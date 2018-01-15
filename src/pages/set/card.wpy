@@ -1,0 +1,176 @@
+<style lang="less">
+.card{
+  font-size: 30rpx;
+  .weui-cells{
+    margin-top: 24rpx;
+    .weui-cell{
+      padding: 40rpx;
+    }
+  }
+  .avatar{
+    width: 160rpx;
+    height: 160rpx;
+    display: block;
+    margin-right: 40rpx;
+  }
+  .input_box{
+    height: 160rpx;
+    border: 2rpx solid #ffcec4;
+    background: #fffcfb;
+    box-sizing: border-box;
+    .input_wrap{
+      box-sizing: border-box;
+      height: 78rpx;
+      font-size: 28rpx;
+      padding: 0 24rpx;
+      input{
+        height: 78rpx;
+      }
+      &.bob{
+        border-bottom:2rpx solid #ffcec4;
+      }
+    }
+  }
+  .flex_wrap{
+    .input_box{
+      width: 100%;
+      flex: auto;
+    }
+  }
+  .card_preview{
+    margin: 40rpx auto;
+    position: relative;
+    width: 673rpx;
+    height: 382rpx;
+    .cardbg,.data_box{
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .data_box{
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      .name{
+        font-size: 46rpx;
+        text-align: center;
+        margin-top: 40rpx;
+      }
+      .phone{
+        font-size: 30rpx;
+        text-align: center;
+        margin-top: 14rpx;
+      }
+      .company{
+        font-size: 24rpx;
+        position: absolute;
+        right: 30rpx;
+        top: 30rpx;
+      }
+      .text_box{
+        width: 100%;
+        height: 162rpx;
+        position: absolute;
+        box-sizing: border-box;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        padding: 40rpx 36rpx;
+        font-size: 23rpx;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="container card">
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__ft">
+          <image src="../../images/qrcode.png" class="avatar"></image>
+        </view>
+        <view class="weui-cell__bd input_box">
+          <view class="input_wrap bob">  
+            <input type="text" placeholder="请输入姓名" />
+          </view>
+          <view class="input_wrap">
+            <input type="text" placeholder="请输入常用手16" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells">
+      <view class="weui-cell flex_wrap">
+        <view class="weui-cell__bd input_box mb24" style="height:auto;">
+          <view class="input_wrap">  
+            <input type="text" placeholder="请输入姓名" />
+          </view>
+        </view>
+        <view class="weui-cell__bd input_box mb24" style="height:auto;">
+          <view class="input_wrap">  
+            <input type="text" placeholder="请输入姓名" />
+          </view>
+        </view>
+        <view class="weui-cell__bd input_box mb24" style="height:auto;">
+          <view class="input_wrap">  
+            <input type="text" placeholder="请输入姓名" />
+          </view>
+        </view>
+        <view class="weui-cell__bd input_box mb24" style="height:auto;">
+          <view class="input_wrap">  
+            <input type="text" placeholder="请输入姓名" />
+          </view>
+        </view>
+        <view class="weui-cell__bd input_box" style="height:auto;">
+          <view class="input_wrap">  
+            <input type="text" placeholder="请输入姓名" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="card_preview">
+      <image src="../../images/cardbg.png" class="cardbg"></image>
+      <view class="data_box">
+        <view class="name">姓名</view>
+        <view class="phone">电话</view>
+        <view class="company">xxx公司</view>
+        <view class="text_box">
+          <view style="margin-bottom:10rpx;">主营业务:123123123邮箱:123123</view>
+          <view>详细地址:1231231231</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Card extends wepy.page {
+    config = {
+      navigationBarTitleText: '名片制作'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

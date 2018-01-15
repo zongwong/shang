@@ -1,0 +1,63 @@
+<style lang="less">
+page{
+    background: #fff;
+}
+.msgdetail{
+    padding: 0 40rpx;
+    .title{
+        font-size: 30rpx;
+        text-align:center;
+        margin: 50rpx 0 30rpx 0;
+    }
+    .box{
+        color: #6e6e6e;
+        font-size: 26rpx;
+        text-indent: 2em;
+    }
+    .footer{
+        margin-top: 30rpx;
+        text-align:right;
+        font-size: 28rpx;
+    }
+}
+</style>
+<template>
+  <view class="container msgdetail">
+      <view class="title">
+          我是标题
+      </view>
+      <view class="box">Kafka是分布式发布-订阅消息系统。它最初由LinkedIn公司开发，之后成为Apache项目的一部分。Kafk</view>
+      <view class="footer">2016-12-12 赏一赏运营中心</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class MsgDetail extends wepy.page {
+    config = {
+      navigationBarTitleText: '消息通知'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

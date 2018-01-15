@@ -12,18 +12,22 @@
                 color: #000;
             }
             .btns_wrap{
-                display: flex;
-                align-items: center;
+                // display: flex;
+                // align-items: center;
+                .tw_row{
+                    justify-content: flex-start;
+                }
                 font-size: 24rpx;
-                .default{
-                    
+                .icon{
+                    margin-right: 12rpx;
                 }
+            }
+            .edit_wrap{
+                display: flex;   
+                color: #000;
                 .edit{
-                    
-                }
-                .del{
-                    
-                }
+                    margin-right: 70rpx;
+                } 
             }
         }
         .detail{
@@ -37,7 +41,7 @@
 </style>
 <template>
   <view class="container address">
-    <view class="weui-cells bgwhite">
+    <view class="weui-cells bgwhite" wx:for="{{3}}" wx:key="address_{{index}}">
         <view class="weui-cell">
             <view class="weui-cell__bd">收货人：1</view>
             <view class="weui-cell__ft phone">1312312222</view>
@@ -45,12 +49,15 @@
         </view>
         <view class="weui-cell">
             <view class="weui-cell__bd btns_wrap">
-                <text class="default">默认地址</text> 
-                <text class="edit">编辑</text> 
-                <text class="del">删除</text>
+                <view class="tw_row"><text class="icon icon_default icon_selected"></text><text>默认地址</text></view> 
+            </view>
+            <view class="weui-cell__ft btns_wrap edit_wrap">
+                <navigator url="/pages/address/edit?type=edit&id={{index}}" class="tw_row edit"><text class="icon icon_edit"></text><text>编辑</text></navigator> 
+                <navigator url="/pages/address/edit?type=edit&id={{index}}" class="tw_row"><text class="icon icon_del"></text><text>删除</text></navigator>
             </view>
         </view>
     </view>
+    <view class="sbtn sbtn_default">添加地址</view>
   </view>
 </template>
 

@@ -21,6 +21,12 @@ page{
   overflow: hidden;
   display: block;
 }
+.light{
+  color: #dd4e32;
+}
+.flex_wrap{
+  flex-wrap: wrap;
+}
 //图标
 .icon{
   background-repeat: no-repeat;
@@ -33,6 +39,26 @@ page{
     height: 28rpx;
     margin-right: 10rpx;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAACDUlEQVRIibXWP2gUQRTH8c9dTlDwD2ilRm3UaIgIEWyijYqNEC1ETG0IVtoZIWITJaVgK/5JoZ1WinbWKjYqiUQTNAQOiRaCVVDPYmdhs7e37uU2DxZm3jx+3/fm5t5MZXawXxtWwRguhflt3ESjqECtHRqGMZ6Yj+Mb7hQVqLYBq+Fahn9MG4m3AxzCTs3btwvnywZWcCXAKqm1BkYz/B0BT6EvR7QvxJQGHE2Mb+FNYh4ncbWIUN6PvR09OIwjwbckOpEXM+IHAvQ1plHPA/bhNHoDZC82pGIbeCzaunUtkpxIjH9iBh8xhWd4X5kd7D+Hh/KrjQ/LACaxOye2lf3BUC1k1ZUTNIO3eIUtK4TFNlHDNstP3zvM4z4+iLb3EE7iaAewKrpreIEziYXNWCPa5rUdANJWwfMaRkRV9IaF7hIhSZvGSBWLOIFPqwQStI9jMf7j13EMc6sAmwvadZZ3moWwMF8ibF5U2ULsSLe2r+mADmwhaH1JOrN66WdRR+nUngStZdaqee8vAbgvy7mawN4sZxZwI3aUAOwOWv8FllFd/AxpqnIlwL8FgHFvbtIqCkw+nKqi+22qALjp4GQBsy7XOOM6LuBg+Ia1uNmDrS8CfJoYx5X9wnVRk7+H3+G7G3w3QkyeFui63LM17ZvFDxwI80mcFT0RljJEl/ASD7AJe/Bd9EB+lA7+B9bJYfhuXv/AAAAAAElFTkSuQmCC);
+  }
+  &.icon_default{
+      width:24rpx;
+      height:24rpx;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAAY0lEQVRIx+3NsQ2AMAwAwQdlCFxkmlTMAWIrK5N4GguFMWhSUbtC/gH+lt77DiggxDaAowDaWpNaa+jd3cXMdAXC5wDzKWv4+VMCCSSQQAIJ/AcY7h4+ns+nAKeZKbAFGzdwvTE0GGLY3W5oAAAAAElFTkSuQmCC);
+  }
+  &.icon_selected{
+      width:24rpx;
+      height:24rpx;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAB60lEQVRIx72VT0gUURyAvzc71v7R3Xacyu0SQX+kTGTDiyAdssCILQ+BIS3BRlogIXZQEroEEqXgVVzo1EHqIkSXQCKKKCqIEoO2Q7TpLq266ori7kwHcWLaSVea6Xf8Zvi+ee8NMyIRCTcDcSCEvTMFxEQiEv7hgNyISA7KAUKSg3IAbAu4D9ehRDudCQTOtBK6PYzk8RVdk/9VHmy9QvBCOwCFhay9K6g4ec6QA+irK/YF3NW1qB09JuYKKPYEJI+XXTf6EXKZOXroqD2Bylg38s4qE8unksw9ur+1gCug4Gs4YWLbDxyhoumsiS29e8n3rjZyr8aLHNZvkRD4T7WgRDsRchnfPr2nkJ0BQLl0HYQwbs29eEp6sA89v2q9nX+CbXv3s6c/jnrtJlK5H+H2sKMlCoC3vhFPzbHfT/7m+YZy68C+g8jqbhPznz6PK1iJ0nbVYCtfJkjd7dlQDiASkbBeVPX6UDt6KT/ebLDlyQ+4q2sBKMxmSHZfJJ9JsdlYHrK2lCM92EcmPgD6Wn9djqaRutdbkvyvgfXJjj0gPXQLNM1gs6MjLH98W5J80wDA4vhjfg7fWdv3r5+ZG42XLIcSP3bzTx4iq1XkXj9DL+S3FLA8ZDvnv/zRphz0T0vAZWDaAXkSiP0CLpCLJBFnNbQAAAAASUVORK5CYII=);
+  }
+  &.icon_edit{
+      width:33rpx;
+      height:32rpx;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAACcuBHKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAACc0lEQVRYw8WWTYiNURjHf3fu3BGGopgFRhM1ZWOhjM0UU8yYuaZRiNQTkYUlWVCyo2SHhVLqrxjRTJmFlTszPmKlyILMgoyIMgvjIyZZvOfW2+nyft7x1Fvv+5z/e57fec5zPgrMokk6DpwAngIHzewFQCGHjhcCRc/9w8y+hzQF4BxwJKSZBszMhhslPQbWAY05Dfg10AlMhnxnPACAZuCmpL0NQEeOAO+AzWY26fmvAh9r6IvAhbyCA3wCus1sAkBSEbgCtADbgS6gAiz1/nvjQ5wCbgC/UkBMmdmUAygB14Adrm0YGHAgo8CSUOZ2+xAjZvYySzokNbmBDITcWzyQCtAEbDWzCR9iJiPAHOAWUK7R3B0C2QDMM7PnkF9BImkuMAT0/EPWAxw1s9NhZy4QkhYAt4GNEdKHwHnfmRlC0mLgDrA+QvoA6DWzL35DQ0aAFoIiSwQgaZmkk5khJC0HxoG1EdL7BKugCrAGeESwSaaHkNQKjAHtMQB6zWza/dfusrIiLEpcE5JWEmw4bRHSew7ga8hXBhb5wkSZkNRGMAVpAABKtcSxMxGagtYI6bgD+Ba376Q1EQU9lhQgNoSkQwR7fRfw/i+yUaAvKUAsCHcrOkawIX0GNtUAqQDlNABxM9EJrHbPCPDWZeSDa78LbEsLEBdif+i9A7gOvHIgg0B/FgCIKDR3MO303P0EJ+FZYE+W4LEggF3AfPc+Q3BSXiQowtwsCmIfwdxfBi7VuMDWF0JSsxv1kJn9rEfwSAh36AzWM3jV/NVRStVLfCvWcvqZOCBpVZ0ACkBfHIjD7plVy3S9yxPiyX+I+xt4Vv34Aw1Zu7WNm/tJAAAAAElFTkSuQmCC);
+  }
+  &.icon_del{
+      width:34rpx;
+      height:36rpx;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAkCAYAAADsHujfAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADOklEQVRYw8WXO2hUURCGv31ks5uQGFEwgqiNYCEWKoraaUgjYmHtYCWWgmIhkspC7awUtPHYCGm0FGvLWAti5wsiJrt5bfZpsefI7LlzN3dJxIHlzN553P/8M2fObo6M4pw7BTwCJoHOFu55oAE8E5FXWfIXswIB7gEXhvAHOATsOJBVpXeAphHf8WwU/PefWZPnhwCyovTzIlIGSvojIiWgAnzzfvWsyYsAzrkJYAq79l2/+z1DgA4y7pybBnIpm84DdRFZzDnnrgFPBgDBAxn1CSF7abpAy8fljLx5YBN4XAReKqcCthSMBKMZ/HLAyBaslYG5InALmKNX5/8hbeB1DsA5V6Gf5g2/Vnb4pQ16paqgyiwia/+JhKQkGsg5d4xe37SASyLyK7JPA2eAdyJSN+LPAZ9FZDF6ngPmgSPAHRF5r+3WkboOnABOA7cN+1vgDfDUAHEf+AB89OXWMgNcBY4DD+JYC8iG0vcb9oN+PWrYzvr1ALAvJQ6MQWcB0RPUataqX1cN27Jfm8bLxpT+IwsQnWDKsAcA1j1VVDlioDpXNQ60gGxuwUjb2GEMxJrQGsjSsECsIVcfEBuerdHfazGQ1bRALTpB2bA3/Dpu2MI479C7Z7TsNnIMBKJ7xLpPQmmsSyw8WxeRuDyTKZtNBaJLYwFp+XXMORfHh1JaPaLLnOn46rlfMl4WXmLd1MF33bDpTWUCoo9WieQ13vRrxWAsnKSWkXdoRmpKr5A8OaEJS9i/U6C/vEF04yfsaZM1dPUYsCuyhyQFg5HxyGdbQGqKlbwBJDAySvJ4B4b6mtU5V4iYTfz+SAARkSb9fTIRuTSV/rc0vqnLhg/0+kyzt5yFEbYA0lWx8ZgfiXyCaPa6ZLxroL9h49I0UuJLatfx5JxUoDei/AOBaOqmIpse7fq/TgXYa/gEIGHq1sjSIwYjMZBPSv+i9BXgt9e/RjGa1ZqIJOZMlh6JgTwEbgCzIvI9PPTJZ4GbwF2DkSDWD6rUP+FLaT4i0gaeW0EisgAsGCZ9iqpWbBoQfTuedM5dZHtyWenLwwBpK33Gf3ZKzNKk9UiDfyfWzZzKyDxwBTi8wyCqwAvL8AeMtdBq8Ch+CwAAAABJRU5ErkJggg==);
   }
 }
 //按钮
@@ -63,8 +89,6 @@ page{
     margin-left: 24rpx;
     font-size: 30rpx;
   }
-
-  
 }
 </style>
 
@@ -75,18 +99,24 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/set/card',
+      'pages/index/task',
+      'pages/sign/index',
+      'pages/set/index',
       'pages/index/index',
       'pages/address/index',
       'pages/address/edit',
-      // 'pages/set/info',
+      'pages/set/faceback',
       'pages/index/order',
+      'pages/index/ticket',
+      'pages/index/msgdetail',
+      'pages/index/msg',
+      'pages/set/info',
       'pages/index/top',
       'pages/index/profit',
       'pages/index/evaluate',
       'pages/set/sign',
       'pages/set/bind',
-      'pages/set/index'
-      
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -105,7 +135,7 @@ export default class extends wepy.app {
           selectedIconPath: "icon/home_on.png"
         },
         {
-          pagePath: "pages/index/index",
+          pagePath: "pages/sign/index",
           text: "签到",
           iconPath: "icon/sign.png",
           selectedIconPath: "icon/sign_on.png"

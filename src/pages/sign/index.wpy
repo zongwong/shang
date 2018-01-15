@@ -1,0 +1,175 @@
+<style lang="less">
+page{
+  height: 100%;
+}
+.sign{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .bg{
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .body{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    font-size: 28rpx;
+    .info_box{
+      margin: 224rpx 75rpx 0;
+      background:rgba(255,255,255,.6);
+      position: relative;
+      height: 424rpx;
+      border-radius: 10rpx;
+      text-align: center;
+      .avatar{
+        width: 140rpx;
+        height: 140rpx;
+        border-radius: 50%;
+        border:4rpx solid #fff;
+        position: absolute;
+        top: -72rpx;
+        left: 50%;
+        margin-left: -72rpx;
+      }
+      .info_text{
+        overflow: hidden;
+        border-bottom: 2rpx solid #fff;
+        height: 320rpx;
+        .name{
+          margin-top: 84rpx;
+          font-size: 32rpx;
+        }
+        .signstatus{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 30rpx 0 20rpx 0;
+          .sign_btn{
+            line-height: 54rpx;
+            width: auto;
+            padding: 0 40rpx;
+            margin-left: 30rpx;
+          }
+        }
+      }
+      .info_btns{
+        display: flex;
+        height: 102rpx;
+        align-items: center;
+        view{
+          flex: 1;
+        }
+      }
+    }
+    .sign_btns{
+      margin: 80rpx 75rpx 0;
+      box-sizing: border-box;
+      width: auto;
+    }
+  }
+  .modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: rgba(0,0,0,.6);
+    .card{
+      width: 479rpx;
+      height: 679rpx;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      .wordbg{
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .close{
+        width: 36rpx;
+        height: 36rpx;
+        background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADQUlEQVRYw72Yy29NURSHf7utJqqupgnVtBFCPOZm5n1hJhISDEw0YUCCev4TQhXRxiNeCUklNMZIUwwqadQjiBhS1ERS9RmcdfS4evfep721kzs4+6z1W9/da6/9OE45G7BaUpukDZLWSmqWVG+vxyR9lDQq6aGk+865N3n0XSTEPEnbJe2VtN66JyS9lfRO0nfrK0haLmmlpCrrG5J0StIN59xE3gGYDmYz8JqkfQF6gBZggcenFmgFLgDfzPc10D4bkFqgLwNyCFg4A50CcBj4aloXgJq8Io3AsAncAZaUYaQbgX7TfAo0xDo2A2+ASeDAbEGKtB1wBPgFvAQWhxxqgefmsKucMEVxdluMIW/6gKs2pF1zBZOJddRi9ZQy2GgGt+caxuI54K7F3Fj8strmzZdQXoFNQHD9AiqBjoDNUlsWXgFV2Rc7jfRgQOCE2Z33QRlMb0z6bZIDbMt2PrHRqY2AwQdVBEMICqgDxoHHacca7+SaStN07S+oEjBpa/Xo91rVrRCwzxxaPA7OgpeECsCcCaQ4LahOATeBCTx7UyTUjGBMuwD8BK6IZCF8oYgWgJqunQ7BZLTfAs8EjAEDMU45oaJhTPcB8Ek2ma7FOkZC5YIxzdvAjwp7zuUsqUJTB7DpWnVOvT9cM0mZr5r+qb4cun9SNgyM5oC5mGNSR0PZpH4q4DpxZe+DOUNgnQpoLyIp+8vZhbFtFjCOiMXTo5/uBHsErLKHcx6HDh9Mxs4H5dsJekmqfXnaMUiyuRY8Tl0+mADUfo9uHfCddHO1zh3mGDoqdPlgSkDtD2imp4it2c4qkkPSN2BpQKA1pnIMqiVg02SjM0r2gGYv0x23P7ZUZ9MM+J7FbC9ldMkMjvwHoGMWq9tnVMPUNWj3HMLssRiDwPyQcRPJJe4XyXm3bOmzNJ007VFCF8WMYwPJdReSq0pjGWAaM3NmKBomI1CTKd1xG61FMwCpA45bNQGcDaYpINhmKcSWhYtWkQs9PgXbDvrszwCMhJYBKf6DVZWkLZI6lXw5q5Q0Kem9pA+SPptWvaRlSj5apTaPJHVLuuWcmywLUBFcvaR2+60zgHTLGTfAEUkDkgacc2N59H8DTXdlDaTFQKUAAAAASUVORK5CYII=);
+        background-size: 100%;
+        position: absolute;
+        top: -18rpx;
+        right: -18rpx;
+      }
+      .wrod_text{
+        position: absolute;
+        top: 520rpx;
+        left: 50rpx;
+        right: 50rpx;
+        width: 400rpx;
+        color: #fff;
+        font-size: 24rpx;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="container sign">
+    <image mode="aspectFill" src="../../images/signbg.png" class="bg"></image>
+    <view class="body">
+      <view class="info_box">
+        <image class="avatar" src="../../images/qrcode.png"></image>
+        <view class="info_text">
+          <view class="name">姓名个阿萨德</view>
+          <view class="signstatus">你今天还没有签到哦 <text class="sbtn sbtn_default sign_btn">签到</text></view>
+          <view><text class="light">15478人</text>参与了签到任务</view>
+        </view>
+        <view class="info_btns">
+          <view>你拥有<text class="light">145555积分</text></view>
+          <view>连续签到<text class="light">第5天</text></view>
+        </view>
+      </view>
+      <view class="sbtn sbtn_default sign_btns">今日祝福语</view>
+      <view class="sbtn sbtn_outline sign_btns">签到记录</view>
+    </view>
+    <view class="modal">
+      <view class="card">
+        <image class="wordbg" src="../../images/wordbg.png"></image>
+        <view class="icon close"></view>
+        <view class="wrod_text">祝你好运朋友!@#!#QWEQEQweas请问请问</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Sign extends wepy.page {
+    config = {
+      navigationBarTitleText: '签到'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

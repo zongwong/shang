@@ -1,12 +1,60 @@
 <style lang="less">
+page{
+  background: #fff;
+}
 .order{
-
+  .weui-cells{
+    margin-top: 0;
+  }
+  font-size: 30rpx;
+  .order_item{
+    padding: 30rpx 24rpx;
+    &::before{
+      left: 0;
+    }
+    .post{
+      width: 120rpx;
+      height: 120rpx;
+      margin-right: 24rpx;
+      display: block;
+    }
+    .title{
+      line-height: 1;
+      margin-bottom: 10rpx;
+      max-width: 540rpx;
+    }
+    .num{
+      font-size:28rpx;
+    }
+    .status{
+      font-size:28rpx;
+      color: #dd4e32;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .ing{
+        color: #626262;
+      }
+    }
+  }
 }
 </style>
 <template>
   <view class="container order">
-    <view class="weui-ceils bgwhite">
-
+    <view class="weui-cells">
+      <view class="weui-cell order_item" wx:for="{{3}}" wx:key="order_{{index}}"> 
+        <view class="weui-cell__ft">
+          <image src="../../images/qrcode.png" mode="aspectFill" class="post"></image>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="title oneTextHide">把问问去</view>
+          <view class="num">X2</view>
+          <view class="status">
+            <view class="money">$160</view>
+            <view class="express ing">配送中</view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </template>

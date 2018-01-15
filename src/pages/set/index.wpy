@@ -1,29 +1,66 @@
 <style lang="less">
+@import "../../style/userinfo.less";
 .set_index{
   font-size: 30rpx;
+  .weui-cells{
+    margin-top: 24rpx;
+  }
   .nav-icon{
-    margin-right: 5px;
+    margin-right: 24rpx;
     vertical-align: middle;
-    width:40rpx; 
-    height: 40rpx;
+    width:56rpx; 
+    height: 56rpx;
   }
 }
 </style>
 <template>
   <view class="container set_index">
-    <view class="weui-ceils bgwhite">
+    <view class="weui-flex bgwhite userinfo mb24">
+      <view class="userinfo_avatar">
+        <image src="../../images/qrcode.png"></image>
+      </view>
+      <view class="userinfo_data">
+        <view class="username oneTextHide">姓名安慰全文</view>
+        <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
+      </view>
+      <view class="userinfo_qrcode">
+        <image src="../../images/qrcode.png"></image>
+      </view>
+      <view class="usersign"><text style="color:#000;">工号：</text>前面请问请问亲 <text style="color:#000;">门店：</text>前面请问请问亲</view>
+      <view class="usersign"><text style="color:#000;">个性签名：</text>前面请问请问亲</view>
+    </view>
+    <view class="weui-cells">
+      <navigator class="weui-cell  weui-cell_access">
+        <image class="nav-icon" src="../../icon/mer.png"></image>
+        <view class="weui-cell__bd">所属商家</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+      <navigator class="weui-cell  weui-cell_access">
+        <image class="nav-icon" src="../../icon/card.png"></image>
+        <view class="weui-cell__bd">名片信息</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+      <navigator class="weui-cell  weui-cell_access">
+        <image class="nav-icon" src="../../icon/id.png"></image>
+        <view class="weui-cell__bd">实名认证</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </view>
+    <view class="weui-cells">
       <navigator class="weui-cell  weui-cell_access" url="/pages/set/bind">
-        <image class="nav-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII="></image>
-        <view class="weui-cell__bd">修改登录手机</view>
+        <image class="nav-icon" src="../../icon/pwd.png"></image>
+        <view class="weui-cell__bd">设置提现密码</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
-      <navigator class="weui-cell  weui-cell_access">
-        <image class="nav-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII="></image>
-        <view class="weui-cell__bd">制作名片</view>
+      <navigator class="weui-cell  weui-cell_access" url="/pages/set/bind">
+        <image class="nav-icon" src="../../icon/phone.png"></image>
+        <view class="weui-cell__bd">变更绑定手机</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
-      <navigator class="weui-cell  weui-cell_access">
-        <image class="nav-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII="></image>
+    </view>
+    <view class="weui-cells">
+      <navigator class="weui-cell  weui-cell_access" url="/pages/set/faceback">
+        <image class="nav-icon" src="../../icon/faceback.png"></image>
         <view class="weui-cell__bd">意见与反馈</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>

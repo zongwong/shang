@@ -1,0 +1,120 @@
+<style lang="less">
+.task{
+  font-size: 30rpx;
+  .weui-cells{
+    margin-top: 24rpx;
+  }
+  .goods_item{
+    flex-wrap: wrap;
+    padding: 24rpx;
+    .post_wrap{
+      width: 100%;
+      margin-bottom: 12rpx;
+    }
+    .post{
+      width: 100%;
+      height: 300rpx;
+    }
+  }
+  .jiangli{
+    color: #999;
+    font-size: 24rpx;
+  }
+  .ex_btn{
+    line-height: 54rpx;
+    padding: 0 24rpx;
+  }
+  .nav-icon{
+    margin-right: 10rpx;
+    vertical-align: middle;
+    width:72rpx; 
+    height: 72rpx;
+  }
+  .tips{
+    text-align: center;
+    margin-top: 24rpx;
+    font-size: 24rpx;
+  }
+}
+</style>
+<template>
+  <view class="container task">
+    <view class="tips">今天还可以获得<text class="light">14积分</text>,已获得<text class="light">0积分</text></view>
+    <view class="weui-cells">
+      <viwe class="weui-cell">
+        <image class="nav-icon" src="../../icon/signed.png"></image>
+        <view class="weui-cell__bd">
+          <view>每日签到</view>
+          <view class="jiangli">奖励：<text class="light">2积分</text></view>
+        </view>
+        <view class="weui-cell__ft">
+          <view class="sbtn sbtn_outline ex_btn">去签到</view>
+        </view>
+      </viwe>
+      <viwe class="weui-cell">
+        <image class="nav-icon" src="../../icon/edit.png"></image>
+        <view class="weui-cell__bd">
+          <view>完善个人信息</view>
+          <view class="jiangli">奖励：<text class="light">2积分</text></view>
+        </view>
+        <view class="weui-cell__ft">
+          <view class="sbtn sbtn_outline ex_btn">去完善</view>
+        </view>
+      </viwe>
+      <viwe class="weui-cell">
+        <image class="nav-icon" src="../../icon/share.png"></image>
+        <view class="weui-cell__bd">
+          <view>分享赏一赏</view>
+          <view class="jiangli">奖励：<text class="light">2积分</text></view>
+        </view>
+        <view class="weui-cell__ft">
+          <view class="sbtn sbtn_outline ex_btn">去分享</view>
+        </view>
+      </viwe>
+    </view>
+    <view class="weui-cells">
+      <viwe class="weui-cell">
+        <view class="weui-cell__bd">积分商城</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </viwe>
+    </view>
+    <view class="weui-cells">
+      <viwe class="weui-cell goods_item">
+        <view class="post_wrap"><image src="../../images/ex.png" mode="aspectFill" class="post"></image></view>
+        <view class="weui-cell__bd">300积分</view>
+        <view class="weui-cell__ft"><view class="sbtn sbtn_outline ex_btn">马上兑换</view></view>
+      </viwe>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Task extends wepy.page {
+    config = {
+      navigationBarTitleText: '任务列表'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

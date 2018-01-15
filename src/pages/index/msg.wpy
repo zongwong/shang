@@ -1,0 +1,84 @@
+<style lang="less">
+.msg{
+    font-size: 30rpx;
+    .weui-cells{
+        margin-top: 24rpx;
+    }
+    .msg_item{
+        flex-wrap: wrap;
+        .time{
+            font-size: 22rpx;
+        }
+        .msg_desrc{
+            width: 100%;
+            font-size: 26rpx;
+            margin-top: 14rpx;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+    }
+}
+</style>
+<template>
+  <view class="container msg">
+    <navigator class="weui-cells" url="/pages/index/msgdetail?id=">
+      <view class="weui-cell msg_item">
+        <view class="weui-cell__bd">
+            <view class="title oneTextHide">标题</view>
+        </view>
+        <view class="weui-cell__ft time">
+            2018-01-01
+        </view>
+        <view class="msg_desrc">
+            请问去且气温气温请问气气温气温请问气温气温请问请问请问请问请温气温请问请问请问请问请问请问请问气温气温而且我请问气温气温请问请问
+        </view>
+      </view>
+    </navigator>
+    <navigator class="weui-cells" url="/pages/index/msgdetail">
+      <view class="weui-cell msg_item">
+        <view class="weui-cell__bd">
+            <view class="title oneTextHide">标题</view>
+        </view>
+        <view class="weui-cell__ft time">
+            2018-01-01
+        </view>
+        <view class="msg_desrc">
+            请问去且气温气温请问气温气温请问请问请问请问请问请问请问气温气温而且我请问气温气温请问请问
+        </view>
+      </view>
+    </navigator>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Msg extends wepy.page {
+    config = {
+      navigationBarTitleText: '系统消息'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

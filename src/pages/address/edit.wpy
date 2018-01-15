@@ -1,12 +1,63 @@
 <style lang="less">
-.address{
-
+.address_edit{
+  .weui-cells{
+    margin-top: 24rpx;
+  }
+  font-size: 30rpx;
+  .textarea{
+    width: 100%;
+    height: 140rpx;
+  }
+  .picker{
+    max-width:460rpx;
+  }
 }
 </style>
 <template>
-  <view class="container address">
-    <view class="weui-ceils bgwhite">
-
+  <view class="container address_edit">
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__ft" style="color:#000;width:5em;text-align:left;">收货人：</view>
+        <view class="weui-cell__bd">
+          <input type="text" placeholder="请输入收货人姓名" />
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__ft" style="color:#000;">联系电话：</view>
+        <view class="weui-cell__bd">
+          <input type="text" placeholder="请输入收货人联系电话" />
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">所在地方：</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+           <picker mode="region" bindchange="bindRegionChange" value="{{}}">
+              <view class="picker oneTextHide">{{region[0]}} {{region[1]}} {{region[2]}}</view>
+            </picker>
+        </view>
+      </view>
+      <!-- <view class="weui-cell">
+        <view class="weui-cell__bd">详细地址：</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view> -->
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea name="" id="" cols="30" rows="10" placeholder="请输入详细地址" class="textarea"></textarea>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd"> 
+            设为默认地址
+        </view>
+        <view class="weui-cell__ft icon icon_default"></view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd" style="color:#dd4e32;">
+            删除地址
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -14,22 +65,26 @@
 <script>
   import wepy from 'wepy'
 
-  export default class Address extends wepy.page {
+  export default class AddressEdit extends wepy.page {
     config = {
-      navigationBarTitleText: '管理收货地址'
+      navigationBarTitleText: '修改地址'
     }
     components = {
     }
 
 
     data = {
-      
+      region: ['广东省', '广州市', '海珠区'],
+      // customItem: '全部'
     }
 
 
 
     methods = {
-      
+      bindRegionChange(e) {
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.region = e.detail.value
+      }
     }
 
     events = {
