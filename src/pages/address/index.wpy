@@ -36,7 +36,10 @@
             color: #666;
         }
     }
-    
+    .add{
+        position: fixed;
+        bottom: 20rpx;
+    }
 }
 </style>
 <template>
@@ -57,7 +60,7 @@
             </view>
         </view>
     </view>
-    <view class="sbtn sbtn_default">添加地址</view>
+    <view class="sbtn sbtn_default add">添加地址</view>
   </view>
 </template>
 

@@ -133,7 +133,7 @@ page{
       <view class="sbtn sbtn_default sign_btns">今日祝福语</view>
       <view class="sbtn sbtn_outline sign_btns">签到记录</view>
     </view>
-    <view class="modal">
+    <view class="modal" wx:if="{{0}}">
       <view class="card">
         <image class="wordbg" src="../../images/wordbg.png"></image>
         <view class="icon close"></view>

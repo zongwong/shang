@@ -35,7 +35,7 @@
         <view class="weui-cell__bd">所属商家</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
-      <navigator class="weui-cell  weui-cell_access">
+      <navigator class="weui-cell  weui-cell_access" url="/pages/set/card">
         <image class="nav-icon" src="../../icon/card.png"></image>
         <view class="weui-cell__bd">名片信息</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>

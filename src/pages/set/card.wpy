@@ -77,7 +77,12 @@
         left: 0;
         color: #fff;
         padding: 40rpx 36rpx;
-        font-size: 23rpx;
+        font-size: 24rpx;
+        .twotext{
+          display: flex;
+          justify-content: space-between;
+          margin-bottom:14rpx;
+        }
       }
     }
   }
@@ -136,8 +141,8 @@
         <view class="phone">电话</view>
         <view class="company">xxx公司</view>
         <view class="text_box">
-          <view style="margin-bottom:10rpx;">主营业务:123123123邮箱:123123</view>
-          <view>详细地址:1231231231</view>
+          <view class="twotext"><text>主营业务：123123123text</text><text>邮箱：123123</text></view>
+          <view>详细地址：1231231231</view>
         </view>
       </view>
     </view>
