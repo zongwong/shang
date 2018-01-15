@@ -1,0 +1,139 @@
+<style lang="less">
+@import "./style/weui.less";
+page{
+  background: #f1f1f1;
+}
+.container{
+  overflow: hidden;
+}
+.mt24{
+  margin-top: 24rpx;
+}
+.mb24{
+  margin-bottom: 24rpx;
+}
+.bgwhite{
+  background: #fff;
+}
+.oneTextHide{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+//图标
+.icon{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: top;
+  &.icon_star{
+    width: 28rpx;
+    height: 28rpx;
+    margin-right: 10rpx;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAACDUlEQVRIibXWP2gUQRTH8c9dTlDwD2ilRm3UaIgIEWyijYqNEC1ETG0IVtoZIWITJaVgK/5JoZ1WinbWKjYqiUQTNAQOiRaCVVDPYmdhs7e37uU2DxZm3jx+3/fm5t5MZXawXxtWwRguhflt3ESjqECtHRqGMZ6Yj+Mb7hQVqLYBq+Fahn9MG4m3AxzCTs3btwvnywZWcCXAKqm1BkYz/B0BT6EvR7QvxJQGHE2Mb+FNYh4ncbWIUN6PvR09OIwjwbckOpEXM+IHAvQ1plHPA/bhNHoDZC82pGIbeCzaunUtkpxIjH9iBh8xhWd4X5kd7D+Hh/KrjQ/LACaxOye2lf3BUC1k1ZUTNIO3eIUtK4TFNlHDNstP3zvM4z4+iLb3EE7iaAewKrpreIEziYXNWCPa5rUdANJWwfMaRkRV9IaF7hIhSZvGSBWLOIFPqwQStI9jMf7j13EMc6sAmwvadZZ3moWwMF8ibF5U2ULsSLe2r+mADmwhaH1JOrN66WdRR+nUngStZdaqee8vAbgvy7mawN4sZxZwI3aUAOwOWv8FllFd/AxpqnIlwL8FgHFvbtIqCkw+nKqi+22qALjp4GQBsy7XOOM6LuBg+Ia1uNmDrS8CfJoYx5X9wnVRk7+H3+G7G3w3QkyeFui63LM17ZvFDxwI80mcFT0RljJEl/ASD7AJe/Bd9EB+lA7+B9bJYfhuXv/AAAAAAElFTkSuQmCC);
+  }
+}
+//按钮
+.sbtn{
+  font-size: 28rpx;
+  line-height: 76rpx;
+  box-sizing: border-box;
+  border-radius: 50rpx;
+  text-align: center;
+  width: 100%;
+  &.sbtn_default{
+    border:2rpx solid #dd4e32;
+    background-color: #dd4e32;
+      color: #fff;
+  }
+  &.sbtn_outline{
+    border:2rpx solid #dd4e32;
+    background-color: #fff;
+    color: #dd4e32;
+  }
+}
+// 图文横排
+.tw_row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .text{
+    margin-left: 24rpx;
+    font-size: 30rpx;
+  }
+
+  
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/index/index',
+      'pages/address/index',
+      'pages/address/edit',
+      // 'pages/set/info',
+      'pages/index/order',
+      'pages/index/top',
+      'pages/index/profit',
+      'pages/index/evaluate',
+      'pages/set/sign',
+      'pages/set/bind',
+      'pages/set/index'
+      
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#dd4e32',
+      navigationBarTitleText: '赏一赏',
+      navigationBarTextStyle: 'white'
+    },
+    tabBar: {
+      backgroundColor: '#fff',
+      selectedColor:'#dd4e32',
+      list: [
+        {
+          pagePath: "pages/index/index",
+          text: "首页",
+          iconPath: "icon/home.png",
+          selectedIconPath: "icon/home_on.png"
+        },
+        {
+          pagePath: "pages/index/index",
+          text: "签到",
+          iconPath: "icon/sign.png",
+          selectedIconPath: "icon/sign_on.png"
+        },
+        { 
+          pagePath: "pages/set/index",
+          text: "设置",
+          iconPath: "icon/set.png",
+          selectedIconPath: "icon/set_on.png"
+        }
+      ]
+    }
+  }
+
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+    this.use('promisify')
+  }
+
+  onLaunch() {
+    
+  }
+
+  
+}
+</script>

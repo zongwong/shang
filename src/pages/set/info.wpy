@@ -1,0 +1,66 @@
+<style lang="less">
+.bind{
+    font-size: 30rpx;
+    .btn_wrap{
+        margin: 40rpx 24rpx 0;
+    }
+    .sms_btn{
+        border-radius: 8rpx;
+        line-height: 46rpx;
+        font-size: 24rpx;
+        padding: 0 16rpx;
+    }
+}
+</style>
+<template>
+  <view class="container bind">
+    <view class="weui-ceils bgwhite mt24">
+      <view class="weui-cell">
+        <view class="weui-cell__bd"><input type="number" placeholder="请输入真实姓名"/></view>
+        <view class="weui-cell__ft"></view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd"><input type="number" placeholder="请输入您的年龄"/></view>
+        <view class="weui-cell__ft"></view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd"><input type="number" placeholder="请输入您的职业"/></view>
+        <view class="weui-cell__ft"></view>
+      </view>
+    </view>
+    <view class="btn_wrap">
+       <view class="sbtn sbtn_default">确定</view> 
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class UserInfo extends wepy.page {
+    config = {
+      navigationBarTitleText: '完善个人信息'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

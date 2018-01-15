@@ -1,0 +1,43 @@
+<style lang="less">
+.address{
+
+}
+</style>
+<template>
+  <view class="container address">
+    <view class="weui-ceils bgwhite">
+
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Address extends wepy.page {
+    config = {
+      navigationBarTitleText: '管理收货地址'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

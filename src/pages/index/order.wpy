@@ -1,0 +1,43 @@
+<style lang="less">
+.order{
+
+}
+</style>
+<template>
+  <view class="container order">
+    <view class="weui-ceils bgwhite">
+
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Order extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的订单'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

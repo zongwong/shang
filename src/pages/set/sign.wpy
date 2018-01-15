@@ -1,0 +1,52 @@
+<style lang="less">
+.bind{
+    font-size: 30rpx;
+    .btn_wrap{
+        margin: 40rpx 24rpx 0;
+    }
+}
+</style>
+<template>
+  <view class="container bind">
+    <view class="weui-ceils bgwhite mt24">
+      <view class="weui-cell">
+        <view class="weui-cell__bd"><input type="number" placeholder="设置签名"/></view>
+        <view class="weui-cell__ft"></view>
+      </view>
+    </view>
+    <view class="btn_wrap">
+       <view class="sbtn sbtn_default">确定</view> 
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class SetSign extends wepy.page {
+    config = {
+      navigationBarTitleText: '设置签名'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

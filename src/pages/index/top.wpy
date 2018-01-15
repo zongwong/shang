@@ -1,0 +1,75 @@
+<style lang="less">
+@import "../../style/evlist.less";
+.info_right{
+    color: #6e6e6e!important;
+    text{
+        color: #dd4e32;
+    }
+}
+</style>
+<template>
+  <view class="container evaluate">
+    <view class="weui-ceils bgwhite ">
+      <view class="weui-cell evaluate_ceil">
+        <view class="weui-cell__ft avatar_wrap">
+            <image src="../../images/qrcode.png" class="avatar"></image>
+        </view>
+        <view class="weui-cell__bd">
+            <view class="info_box">
+                <view class="info_left">
+                    <view class="name oneTextHide">昵称啊啊</view>
+                    <view class="sign oneTextHide">1232</view>
+                </view>
+                <view class="info_right">总获得积分<text>154</text>分</view>
+            </view>
+        </view>
+      </view>
+      <view class="weui-cell evaluate_ceil">
+        <view class="weui-cell__ft avatar_wrap">
+            <image src="../../images/qrcode.png" class="avatar"></image>
+        </view>
+        <view class="weui-cell__bd">
+            <view class="info_box">
+                <view class="info_left">
+                    <view class="name oneTextHide">昵称啊啊</view>
+                    <view class="sign oneTextHide">1232</view>
+                </view>
+                <view class="info_right">总获得积分<text>154</text>分</view>
+            </view>
+        </view>
+      </view>
+    </view>
+    <view class="float"></view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Top extends wepy.page {
+    config = {
+      navigationBarTitleText: '排行榜'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

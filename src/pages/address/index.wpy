@@ -1,0 +1,86 @@
+<style lang="less">
+.address{
+    font-size: 30rpx;
+    .weui-cells{
+        margin-top: 24rpx;
+        .weui-cell{
+            flex-wrap: wrap;
+            &:before{
+                left: 0;
+            }
+            .phone{
+                color: #000;
+            }
+            .btns_wrap{
+                display: flex;
+                align-items: center;
+                font-size: 24rpx;
+                .default{
+                    
+                }
+                .edit{
+                    
+                }
+                .del{
+                    
+                }
+            }
+        }
+        .detail{
+            width:100%;
+            font-size: 26rpx;
+            color: #666;
+        }
+    }
+    
+}
+</style>
+<template>
+  <view class="container address">
+    <view class="weui-cells bgwhite">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">收货人：1</view>
+            <view class="weui-cell__ft phone">1312312222</view>
+            <view class="detail">收货地址：qweqw乔沃维奇翁请问请问</view>
+        </view>
+        <view class="weui-cell">
+            <view class="weui-cell__bd btns_wrap">
+                <text class="default">默认地址</text> 
+                <text class="edit">编辑</text> 
+                <text class="del">删除</text>
+            </view>
+        </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Address extends wepy.page {
+    config = {
+      navigationBarTitleText: '管理收货地址'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

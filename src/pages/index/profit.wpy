@@ -1,0 +1,71 @@
+<style lang="less">
+@import "../../style/evlist.less";
+</style>
+<template>
+  <view class="container evaluate">
+    <view class="weui-ceils bgwhite ">
+      <view class="weui-cell evaluate_ceil">
+        <view class="weui-cell__ft avatar_wrap">
+            <image src="../../images/qrcode.png" class="avatar"></image>
+        </view>
+        <view class="weui-cell__bd">
+            <view class="info_box mb24">
+                <view class="info_left">
+                    <view class="name oneTextHide">昵称啊啊</view>
+                    <view class="sign oneTextHide">1232</view>
+                </view>
+                <view class="info_right">打赏2元</view>
+            </view>
+            <view class="pjtext">吾问无为谓呜呜呜呜娃儿沃尔沃尔娃儿沃尔问问二位二位认为任务二沃尔沃尔问问3</view>
+        </view>
+      </view>
+      <view class="weui-cell evaluate_ceil">
+        <view class="weui-cell__ft avatar_wrap">
+            <image src="../../images/qrcode.png" class="avatar"></image>
+        </view>
+        <view class="weui-cell__bd">
+            <view class="info_box mb24">
+                <view class="info_left">
+                    <view class="name oneTextHide">昵称啊啊</view>
+                    <view class="sign oneTextHide">1232</view>
+                </view>
+                <view class="info_right">打赏2元</view>
+            </view>
+            <view class="pjtext">吾问无为谓呜呜呜呜娃儿沃尔沃尔娃儿沃尔问问二位二位认为任务二沃尔沃尔问问3</view>
+        </view>
+      </view>
+    </view>
+    <view class="float"></view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Profit extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的收益'
+    }
+    components = {
+    }
+
+
+    data = {
+      
+    }
+
+
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>
