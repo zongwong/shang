@@ -95,23 +95,23 @@ page{
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
-
+import login from './interfaces/login'
 export default class extends wepy.app {
   config = {
     pages: [
+      // 'pages/index/msgdetail',
+      'pages/index/msg',
+      'pages/set/info',
+      // 'pages/address/index',
+      // 'pages/address/edit',
       'pages/index/index',
       'pages/set/card',
       'pages/index/task',
       'pages/sign/index',
       'pages/set/index',
-      'pages/address/index',
-      'pages/address/edit',
       'pages/set/faceback',
       'pages/index/order',
       'pages/index/ticket',
-      'pages/index/msgdetail',
-      'pages/index/msg',
-      'pages/set/info',
       'pages/index/top',
       'pages/index/profit',
       'pages/index/evaluate',
@@ -161,7 +161,7 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    
+    login.login()
   }
 
   

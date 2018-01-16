@@ -11,88 +11,188 @@
   .picker{
     max-width:460rpx;
   }
+  .add{
+      position: fixed;
+      bottom: 20rpx;
+  }
 }
 </style>
 <template>
   <view class="container address_edit">
-    <view class="weui-cells">
-      <view class="weui-cell">
-        <view class="weui-cell__ft" style="color:#000;width:5em;text-align:left;">收货人：</view>
-        <view class="weui-cell__bd">
-          <input type="text" placeholder="请输入收货人姓名" />
+    <form @submit="formSubmit">
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__ft" style="color:#000;width:5em;text-align:left;">收货人：</view>
+          <view class="weui-cell__bd">
+            <input type="text" name="receiver" value="{{address.receiver}}" placeholder="请输入收货人姓名" />
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__ft" style="color:#000;">联系电话：</view>
+          <view class="weui-cell__bd">
+            <input type="text" name="mobilephone" value="{{address.mobilephone}}" placeholder="请输入收货人联系电话" />
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">所在地方：</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+            <picker mode="region" bindchange="bindRegionChange" value="{{}}">
+                <view class="picker oneTextHide">{{region[0]}} {{region[1]}} {{region[2]}}</view>
+              </picker>
+          </view>
+        </view>
+        <!-- <view class="weui-cell">
+          <view class="weui-cell__bd">详细地址：</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view> -->
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea name="detail" cols="30" rows="10" placeholder="请输入详细地址" class="textarea" value="{{address.detail}}"></textarea>
+          </view>
         </view>
       </view>
-      <view class="weui-cell">
-        <view class="weui-cell__ft" style="color:#000;">联系电话：</view>
-        <view class="weui-cell__bd">
-          <input type="text" placeholder="请输入收货人联系电话" />
+      <view class="weui-cells">
+        <view class="weui-cell" @tap="setDefault">
+          <view class="weui-cell__bd"> 
+              设为默认地址
+          </view>
+          <view class="weui-cell__ft icon icon_default {{isDefault==1?'icon_selected':''}}"></view>
+        </view>
+        <view class="weui-cell" wx:if="{{query.type=='edit'}}" @tap="deleteAddress({{address.address_id}})">
+          <view class="weui-cell__bd" style="color:#dd4e32;">
+              删除地址
+          </view>
         </view>
       </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">所在地方：</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">
-           <picker mode="region" bindchange="bindRegionChange" value="{{}}">
-              <view class="picker oneTextHide">{{region[0]}} {{region[1]}} {{region[2]}}</view>
-            </picker>
-        </view>
-      </view>
-      <!-- <view class="weui-cell">
-        <view class="weui-cell__bd">详细地址：</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </view> -->
-      <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <textarea name="" id="" cols="30" rows="10" placeholder="请输入详细地址" class="textarea"></textarea>
-        </view>
-      </view>
-    </view>
-    <view class="weui-cells">
-      <view class="weui-cell">
-        <view class="weui-cell__bd"> 
-            设为默认地址
-        </view>
-        <view class="weui-cell__ft icon icon_default"></view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd" style="color:#dd4e32;">
-            删除地址
-        </view>
-      </view>
-    </view>
+      <button formType="submit" class="sbtn sbtn_default add">提交</button>
+    </form>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
+  import WxValidate from '../../utils/WxValidate'
   export default class AddressEdit extends wepy.page {
     config = {
-      navigationBarTitleText: '修改地址'
+      navigationBarTitleText: '添加地址'
     }
-    components = {
-    }
-
-
     data = {
-      region: ['广东省', '广州市', '海珠区'],
-      // customItem: '全部'
+      region: ['福建省', '泉州市', '丰泽区'],
+      query:null,
+      address:{},
+      isDefault:0
     }
-
-
-
     methods = {
       bindRegionChange(e) {
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.region = e.detail.value
+      },
+      // 表单提交
+      async formSubmit(e) {
+        const params = e.detail.value
+        // 传入表单数据，调用验证方法
+        if (!this.WxValidate.checkForm(e)) {
+            const error = this.WxValidate.errorList[0]
+            this.showModal(error)
+            return false
+        }
+        params.is_default = this.isDefault
+        params.province = this.region[0]
+        params.city = this.region[1]
+        params.street = this.region[2]
+        if(this.query.type=='edit'){
+          params.address_id = this.query.id
+        }
+        const data = await api.addressEdit(params)
+        console.log(data)
+        if(data.code==200){
+          wepy.showToast({
+              title: '提交成功',
+          })
+          setTimeout(() => {
+            wepy.navigateBack({
+              delta: 1
+            })
+          }, 1000);
+        }
+
+      },
+      // 删除地址
+      async deleteAddress(id){
+        const data = await api.addressDelete({
+          address_id:id
+        })
+        if(data.code==200){
+          wepy.showToast({
+            title:'删除成功'
+          })
+          setTimeout(() => {
+            wepy.navigateBack({
+              delta: 1
+            })
+          }, 1000);
+        }
       }
     }
-
-    events = {
-
+    async onLoad(options) {
+      this.query = options
+      this.$apply()
+      if(this.query.type == 'edit'){
+        wx.setNavigationBarTitle({
+           title: '修改地址'
+        })
+        const data = await api.addressInfo({
+          address_id:options.id
+        })
+        if(data.code == 200){
+          this.address = data.data
+          this.region[0] = data.data.province
+          this.region[1] = data.data.city
+          this.region[2] = data.data.street
+          this.isDefault = data.data.is_default
+          this.$apply()
+        }
+      }
+      this.initValidate()
     }
-
-    onLoad() {
-      
+    setDefault() {
+      this.isDefault = (this.isDefault==0?1:0)
+    }
+    showModal(error){
+      wx.showModal({
+          content: error.msg,
+          showCancel: false,
+      })
+    }
+    initValidate() {
+        const rules = {
+            receiver: {
+                required: true,
+                minlength: 2,
+                maxlength: 15,
+            },
+            mobilephone: {
+                required: true,
+                tel: true,
+            },
+            detail: {
+                required: true,
+            },
+        }
+        const messages = {
+            detail: {
+                required: '请输入详细地址',
+            },
+            mobilephone: {
+                required: '请输入手机号码',
+                tel: '请输入正确的手机号码',
+            },
+            receiver: {
+                required: '请输入收货人姓名',
+            }
+        }
+        this.WxValidate = new WxValidate(rules, messages)
     }
   }
 </script>

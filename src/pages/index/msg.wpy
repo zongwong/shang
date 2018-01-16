@@ -23,7 +23,7 @@
 </style>
 <template>
   <view class="container msg">
-    <navigator class="weui-cells" url="/pages/index/msgdetail?id=">
+    <navigator class="weui-cells" url="/pages/index/msgdetail?id={{item.notice_id}}" wx:for="{{list}}" wx:key="notice_{{index}}">
       <view class="weui-cell msg_item">
         <view class="weui-cell__bd">
             <view class="title oneTextHide">标题</view>
@@ -54,7 +54,7 @@
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
   export default class Msg extends wepy.page {
     config = {
       navigationBarTitleText: '系统消息'
@@ -64,7 +64,7 @@
 
 
     data = {
-      
+      list:null
     }
 
 
@@ -77,8 +77,12 @@
 
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const data = await api.notice()
+      if(data.code==200){
+          this.list = data.data
+          this.$apply()
+      }
     }
   }
 </script>
