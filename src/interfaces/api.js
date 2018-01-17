@@ -62,8 +62,8 @@ export default class Api extends base{
     return await this.get(url)
   }
   // 我的排名
-  static async rank() {
-    const url = `${this.host}/rank/getlist`
+  static async rankMer() {
+    const url = `${this.host}/rank/merchant`
     return await this.get(url)
   }
   // 消息列表

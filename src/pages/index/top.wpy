@@ -40,51 +40,72 @@
         z-index: 1;
         box-sizing: border-box;
     }
+    .tabNav{
+        &:after{
+            content:'';
+            width: 1px;
+            height: 40rpx;
+            background: #f1f1f1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+        }
+    }
 }
 </style>
 <template>
   <view class="container evaluate">
-    
-    <view class="weui-ceils bgwhite">
-      <view class="weui-cell evaluate_ceil" wx:for="{{10}}" wx:key="top_{{index}}">
+    <tabNav :navs="navs"></tabNav>
+    <view class="weui-ceils bgwhite mt24">
+      <view class="weui-cell evaluate_ceil" wx:for="{{list.list}}" wx:key="top_{{index}}">
         <image wx:if="{{index == 0}}" src="../../icon/1st.png" class="top_icon"></image>
         <image wx:if="{{index == 1}}" src="../../icon/2nd.png" class="top_icon"></image>
         <image wx:if="{{index == 2}}" src="../../icon/3rd.png" class="top_icon"></image>
         <view wx:if="{{index>2}}" class="top_icon">{{index + 1}}</view>
         <view class="weui-cell__ft avatar_wrap">
-            <image src="../../images/qrcode.png" class="avatar"></image>
+            <image src="{{item.headimgurl}}" class="avatar"></image>
         </view>
         <view class="weui-cell__bd">
             <view class="info_box">
                 <view class="info_left">
-                    <view class="name oneTextHide">昵称啊啊</view>
-                    <view class="sign oneTextHide">1232</view>
+                    <view class="name oneTextHide">{{item.nickname}}</view>
+                    <view class="sign oneTextHide">{{}}</view>
                 </view>
                 <view class="info_right">
-                    <view class="shouru">总积分：<text class="light">154884</text></view>
-                    <view class="shouru">总收入：<text class="light">154884</text></view>
+                    <view class="shouru">总积分：<text class="light">{{item.point}}</text></view>
+                    <view class="shouru">总收入：<text class="light">{{item.point}}</text></view>
                 </view>
             </view>
         </view>
       </view>
     </view>
-    <view class="float_tips">您的排行为第1234名，总收入25.20元，总积分152分， 己超越25%的用户。</view>
+    <view class="float_tips">您的排行为第{{list.rank}}名，总收入{{list.total}}元，总积分{{list.wechat_point}}分， 己超越25%的用户。</view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
+  import tabNav from '../../components/tabNav'
   export default class Top extends wepy.page {
     config = {
       navigationBarTitleText: '排行榜'
     }
     components = {
+        tabNav:tabNav
     }
 
 
     data = {
-      
+      list:null,
+      navs:[{
+          text:'本店排名',
+          selected:true
+      },{
+          text:'平台排名',
+          selected:false
+      }]
     }
 
 
@@ -94,11 +115,17 @@
     }
 
     events = {
+        navTapEvent(index){
 
+        }
     }
 
-    onLoad() {
-      
+    async onLoad() {
+        const data = await api.rankMer()
+        if(data.code==200){
+            this.list = data.data
+            this.$apply()
+        }
     }
   }
 </script>
