@@ -6,11 +6,51 @@
         color: #dd4e32;
     }
 }
+.evaluate{
+    .evaluate_ceil{
+        align-items: center;
+    }
+    .info_box{
+        .info_right{
+            .shouru{
+                font-size: 24rpx;
+                line-height: 36rpx;
+            }
+        }
+    }
+    .top_icon{
+        width: 44rpx;
+        height: 54rpx;
+        margin-right: 20rpx;
+        display: block;
+        line-height: 54rpx;
+        font-size: 38rpx;
+        color: #4d4d4d;
+        text-align: center;
+    }
+    .float_tips{
+        width: 100%;
+        position: fixed;
+        padding: 18rpx 40rpx;
+        background: rgba(226,103,79,.86);
+        color: #fff;
+        font-size: 24rpx;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        box-sizing: border-box;
+    }
+}
 </style>
 <template>
   <view class="container evaluate">
-    <view class="weui-ceils bgwhite ">
-      <view class="weui-cell evaluate_ceil">
+    
+    <view class="weui-ceils bgwhite">
+      <view class="weui-cell evaluate_ceil" wx:for="{{10}}" wx:key="top_{{index}}">
+        <image wx:if="{{index == 0}}" src="../../icon/1st.png" class="top_icon"></image>
+        <image wx:if="{{index == 1}}" src="../../icon/2nd.png" class="top_icon"></image>
+        <image wx:if="{{index == 2}}" src="../../icon/3rd.png" class="top_icon"></image>
+        <view wx:if="{{index>2}}" class="top_icon">{{index + 1}}</view>
         <view class="weui-cell__ft avatar_wrap">
             <image src="../../images/qrcode.png" class="avatar"></image>
         </view>
@@ -20,26 +60,15 @@
                     <view class="name oneTextHide">昵称啊啊</view>
                     <view class="sign oneTextHide">1232</view>
                 </view>
-                <view class="info_right">总获得积分<text>154</text>分</view>
-            </view>
-        </view>
-      </view>
-      <view class="weui-cell evaluate_ceil">
-        <view class="weui-cell__ft avatar_wrap">
-            <image src="../../images/qrcode.png" class="avatar"></image>
-        </view>
-        <view class="weui-cell__bd">
-            <view class="info_box">
-                <view class="info_left">
-                    <view class="name oneTextHide">昵称啊啊</view>
-                    <view class="sign oneTextHide">1232</view>
+                <view class="info_right">
+                    <view class="shouru">总积分：<text class="light">154884</text></view>
+                    <view class="shouru">总收入：<text class="light">154884</text></view>
                 </view>
-                <view class="info_right">总获得积分<text>154</text>分</view>
             </view>
         </view>
       </view>
     </view>
-    <view class="float"></view>
+    <view class="float_tips">您的排行为第1234名，总收入25.20元，总积分152分， 己超越25%的用户。</view>
   </view>
 </template>
 

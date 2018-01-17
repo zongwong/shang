@@ -97,16 +97,21 @@
   <view class="container user_index">
     <view class="weui-flex bgwhite userinfo mb24">
       <view class="userinfo_avatar">
-        <image src="../../images/qrcode.png"></image>
+        <image src="{{userInfo.avatarUrl}}"></image>
       </view>
       <view class="userinfo_data">
-        <view class="username oneTextHide">姓名安慰全文</view>
+        <view class="username oneTextHide">{{userInfo.nickName}}</view>
         <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
       </view>
       <view class="userinfo_qrcode">
         <image src="../../images/qrcode.png"></image>
       </view>
-      <view class="usersign"><text style="color:#000;">个性签名：</text>前面请问请问亲</view>
+      <navigator class="usersign" url="/pages/set/sign" hover-class="none">
+        <view class="weui-cell" style="padding:0;">
+          <view class="weui-cell__bd"><text style="color:#000;">个性签名：</text>前面请问请问亲</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </navigator>
     </view>
     <view class="navs bgwhite weui-flex mb24">
       <view class="weui-flex__item">
@@ -183,7 +188,7 @@
 
 <script>
   import wepy from 'wepy'
-
+  import wxApi from '../../interfaces/wxapi'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '赏一赏个人中心'
@@ -193,7 +198,7 @@
 
 
     data = {
-      
+      userInfo:null
     }
 
 
@@ -206,8 +211,10 @@
 
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const userInfo = await wxApi.getUser()
+      this.userInfo = userInfo
+      this.$apply()
     }
   }
 </script>

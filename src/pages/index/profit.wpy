@@ -1,37 +1,79 @@
 <style lang="less">
 @import "../../style/evlist.less";
+.time{
+  color: #6e6e6e!important;
+}
+.data{
+  background: #dd4e32;
+  color: #f9b3a5;
+  text-align: center;
+  .tips_text{
+    font-size: 28rpx;
+  }
+  .value{
+    color: #fff;
+  }
+  .total{
+    font-size: 42rpx;
+  }
+  .flex_row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24rpx 110rpx;
+    .flex_item{
+      flex:1;
+    }
+  }
+}
 </style>
 <template>
   <view class="container evaluate">
-    <view class="weui-ceils bgwhite ">
-      <view class="weui-cell evaluate_ceil">
-        <view class="weui-cell__ft avatar_wrap">
-            <image src="../../images/qrcode.png" class="avatar"></image>
+    <view class="data">
+      <view>
+        <view class="tips_text" style="padding-top:20rpx;">收入总额(元)</view>
+        <view class="value total" style="margin-bottom:20rpx;">{{mydata.total}}</view>
+      </view>
+      <view class="flex_row">
+        <view class="flex_item">
+          <view class="tips_text">账户余额(元)</view>
+          <view class="value">{{mydata.rest}}</view>
         </view>
-        <view class="weui-cell__bd">
-            <view class="info_box mb24">
-                <view class="info_left">
-                    <view class="name oneTextHide">昵称啊啊</view>
-                    <view class="sign oneTextHide">1232</view>
-                </view>
-                <view class="info_right">打赏2元</view>
-            </view>
-            <view class="pjtext">吾问无为谓呜呜呜呜娃儿沃尔沃尔娃儿沃尔问问二位二位认为任务二沃尔沃尔问问3</view>
+        <view class="flex_item">
+          <view class="tips_text">已提现(元)</view>
+          <view class="value">{{mydata.transfered}}</view>
         </view>
       </view>
-      <view class="weui-cell evaluate_ceil">
+    </view>
+    <view class="query mt24">
+        <view>
+            <picker mode="date" value="{{date}}"  @change="DateChange">
+                <view class="value">{{date}}</view>
+                <view class="text">日期可选</view>
+            </picker>
+        </view>
+        <view>
+            <view class="value light">{{list.total}}</view>
+            <view class="text">金额(元)</view>
+        </view>
+        <view>
+            <view class="value">{{list.count}}</view>
+            <view class="text">次数</view>
+        </view>
+    </view>
+    <view class="weui-ceils bgwhite">
+      <view class="weui-cell evaluate_ceil" wx:for="{{list.list}}" wx:key="item_{{index}}">
         <view class="weui-cell__ft avatar_wrap">
             <image src="../../images/qrcode.png" class="avatar"></image>
         </view>
         <view class="weui-cell__bd">
-            <view class="info_box mb24">
+            <view class="info_box">
                 <view class="info_left">
-                    <view class="name oneTextHide">昵称啊啊</view>
-                    <view class="sign oneTextHide">1232</view>
+                    <view class="name oneTextHide">打赏-来自 无名</view>
+                    <view class="sign oneTextHide time">{{item.day}}</view>
                 </view>
-                <view class="info_right">打赏2元</view>
+                <view class="info_right">+{{item.net_remuneration}}</view>
             </view>
-            <view class="pjtext">吾问无为谓呜呜呜呜娃儿沃尔沃尔娃儿沃尔问问二位二位认为任务二沃尔沃尔问问3</view>
         </view>
       </view>
     </view>
@@ -41,7 +83,8 @@
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
+  import _ from '../../utils/tools'
   export default class Profit extends wepy.page {
     config = {
       navigationBarTitleText: '我的收益'
@@ -51,21 +94,38 @@
 
 
     data = {
-      
+      mydata:null,
+      list:null,
+      date:'',
     }
 
 
 
     methods = {
-      
+      async DateChange(e) {
+        this.date = e.detail.value
+        this.$apply()
+        await this.getList()
+      }
     }
 
-    events = {
-
+    async onLoad() {
+        this.date = _.getToday()
+        const data = await api.profitData()
+        if(data.code==200){
+            this.mydata = data.data
+        }
+        this.$apply()
+        await this.getList()
     }
-
-    onLoad() {
-      
+    async getList(){
+        const list = await api.profitList({
+            day:this.date
+        })
+        if(list.code==200){
+            this.list = list.data
+        }
+        this.$apply()
     }
   }
 </script>

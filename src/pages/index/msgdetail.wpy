@@ -3,11 +3,41 @@ page{
     background: #fff;
 }
 .msgdetail{
-    padding: 0 40rpx;
+    // padding: 0 40rpx;
+    .detailbox{
+        margin: 0 40rpx;
+        border:2rpx solid #dd4e32;
+        margin-top: 74rpx;
+        padding: 50rpx 24rpx;
+        position: relative;
+    }
     .title{
         font-size: 30rpx;
         text-align:center;
-        margin: 50rpx 0 30rpx 0;
+        position: absolute;
+        box-sizing: border-box;
+        line-height: 1;
+        padding: 0 16px;
+        background: #fff;
+        top: -15rpx;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 600rpx;
+        &::after,&::before{
+            content: '';
+            position: absolute;
+            width: 10rpx;
+            height: 10rpx;
+            background: #dd4e32;
+            border-radius: 50%;
+            top: 10rpx;
+        }
+        &::after{
+            left: -5rpx;
+        }
+        &::before{
+            right: -5rpx;
+        }
     }
     .box{
         color: #6e6e6e;
@@ -23,11 +53,13 @@ page{
 </style>
 <template>
   <view class="container msgdetail">
-      <view class="title">
-          我是标题
+      <view class="detailbox">
+        <view class="title oneTextHide">
+            我是标题
+        </view>
+        <view class="box">Kafka是分布式发布-订阅消息系统。它最初由LinkedIn公司开发，之后成为Apache项目的一部分。Kafk</view>
+        <view class="footer">2016-12-12 赏一赏运营中心</view>
       </view>
-      <view class="box">Kafka是分布式发布-订阅消息系统。它最初由LinkedIn公司开发，之后成为Apache项目的一部分。Kafk</view>
-      <view class="footer">2016-12-12 赏一赏运营中心</view>
   </view>
 </template>
 

@@ -1,6 +1,6 @@
 import wepy from 'wepy';
 import Tips from './Tips';
-
+import login from '../interfaces/login'
 // HTTP工具类
 export default class http {
   static async request (method, url, data={}, loading = true , token = true) {
@@ -22,6 +22,10 @@ export default class http {
     const res = await wepy.request(param);
 
     if (res.statusCode == 200) {
+      if(res.data.code==400 && res.data.message=='token过期，请重新请求'){
+        await login.login()
+        return await this.request(method, url, data)
+      }
       return res.data;
     } else {
       throw this.requestException(res);

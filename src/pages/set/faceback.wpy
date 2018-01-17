@@ -14,10 +14,19 @@
 </style>
 <template>
   <view class="container faceback">
+    <view class="weui-cells__title">问题和意见</view>
     <view class="weui-ceils bgwhite">
       <view class="weui-cell">
         <view class="weui-cell__bd">
         <textarea name="" id="" cols="30" rows="10" placeholder="请输入反馈内容"></textarea>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">联系方式</view>
+    <view class="weui-ceils bgwhite">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <input type="text" placeholder="选填，便于我们与你联系" />
         </view>
       </view>
     </view>

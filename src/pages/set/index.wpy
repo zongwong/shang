@@ -5,6 +5,9 @@
   .weui-cells{
     margin-top: 24rpx;
   }
+  .navsBox{
+    font-size: 28rpx;
+  }
   .nav-icon{
     margin-right: 24rpx;
     vertical-align: middle;
@@ -17,10 +20,10 @@
   <view class="container set_index">
     <view class="weui-flex bgwhite userinfo mb24">
       <view class="userinfo_avatar">
-        <image src="../../images/qrcode.png"></image>
+        <image src="{{userInfo.avatarUrl}}"></image>
       </view>
       <view class="userinfo_data">
-        <view class="username oneTextHide">姓名安慰全文</view>
+        <view class="username oneTextHide">{{userInfo.nickName}}</view>
         <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
       </view>
       <view class="userinfo_qrcode">
@@ -29,7 +32,7 @@
       <view class="usersign"><text style="color:#000;">工号：</text>前面请问请问亲 <text style="color:#000;">门店：</text>前面请问请问亲</view>
       <view class="usersign"><text style="color:#000;">个性签名：</text>前面请问请问亲</view>
     </view>
-    <view class="weui-cells">
+    <view class="weui-cells navsBox">
       <navigator class="weui-cell  weui-cell_access">
         <image class="nav-icon" src="../../icon/mer.png"></image>
         <view class="weui-cell__bd">所属商家</view>
@@ -40,13 +43,13 @@
         <view class="weui-cell__bd">名片信息</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
-      <navigator class="weui-cell  weui-cell_access">
+      <navigator class="weui-cell  weui-cell_access" url="/pages/set/info">
         <image class="nav-icon" src="../../icon/id.png"></image>
         <view class="weui-cell__bd">实名认证</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
     </view>
-    <view class="weui-cells">
+    <view class="weui-cells navsBox">
       <navigator class="weui-cell  weui-cell_access" url="/pages/set/bind">
         <image class="nav-icon" src="../../icon/pwd.png"></image>
         <view class="weui-cell__bd">设置提现密码</view>
@@ -58,7 +61,7 @@
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
     </view>
-    <view class="weui-cells">
+    <view class="weui-cells navsBox">
       <navigator class="weui-cell  weui-cell_access" url="/pages/set/faceback">
         <image class="nav-icon" src="../../icon/faceback.png"></image>
         <view class="weui-cell__bd">意见与反馈</view>
@@ -70,7 +73,7 @@
 
 <script>
   import wepy from 'wepy'
-
+  import wxApi from '../../interfaces/wxapi'
   export default class Set extends wepy.page {
     config = {
       navigationBarTitleText: '设置'
@@ -80,7 +83,7 @@
 
 
     data = {
-      
+      userInfo:null
     }
 
 
@@ -93,8 +96,10 @@
 
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const userInfo = await wxApi.getUser()
+      this.userInfo = userInfo
+      this.$apply()
     }
   }
 </script>

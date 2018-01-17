@@ -32,7 +32,7 @@ export default class Api extends base{
     return await this.put(url, data)
   }
   // 每日签到
-  static async sign() {
+  static async toSign() {
     const url = `${this.host}/sign/dosign`
     return await this.post(url)
   }
@@ -42,13 +42,23 @@ export default class Api extends base{
     return await this.get(url)
   }
   // 我的评价
-  static async evaluate() {
-    const url = `${this.host}/evaluate/getlist`
+  static async rewardList(data) {
+    const url = `${this.host}/reward/getlist`
+    return await this.get(url,data)
+  }
+  // 我的评价统计
+  static async rewardData() {
+    const url = `${this.host}/reward/getdata`
     return await this.get(url)
   }
   // 我的收益
-  static async profit() {
+  static async profitList(data) {
     const url = `${this.host}/profit/getlist`
+    return await this.get(url,data)
+  }
+  // 我的收益数据
+  static async profitData() {
+    const url = `${this.host}/profit/getdata`
     return await this.get(url)
   }
   // 我的排名

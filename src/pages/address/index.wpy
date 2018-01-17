@@ -39,6 +39,9 @@
     .add{
         position: fixed;
         bottom: 20rpx;
+        left:24rpx;
+        right:24rpx;
+        width:auto;
     }
 }
 </style>

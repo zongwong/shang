@@ -119,10 +119,14 @@ page{
     <image mode="aspectFill" src="../../images/signbg.png" class="bg"></image>
     <view class="body">
       <view class="info_box">
-        <image class="avatar" src="../../images/qrcode.png"></image>
+        <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
         <view class="info_text">
-          <view class="name">姓名个阿萨德</view>
-          <view class="signstatus">你今天还没有签到哦 <text class="sbtn sbtn_default sign_btn">签到</text></view>
+          <view class="name">{{userInfo.nickName}}</view>
+          <view class="signstatus">
+            <text wx:if="{{isSigned==0}}">你今天还没有签到哦</text>
+            <text wx:if="{{isSigned==1}}">你今天已经签到啦</text>
+            <text class="sbtn sbtn_default sign_btn" @tap="toSign">{{isSigned==0?'签到':'已签到'}}</text>
+          </view>
           <view><text class="light">15478人</text>参与了签到任务</view>
         </view>
         <view class="info_btns">
@@ -130,13 +134,13 @@ page{
           <view>连续签到<text class="light">第5天</text></view>
         </view>
       </view>
-      <view class="sbtn sbtn_default sign_btns">今日祝福语</view>
+      <view class="sbtn sbtn_default sign_btns" @tap="modalChange(1)">今日祝福语</view>
       <view class="sbtn sbtn_outline sign_btns">签到记录</view>
     </view>
-    <view class="modal" wx:if="{{0}}">
+    <view class="modal" wx:if="{{modalStatus==1}}">
       <view class="card">
         <image class="wordbg" src="../../images/wordbg.png"></image>
-        <view class="icon close"></view>
+        <view class="icon close" @tap="modalChange(0)"></view>
         <view class="wrod_text">祝你好运朋友!@#!#QWEQEQweas请问请问</view>
       </view>
     </view>
@@ -145,7 +149,8 @@ page{
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
   export default class Sign extends wepy.page {
     config = {
       navigationBarTitleText: '签到'
@@ -155,21 +160,41 @@ page{
 
 
     data = {
-      
+      userInfo:null,
+      modalStatus:0,
+      isSigned:0,
     }
 
-
-
     methods = {
-      
+      modalChange(status){
+        this.modalStatus = status
+      },
+      async toSign(){
+        if(this.isSigned = 1){
+          return false
+        }
+        const data = await api.toSign()
+        if(data.code==200){
+          console.log(data)
+        }else if(data.code==400){
+          this.isSigned = 1
+          this.$apply()
+          wx.showModal({
+            title:'提示',
+            content:data.message
+          })
+        }
+      }
     }
 
     events = {
 
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const userInfo = await wxApi.getUser()
+      this.userInfo = userInfo
+      this.$apply()
     }
   }
 </script>

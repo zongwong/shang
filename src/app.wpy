@@ -15,6 +15,9 @@ page{
 .bgwhite{
   background: #fff;
 }
+.grayColor{
+  color:#898888;
+}
 .oneTextHide{
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -99,22 +102,22 @@ import login from './interfaces/login'
 export default class extends wepy.app {
   config = {
     pages: [
-      // 'pages/index/msgdetail',
+      'pages/index/index',
+      'pages/index/top',
+      'pages/index/profit',
+      'pages/index/evaluate',
+      'pages/set/faceback',
+      'pages/index/msgdetail',
       'pages/index/msg',
       'pages/set/info',
-      // 'pages/address/index',
-      // 'pages/address/edit',
-      'pages/index/index',
+      'pages/address/index',
+      'pages/address/edit',
       'pages/set/card',
       'pages/index/task',
       'pages/sign/index',
       'pages/set/index',
-      'pages/set/faceback',
       'pages/index/order',
       'pages/index/ticket',
-      'pages/index/top',
-      'pages/index/profit',
-      'pages/index/evaluate',
       'pages/set/sign',
       'pages/set/bind',
     ],
