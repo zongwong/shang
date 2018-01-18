@@ -18,7 +18,7 @@
     <view class="weui-ceils bgwhite">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-        <textarea name="" id="" cols="30" rows="10" placeholder="请输入反馈内容"></textarea>
+        <textarea name="" id="" cols="30" rows="10" placeholder="请输入反馈内容" @input="contentInput" maxlength="5000" value="{{content}}"></textarea>
         </view>
       </view>
     </view>
@@ -26,39 +26,55 @@
     <view class="weui-ceils bgwhite">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <input type="text" placeholder="选填，便于我们与你联系" />
+          <input type="text" value="{{phone}}" @input="phoneInput" placeholder="选填，便于我们与你联系" />
         </view>
       </view>
     </view>
     <view class="btn_wrap">
-       <view class="sbtn sbtn_default" style="font-size:32rpx;">提交</view> 
+       <view class="sbtn sbtn_default" style="font-size:32rpx;" @tap="toFaceback">提交</view> 
     </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
   export default class Faceback extends wepy.page {
     config = {
       navigationBarTitleText: '反馈'
     }
-    components = {
+
+    data = {      
+      content:'',
+      phone:''
     }
-
-
-    data = {
-      
-    }
-
-
 
     methods = {
-      
-    }
-
-    events = {
-
+      contentInput(e) {
+        this.content = e.detail.value
+      },
+      phoneInput(e) {
+        this.phone = e.detail.value
+      },
+      async toFaceback() {
+        if(!this.content){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写反馈内容'
+          })
+          return false
+        }
+        const  data = await api.toFaceback({
+          content:this.content,
+          phone:this.phone
+        })
+        if (data.code == 200){
+          wepy.showToast({
+            title:'感谢您的反馈!'
+          })
+          wepy.navigateBack()
+        }
+      }
     }
 
     onLoad() {

@@ -1,0 +1,179 @@
+<style lang="less">
+page{
+  background: #fff;
+}
+.signed{
+  font-size: 30rpx;
+  .banner{
+    display: block;
+    width: 100%;
+    height: 240rpx;
+  }
+  .title{
+    text-align: center;
+    padding: 30rpx 0;
+  }
+  .rule{
+    border-top: 2rpx solid #cacaca;
+    padding: 30rpx 40rpx;
+    .rule_title{
+      font-weight: bold;
+      margin-bottom: 10rpx;
+    }
+    .rule_detail{
+      color: #6e6e6e;
+      font-size: 26rpx;
+      view{
+        margin-bottom: 10rpx;
+      }
+    }
+  }
+  .calendar{
+    padding: 0 30rpx;
+    .calendar_nav{
+      padding: 20rpx 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .week_nav{
+      background: #dd4e32;
+      display: flex;
+      color: #fff;
+      text-align: center;
+      view{
+        flex:1;
+      }
+    }
+    .date_wrap{
+      padding: 10rpx 0 16rpx 0;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      .date_item{
+        width: calc(100% / 7 );
+        line-height: 66rpx;
+        &.signed{
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAoCAYAAAB5ADPdAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADC0lEQVRYw82YX2iOURzHP++72SwtNv8iaTkZEeXkvwul0SJHXGi3YkguNkki5UaoraSmJSLl39Xq3DCi/Cn/T8qI6VBSw8W2GlnLNhfP8671ev69z7OnfG/e3t/v9/2dz3s676/nORlcWSWLgD1ADTAF+A7cFdqcJ0RWyUqgEVgNDADtQpszYT4/Zdym1cApYLZHTSewT2jT6wM0GbgJTMpLvQXqhTYDhUJl3c8mHyCAauCsVTLjkz/uAQSwEGgIWtwqWWSVrLZKzrNKjh+BskrWATND4BcA2z2aVgCrAnxrA4CWAxq4BlwFtFVyfW6nNkfc1aUesWyIxzPvHpdzwPRR4UrgpFVyZdb9EkUlHrFu4GOA541P/GCA51AW+BYRqj8/ILQZBo741PcBJ31yswLWmZQFrkeEuucVFNp8BnYCxg0NAfeBOqFNj0+v4YB1MrmRcAXnMPvpkdCmMYzaKjkDGBLafA+pq8eZiV5qy0GVA82A9Ch6KrTZH3E3I8sq2cy//87XQptdmbzCNcAGYCrOWWsX2jwLaV7m1k/EGcb9QA/QLbQZDPHWALXAOOCe0EbjNonzKzcBS4AqQADleSWDLtgn4CvwUmhzJ2r/gqDcgdeAM+ULVQfQIrR5MWZQVslDeEz1GGoV2lwIKgibyDmgo2MEBLDXKlkbVBC6U1bJuUSfZYVoo9Dmh1ciyk7tSAEIYKtfIgrUopSgtsSCskqWAhUpQU2zSi4uGAr4A/xOCQpgRcFQ7kS2KUJ5PjZFOVNp/PNyKosFJbR5AHSlBFUaC8rVbpynzLFWcWwooU0XUAdcSgEsHpQL1i20aQG2AQ/HaH3Pd8LIUKPgvghtDgBt/w3UKLgTOM9KSeQ5A2NDuWpN6O9NA+pdQv+HNKCS6lUaUCUJvM+FNj/TgJqTwPvYL5EUal0C75O0oObH9N12X/dTgSqO6TsdlEwK9T6G55jQpi9NqMsF1jcJbW6FFSWCEtp0ABcjlHYCh4U2N6L0jXWXkC+r5DKcl9UqYALOHdUvnEuSkYuLqPoLm4rTal7EUCEAAAAASUVORK5CYII=) center / 100% no-repeat;
+          background-size: 37rpx 40rpx;
+        }
+      }
+    }
+  }
+  .icon_left{
+    width: 30rpx;
+    height: 30rpx;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAACO0lEQVRIx72XsWvUUBzHP7mkJ7j0glg5cDLorRIQVxevWwaHu3pdW2gVyfk/OAqm1qOoHYoO3hUsmK0n/gMKAYcOpcRJEKttrpNFaeOQl2sblLyk6X2nhPf7/T7vhfd++T4FCfmWOQZMAreBG8AVoCKGB8AX4BPwHlg3XO9PWk0lBVgB2sA94KLMJIGfQAdwDNcbZAb7ljkFOMAlSWBS34G24XpdKbBvmSqwCMznBCa1BDwwXO/gv2ABXQXuFASNtQY0jsNLiQDnDKCImgv/XLFvmU2gm7ViRk0ZrtcbgsXu3QQmslbSGzOgqgRvnsuEbwM1w/UG8adu54Xq0/MoY2XZlAnBQvEtswx8Rf6cnoAO3q6w+2oxS+oP4LIG1DNDmzPorVxQBKteEuBRQWNNlgBzxFAAUwOuyUFn0VtzRUABrpaA8RFDAcZLUmGK6DNhWAQUAA3YI2VXB90XEIborTkAdl8/Oy13TwO20sAAQe8lQFHwLdWuVa8DN2Wi9ze8aOXNWZTyOX59/pgX/E61a1UVaMlmRPDD08IfaUAf2AEuyGYFvWUIQZ+OvEKOlrmuPt38dmDXqueBW1my9zc8OMy18seG633QxItDZHUy/aGC1eXoQVWzrNaB0RuBu7H5GzYQ4Qw6ZwjtHHecyc5lExmzorUmag91AixcYIPIkhalJRIOE9IN/QI5LJHQNmBLG/oEvAI8BO4jf853iPbKk1xXmMQE4ktbnaNLmy6GA44ubX2gb7je77SafwFfactB9I8PhQAAAABJRU5ErkJggg==);
+  }
+  .icon_right{
+    width: 30rpx;
+    height: 30rpx;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAACJklEQVRIx73XPW/TQADG8b/dUAaGxqAWsWJBBzZLfATSzQMvaaACAQKkAFXCJyFRCakEExKl6dDBW8M3AGGJgQFVZqelOJ1AqYgZfHaLVfDdOeWZItl3P8eyz88ZSCRwnWPAHHAJuAicBcri8AD4ArwH3gIbtufv5c1p5IBloAk8BKZlLhL4BnSAlu35A2U4cJ0a0AJOS4LZfAWatuevSsGB60wAS0BdE8ymCyzanv/rr7BA14DLY0KTrAPVg7iZOaF1BChizvah/zhwnXlgVXVGxdRsz++lsHh6PwMzeSOt2gMYjQjXXurAW8Cs7fmD5FY3ZVAAY/I41kIdq3pPB54RFhOB60wCb4ATMiN/fHwX4/P3YTTi5ydfFb/QmD3TLgEV5BcHAL6/WgLAWqiDAWFP6bZPA5UEVk6K34hfd0V8rgQ4OnBB3CkB53XhAvi5EjBVBE7xKFLBp8zcWWUTReKHIXW6CewWNU/efEz52l3ClWXC3guZIbsmsFkYvXpHBQXYNIEP2uitRR0UwDeBvjZ65TbhSlcVBegn8I4+qvyx2AY2TNvzh8AzZfS1Fgrw3Pb8YfI6tYg/WbmJ9oYxqvdZ3BbWfy8C15Pyly4gohl0jhDtHGyc2ZWrQVzMxp11MXeaP2DRAqvElXRc6ZJpmJBf6NtIVqJDsgU0pAt9Bi8DT4BHwClJcIf4WXmqtYXJXECyaauwv2mzxOGQ/U1bH+iLteGf+Q3x9crcxyjtcwAAAABJRU5ErkJggg==);
+  }
+  // .icon_signed{
+  //   width: 37rpx;
+  //   height: 40rpx;
+  //   background-image: url();
+  // }
+}
+</style>
+<template>
+  <view class="container signed">
+    <image src="../../images/signed.png" class="banner"></image>
+    <view class="title">你已经连续签到<text class="light">3天</text>了</view>
+    <view class="calendar">
+      <view class="calendar_nav">
+        <view>
+          <view class="tw_row" @tap="prevMonth">
+            <text class="icon icon_left" style="margin-right:12rpx;"></text>
+            <text>上月</text>
+          </view>
+        </view>
+        <view>{{year}}年{{month}}月</view>
+        <view>
+          <view class="tw_row" @tap="nextMonth">
+            <text>下月</text>
+            <text class="icon icon_right" style="margin-left:12rpx;"></text>
+          </view>
+        </view>
+      </view>
+      <view class="week_nav">
+        <view>日</view>
+        <view>一</view>
+        <view>二</view>
+        <view>三</view>
+        <view>四</view>
+        <view>五</view>
+        <view>六</view>
+      </view>
+      <view class="date_wrap">
+        <view class="date_item {{item.month!=month?'grayColor':''}} {{item.signed?'signed':''}}" wx:for="{{date.days}}" wx:key="day_{index}">{{item.showDate}}</view>
+      </view>
+    </view>
+    <view class="rule">
+      <view class="rule_title">签到规则</view>
+      <view class="rule_detail">
+        <view>1、每次签到获得1积分；</view>
+        <view>2、本月连续签到额外获得5积分；</view>
+        <view>3、本月签满额外获得20积分；</view>
+        <view>4、如果中间有一天间断未签到的，重新开始计算连续签到时间；</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  import datapicker from '../../utils/date'
+  export default class Signed extends wepy.page {
+    config = {
+      navigationBarTitleText: '签到记录'
+    }
+
+    data = {
+      date:null,
+      year:'',
+      month:'',
+    }
+
+    methods = {
+      async nextMonth(){
+        this.month = this.month + 1
+        if (this.month>12) {
+          this.month = 1
+          this.year = this.year + 1
+        } 
+        let date = datapicker.getMonthData(this.year,this.month)
+        date.days.forEach((item)=>{
+          item.signed = false
+        })
+        this.date = date
+        this.$apply()
+      },
+      async prevMonth(){
+        this.month = this.month - 1
+        if (this.month<1) {
+          this.month = 12
+          this.year = this.year - 1
+        } 
+        let date = datapicker.getMonthData(this.year,this.month)
+        date.days.forEach((item)=>{
+          item.signed = true
+        })
+        this.date = date
+        this.$apply()
+      }
+    }
+
+    async onLoad() {
+      const now = new Date()
+      this.year = now.getFullYear()
+      this.month = now.getMonth() + 1
+      this.date = datapicker.getMonthData(this.year,this.month)
+    }
+    async getSignData(){
+      // const data = api.getSignData()
+    }
+  }
+</script>

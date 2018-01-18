@@ -7,6 +7,7 @@
     }
 }
 .evaluate{
+    margin-bottom: 120rpx;
     .evaluate_ceil{
         align-items: center;
     }
@@ -70,11 +71,11 @@
             <view class="info_box">
                 <view class="info_left">
                     <view class="name oneTextHide">{{item.nickname}}</view>
-                    <view class="sign oneTextHide">{{}}</view>
+                    <view class="sign oneTextHide">{{item.merchant_name}}</view>
                 </view>
                 <view class="info_right">
-                    <view class="shouru">总积分：<text class="light">{{item.point}}</text></view>
-                    <view class="shouru">总收入：<text class="light">{{item.point}}</text></view>
+                    <view class="shouru">总积分：<text class="light">{{item.point}}分</text></view>
+                    <view class="shouru">总收入：<text class="light">{{item.profit}}元</text></view>
                 </view>
             </view>
         </view>
@@ -116,12 +117,26 @@
 
     events = {
         navTapEvent(index){
-
+            if(index==0){
+                this.rankMer()
+            }else{
+                this.rankPlatform()
+            }
         }
     }
 
     async onLoad() {
+        this.rankMer()
+    }
+    async rankMer(){
         const data = await api.rankMer()
+        if(data.code==200){
+            this.list = data.data
+            this.$apply()
+        }
+    }
+    async rankPlatform(){
+        const data = await api.rankPlatform()
         if(data.code==200){
             this.list = data.data
             this.$apply()

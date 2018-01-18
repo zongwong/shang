@@ -16,39 +16,106 @@
   <view class="container bind">
     <view class="weui-ceils bgwhite mt24">
       <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" placeholder="请输入手机号"/></view>
+        <view class="weui-cell__bd"><input type="number" @input="phoneInput" value="{{phone}}" placeholder="请输入手机号"/></view>
         <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" placeholder="请输入验证码"/></view>
-        <view class="weui-cell__ft"><view class="sbtn sbtn_outline sms_btn">获取验证码</view></view>
+        <view class="weui-cell__bd"><input type="number" @input="codeInput" value="{{code}}" placeholder="请输入验证码" /></view>
+        <view class="weui-cell__ft"><button class="sbtn sbtn_outline sms_btn" @tap="getCode"  disabled="{{disabled}}">{{text}}</button></view>
       </view>
     </view>
     <view class="btn_wrap">
-       <view class="sbtn sbtn_default">完成</view> 
+       <view class="sbtn sbtn_default" @tap="bind">完成</view> 
     </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
   export default class Bind extends wepy.page {
     config = {
       navigationBarTitleText: '绑定手机号'
     }
-    components = {
-    }
-
-
     data = {
-      
+      phone:'',
+      text:'获取验证码',
+      disabled: false,
+      code: ''
     }
-
-
 
     methods = {
-      
+      phoneInput(e) {
+        this.phone = e.detail.value
+      },
+      codeInput(e) {
+        this.code = e.detail.value
+      },
+      // 验证码
+      async getCode() {
+        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+          wepy.showModal({
+            content: '请输入正确的手机号',
+            title: '提示'
+          })
+          return false;
+        }
+        const data = await api.sms({
+          phone: this.phone
+        })
+        if(data.status){
+          wepy.showToast({
+            title: '验证码已发送'
+          })
+          this.disabled = true
+          this.text = '60s后获取'
+          let second = 60
+          let timer = setInterval(()=>{
+            second = second - 1
+            this.text = `${second}s后获取`
+            if(second==0){
+              this.text = '获取验证码'
+              this.disabled = false
+              clearInterval(timer)
+            }
+            this.$apply()
+          },1000)
+        }
+      },
+      // 绑定
+      async bind() {
+        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+          wepy.showModal({
+            content: '请输入正确的手机号',
+            title: '提示'
+          })
+          return false;
+        }
+        if(!this.code){
+          wepy.showModal({
+            content: '请填写短信验证码',
+            title: '提示'
+          })
+          return false;
+        }
+        const data = await api.bind({
+          phone: this.phone,
+          code: this.code
+        }) 
+
+        if(data.code==200){
+          await wepy.showToast({
+            title: '绑定成功',
+          })
+          wepy.navigateBack()
+        }else{
+          wepy.showModal({
+            title: '提示',
+            content: data.message
+          })
+        }
+        
+      }
     }
 
     events = {

@@ -70,26 +70,19 @@ page{
     config = {
       navigationBarTitleText: '消息通知'
     }
-    components = {
-    }
-
 
     data = {
-      
+      info:null
     }
 
-
-
-    methods = {
-      
-    }
-
-    events = {
-
-    }
-
-    onLoad() {
-      
+    async onLoad(options) {
+      const data = await api.noticeInfo({
+          id:options.id
+      })
+      if(data.code==200){
+          this.info = data.data
+          this.$apply()
+      }
     }
   }
 </script>

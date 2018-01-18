@@ -103,6 +103,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index/index',
+      'pages/sign/signed',
       'pages/index/top',
       'pages/index/profit',
       'pages/index/evaluate',

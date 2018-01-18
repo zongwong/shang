@@ -16,15 +16,15 @@
   <view class="container bind">
     <view class="weui-ceils bgwhite mt24">
       <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" placeholder="请输入真实姓名"/></view>
+        <view class="weui-cell__bd"><input type="number" @input="nameInput" value="{{name}}" placeholder="请输入真实姓名"/></view>
         <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" placeholder="请输入您的年龄"/></view>
+        <view class="weui-cell__bd"><input type="number" @input="ageInput" value="{{age}}" placeholder="请输入您的年龄"/></view>
         <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" placeholder="请输入您的职业"/></view>
+        <view class="weui-cell__bd"><input type="number" @input="jobInput" value="{{job}}" placeholder="请输入您的职业"/></view>
         <view class="weui-cell__ft"></view>
       </view>
     </view>
@@ -36,31 +36,66 @@
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
   export default class UserInfo extends wepy.page {
     config = {
       navigationBarTitleText: '完善个人信息'
     }
-    components = {
-    }
-
 
     data = {
-      
+      name:'',
+      age:'',
+      job:'',
     }
-
-
 
     methods = {
-      
+      nameInput(e) {
+        this.name = e.detail.value
+      },
+      ageInput(e) {
+        this.age = e.detail.value
+      },
+      jobInput(e) {
+        this.job = e.detail.value
+      },
+      async toSubmit(){
+        if(!this.name){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写真实姓名'
+          })
+          return false
+        }
+        if(!this.age){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写年龄'
+          })
+          return false
+        }
+        if(!this.job){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写职业'
+          })
+          return false
+        }
+        const data = await api.setPersonalInfo({
+          name:this.name,
+          age:this.age,
+          job:this.job,
+        })
+        if(data.code==200){
+          await wepy.showToast({
+            title:'设置成功'
+          })
+          wepy.navigateBack()
+        }
+      }
     }
 
-    events = {
-
-    }
-
-    onLoad() {
-      
+    async onLoad() {
+      // 获取内容
     }
   }
 </script>

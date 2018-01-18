@@ -36,7 +36,7 @@ export default class Api extends base{
     const url = `${this.host}/sign/dosign`
     return await this.post(url)
   }
-  // 积分明细
+  // 积分明细?
   static async pointList() {
     const url = `${this.host}/point/getlist`
     return await this.get(url)
@@ -61,9 +61,14 @@ export default class Api extends base{
     const url = `${this.host}/profit/getdata`
     return await this.get(url)
   }
-  // 我的排名
+  // 我的商家排名
   static async rankMer() {
     const url = `${this.host}/rank/merchant`
+    return await this.get(url)
+  }
+  // 全平台排名
+  static async rankPlatform() {
+    const url = `${this.host}/rank/platform`
     return await this.get(url)
   }
   // 消息列表

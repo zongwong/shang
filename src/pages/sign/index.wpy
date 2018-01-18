@@ -135,7 +135,7 @@ page{
         </view>
       </view>
       <view class="sbtn sbtn_default sign_btns" @tap="modalChange(1)">今日祝福语</view>
-      <view class="sbtn sbtn_outline sign_btns">签到记录</view>
+      <navigator url="/pages/sign/signed" class="sbtn sbtn_outline sign_btns">签到记录</navigator>
     </view>
     <view class="modal" wx:if="{{modalStatus==1}}">
       <view class="card">
