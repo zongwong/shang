@@ -116,7 +116,7 @@ page{
 </style>
 <template>
   <view class="container sign">
-    <image mode="aspectFill" src="../../images/signbg.png" class="bg"></image>
+    <image mode="aspectFill" src="https://www.hdlwork.cn/xcx/images/signbg.png" class="bg"></image>
     <view class="body">
       <view class="info_box">
         <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
@@ -139,7 +139,7 @@ page{
     </view>
     <view class="modal" wx:if="{{modalStatus==1}}">
       <view class="card">
-        <image class="wordbg" src="../../images/wordbg.png"></image>
+        <image class="wordbg" src="https://www.hdlwork.cn/xcx/images/wordbg.png"></image>
         <view class="icon close" @tap="modalChange(0)"></view>
         <view class="wrod_text">祝你好运朋友!@#!#QWEQEQweas请问请问</view>
       </view>
@@ -195,6 +195,9 @@ page{
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
       this.$apply()
+    }
+    onShareAppMessage(){
+      
     }
   }
 </script>

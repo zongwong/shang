@@ -135,7 +135,7 @@
       </view>
     </view>
     <view class="card_preview">
-      <image src="../../images/cardbg.png" class="cardbg"></image>
+      <image src="https://www.hdlwork.cn/xcx/images/cardbg.png" class="cardbg"></image>
       <view class="data_box">
         <view class="name">姓名</view>
         <view class="phone">电话</view>

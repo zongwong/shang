@@ -216,5 +216,8 @@
       this.userInfo = userInfo
       this.$apply()
     }
+    onShareAppMessage(){
+      
+    }
   }
 </script>

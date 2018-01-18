@@ -79,7 +79,7 @@ page{
 </style>
 <template>
   <view class="container signed">
-    <image src="../../images/signed.png" class="banner"></image>
+    <image src="https://www.hdlwork.cn/xcx/images/signed.png" class="banner"></image>
     <view class="title">你已经连续签到<text class="light">3天</text>了</view>
     <view class="calendar">
       <view class="calendar_nav">
