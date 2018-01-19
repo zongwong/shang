@@ -38,16 +38,16 @@
 </style>
 <template>
   <view class="container msg">
-    <navigator class="weui-cells" url="/pages/index/msgdetail?id={{item.notice_id}}" wx:for="{{3}}" wx:key="notice_{{index}}">
+    <navigator class="weui-cells" url="/pages/index/msgdetail?id={{item.msg_id}}" wx:for="{{list}}" wx:key="msg_{{index}}">
       <view class="weui-cell msg_item">
         <view class="weui-cell__bd">
-            <view class="title oneTextHide">标题</view>
+            <view class="title oneTextHide">{{item.title}}</view>
         </view>
         <view class="weui-cell__ft time">
-            2018-01-01
+            {{item.create_time}}
         </view>
         <view class="msg_desrc">
-            请问去且气温气温请问气气温气温请问气温气温请问请问请问请问请温气温请问请问请问请问请问请问请问气温气温而且我请问气温气温请问请问
+            {{item.content}}
         </view>
         <view class="weui-cell clickmore">
             <view class="weui-cell__bd">点击查看</view>
@@ -65,26 +65,14 @@
     config = {
       navigationBarTitleText: '系统消息'
     }
-    components = {
-    }
 
 
     data = {
       list:null
     }
 
-
-
-    methods = {
-      
-    }
-
-    events = {
-
-    }
-
     async onLoad() {
-      const data = await api.notice()
+      const data = await api.msgList()
       if(data.code==200){
           this.list = data.data
           this.$apply()

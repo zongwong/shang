@@ -41,19 +41,21 @@
           return false
         }
         const data = await api.setSignature({
-          sign:this.sign
+          signature:this.sign
         })
-        if(data.code==200){
-          wepy.navigateBack({
-            delta:1
+        if (data.code == 200){
+          await wepy.showToast({
+            title:'设置成功!'
           })
+          setTimeout(()=>{
+            wepy.navigateBack()
+          },1000)
         }
       }
     }
 
-    async onLoad() {
-      // 获取签名填入
-      // const data = await api.get()
+    onLoad(options) {
+      this.sign = options.sign
     }
   }
 </script>

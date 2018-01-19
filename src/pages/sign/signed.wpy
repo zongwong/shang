@@ -80,7 +80,7 @@ page{
 <template>
   <view class="container signed">
     <image src="https://www.hdlwork.cn/xcx/images/signed.png" class="banner"></image>
-    <view class="title">你已经连续签到<text class="light">3天</text>了</view>
+    <view class="title">你已经连续签到<text class="light">{{signData.continuous_days||0}}天</text>了</view>
     <view class="calendar">
       <view class="calendar_nav">
         <view>
@@ -114,7 +114,7 @@ page{
       <view class="rule_title">签到规则</view>
       <view class="rule_detail">
         <view>1、每次签到获得1积分；</view>
-        <view>2、本月连续签到额外获得5积分；</view>
+        <view>2、本周连续签到额外获得5积分；</view>
         <view>3、本月签满额外获得20积分；</view>
         <view>4、如果中间有一天间断未签到的，重新开始计算连续签到时间；</view>
       </view>
@@ -126,6 +126,7 @@ page{
   import wepy from 'wepy'
   import api from '../../interfaces/api'
   import datapicker from '../../utils/date'
+  import _ from '../../utils/tools'
   export default class Signed extends wepy.page {
     config = {
       navigationBarTitleText: '签到记录'
@@ -135,33 +136,30 @@ page{
       date:null,
       year:'',
       month:'',
+      signData:null
     }
 
     methods = {
       async nextMonth(){
-        this.month = this.month + 1
+        this.month = _.addZero(parseInt(this.month) + 1)
         if (this.month>12) {
-          this.month = 1
+          this.month = '01'
           this.year = this.year + 1
         } 
         let date = datapicker.getMonthData(this.year,this.month)
-        date.days.forEach((item)=>{
-          item.signed = false
-        })
-        this.date = date
+        const monthData = await this.getSignData()
+        this.date = this.mergeDate(date,monthData)
         this.$apply()
       },
       async prevMonth(){
-        this.month = this.month - 1
+        this.month = _.addZero(parseInt(this.month) - 1)
         if (this.month<1) {
           this.month = 12
           this.year = this.year - 1
         } 
         let date = datapicker.getMonthData(this.year,this.month)
-        date.days.forEach((item)=>{
-          item.signed = true
-        })
-        this.date = date
+        const monthData = await this.getSignData()
+        this.date = this.mergeDate(date,monthData)
         this.$apply()
       }
     }
@@ -169,11 +167,33 @@ page{
     async onLoad() {
       const now = new Date()
       this.year = now.getFullYear()
-      this.month = now.getMonth() + 1
-      this.date = datapicker.getMonthData(this.year,this.month)
+      this.month = _.addZero(parseInt(now.getMonth()) + 1)
+      this.$apply()
+      const date = datapicker.getMonthData(this.year,this.month)
+      const monthData = await this.getSignData()
+      this.date = this.mergeDate(date,monthData)
+      const signData = await api.signContinue()
+      this.signData = signData.data
+      this.$apply()
     }
     async getSignData(){
-      // const data = api.getSignData()
+      const data = await api.getSignData({
+        month:this.year+'-'+this.month
+      })
+      if (data.code==200) {
+        return data.data
+      }
+    }
+    mergeDate(date,signDate){
+      date.days.forEach((item)=>{
+        let day = this.year + '-' + _.addZero(item.month) + '-' +  _.addZero(item.showDate)
+        if(signDate[day]){
+          item.signed = true
+        }else{
+          item.signed = false
+        }
+      })
+      return date
     }
   }
 </script>

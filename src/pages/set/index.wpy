@@ -29,8 +29,8 @@
       <view class="userinfo_qrcode">
         <image src="../../images/qrcode.png"></image>
       </view>
-      <view class="usersign"><text style="color:#000;">工号：</text>前面请问请问亲 <text style="color:#000;">门店：</text>前面请问请问亲</view>
-      <view class="usersign"><text style="color:#000;">个性签名：</text>前面请问请问亲</view>
+      <view class="usersign"><text style="color:#000;">工号：</text>{{myInfo.staffinfo.staff_no||'无'}} <text style="color:#000;">门店：</text>{{myInfo.staffinfo.merchant_name||'无'}}</view>
+      <view class="usersign"><text style="color:#000;">个性签名：</text>{{myInfo.signature||''}}</view>
     </view>
     <view class="weui-cells navsBox">
       <navigator class="weui-cell  weui-cell_access">
@@ -74,6 +74,7 @@
 <script>
   import wepy from 'wepy'
   import wxApi from '../../interfaces/wxapi'
+  import api from '../../interfaces/api'
   export default class Set extends wepy.page {
     config = {
       navigationBarTitleText: '设置'
@@ -83,7 +84,8 @@
 
 
     data = {
-      userInfo:null
+      userInfo:null,
+      myInfo:null
     }
 
 
@@ -99,7 +101,12 @@
     async onLoad() {
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
+      const data = await api.getPersonalInfo()
+      if(data.code==200){
+        this.myInfo = data.data
+      }
       this.$apply()
     }
+
   }
 </script>

@@ -39,4 +39,12 @@ export default class wxApi extends base {
       return data
     }
   }
+  // 获取设备信息
+  static async getSystemInfo(){
+    return wepy.getSystemInfo()
+  }
+  // 图片预览
+  static previewImg() {
+    
+  }
 }

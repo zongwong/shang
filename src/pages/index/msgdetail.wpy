@@ -55,17 +55,17 @@ page{
   <view class="container msgdetail">
       <view class="detailbox">
         <view class="title oneTextHide">
-            我是标题
+            {{info.title}}
         </view>
-        <view class="box">Kafka是分布式发布-订阅消息系统。它最初由LinkedIn公司开发，之后成为Apache项目的一部分。Kafk</view>
-        <view class="footer">2016-12-12 赏一赏运营中心</view>
+        <view class="box">{{info.content}}</view>
+        <view class="footer">{{info.create_time}} 赏一赏运营中心</view>
       </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
   export default class MsgDetail extends wepy.page {
     config = {
       navigationBarTitleText: '消息通知'
@@ -76,8 +76,8 @@ page{
     }
 
     async onLoad(options) {
-      const data = await api.noticeInfo({
-          id:options.id
+      const data = await api.msgInfo({
+          msg_id:options.id
       })
       if(data.code==200){
           this.info = data.data

@@ -36,6 +36,16 @@ export default class Api extends base{
     const url = `${this.host}/sign/dosign`
     return await this.post(url)
   }
+  // 月签到数据
+  static async getSignData(data) {
+    const url = `${this.host}/sign/getList`
+    return await this.get(url,data)
+  }
+  // 连续签到数据
+  static async signContinue() {
+    const url = `${this.host}/sign/getContinuousDays`
+    return await this.get(url)
+  }
   // 积分明细?
   static async pointList() {
     const url = `${this.host}/point/getlist`
@@ -72,13 +82,13 @@ export default class Api extends base{
     return await this.get(url)
   }
   // 消息列表
-  static async notice() {
-    const url = `${this.host}/notice/getlist`
+  static async msgList() {
+    const url = `${this.host}/msg/getlist`
     return await this.get(url)
   }
   // 消息详情
-  static async noticeInfo(data) {
-    const url = `${this.host}/notice/getinfo`
+  static async msgInfo(data) {
+    const url = `${this.host}/msg/detail`
     return await this.get(url,data)
   }
   // 修改绑定手机号
@@ -98,7 +108,22 @@ export default class Api extends base{
   }
   // 获取个人信息
   static async getPersonalInfo() {
-    const url = `${this.host}/center/getPersonalInfo`
-    return await this.get(url)
+    const url = `${this.host}/center/getData`
+    return await this.post(url)
+  }
+  // 反馈
+  static async toFaceback(data){
+    const url = `${this.host}/feedback/save`
+    return await this.post(url,data)
+  }
+  // 抽奖
+  static async toCj() {
+    const url = `${this.host}/game/play`
+    return await this.post(url)
+  }
+  // 抽奖记录
+  static async cjList() {
+    const url = `${this.host}/game/getList`
+    return await this.post(url)
   }
 }

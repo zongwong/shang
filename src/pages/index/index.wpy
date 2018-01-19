@@ -106,9 +106,9 @@
       <view class="userinfo_qrcode">
         <image src="../../images/qrcode.png"></image>
       </view>
-      <navigator class="usersign" url="/pages/set/sign" hover-class="none">
+      <navigator class="usersign" url="/pages/set/sign?sign={{myInfo.signature||''}}" hover-class="none">
         <view class="weui-cell" style="padding:0;">
-          <view class="weui-cell__bd"><text style="color:#000;">个性签名：</text>前面请问请问亲</view>
+          <view class="weui-cell__bd"><text style="color:#000;">个性签名：</text>{{myInfo.signature||''}}</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
       </navigator>
@@ -116,19 +116,19 @@
     <view class="navs bgwhite weui-flex mb24">
       <view class="weui-flex__item">
         <view class="nav_row">
-            <view class="icon icon_jf">122333</view>
+            <view class="icon icon_jf">{{myInfo.point}}</view>
             <view class="text">积分</view>
         </view>
       </view>
       <view class="weui-flex__item">
         <view class="nav_row">
-            <view class="icon icon_sb">122333</view>
+            <view class="icon icon_sb">{{myInfo.coin}}</view>
             <view class="text">赏币</view>
         </view>
       </view>
       <view class="weui-flex__item">
         <view class="nav_row">
-            <view class="icon icon_fans">123321</view>
+            <view class="icon icon_fans">{{myInfo.fans}}</view>
             <view class="text">粉丝</view>
         </view>
       </view>
@@ -176,7 +176,7 @@
           <view class="text">积分商城</view>
         </view>
       </navigator>
-      <navigator class="btn_wrap">
+      <navigator class="btn_wrap" url="/pages/index/game">
         <view class="tw_row">
           <view class="icon icon_game"></view>
           <view class="text">小游戏</view>
@@ -189,6 +189,7 @@
 <script>
   import wepy from 'wepy'
   import wxApi from '../../interfaces/wxapi'
+  import api from '../../interfaces/api'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '赏一赏个人中心'
@@ -198,23 +199,21 @@
 
 
     data = {
-      userInfo:null
-    }
-
-
-
-    methods = {
-      
-    }
-
-    events = {
-
+      userInfo:null,
+      myInfo:null
     }
 
     async onLoad() {
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
       this.$apply()
+    }
+    async onShow() {
+      const data = await api.getPersonalInfo()
+      if(data.code==200){
+        this.myInfo = data.data
+        this.$apply()
+      }
     }
     onShareAppMessage(){
       

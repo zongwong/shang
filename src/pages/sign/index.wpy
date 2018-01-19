@@ -109,6 +109,8 @@ page{
         width: 400rpx;
         color: #fff;
         font-size: 24rpx;
+        height:112rpx;
+        overflow-y:auto;
       }
     }
   }
@@ -130,8 +132,8 @@ page{
           <view><text class="light">15478人</text>参与了签到任务</view>
         </view>
         <view class="info_btns">
-          <view>你拥有<text class="light">145555积分</text></view>
-          <view>连续签到<text class="light">第5天</text></view>
+          <view>你拥有<text class="light">{{myInfo.point}}积分</text></view>
+          <view>连续签到<text class="light">第{{signData.continuous_days||0}}天</text></view>
         </view>
       </view>
       <view class="sbtn sbtn_default sign_btns" @tap="modalChange(1)">今日祝福语</view>
@@ -141,7 +143,7 @@ page{
       <view class="card">
         <image class="wordbg" src="https://www.hdlwork.cn/xcx/images/wordbg.png"></image>
         <view class="icon close" @tap="modalChange(0)"></view>
-        <view class="wrod_text">祝你好运朋友!@#!#QWEQEQweas请问请问</view>
+        <view class="wrod_text">{{myInfo.blessword}}</view>
       </view>
     </view>
   </view>
@@ -163,6 +165,8 @@ page{
       userInfo:null,
       modalStatus:0,
       isSigned:0,
+      signData:null,
+      myInfo:null
     }
 
     methods = {
@@ -170,12 +174,14 @@ page{
         this.modalStatus = status
       },
       async toSign(){
-        if(this.isSigned = 1){
+        if(this.isSigned == 1){
           return false
         }
         const data = await api.toSign()
         if(data.code==200){
-          console.log(data)
+          this.isSigned = 1
+          this.modalStatus = 1
+          this.$apply()
         }else if(data.code==400){
           this.isSigned = 1
           this.$apply()
@@ -193,8 +199,17 @@ page{
 
     async onLoad() {
       const userInfo = await wxApi.getUser()
+      const signData = await api.signContinue()
       this.userInfo = userInfo
+      this.signData = signData.data
       this.$apply()
+    }
+    async onShow() {
+      const data = await api.getPersonalInfo()
+      if(data.code==200){
+        this.myInfo = data.data
+        this.$apply()
+      }
     }
     onShareAppMessage(){
       

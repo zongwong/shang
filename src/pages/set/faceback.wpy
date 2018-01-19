@@ -66,13 +66,15 @@
         }
         const  data = await api.toFaceback({
           content:this.content,
-          phone:this.phone
+          contact:this.phone
         })
         if (data.code == 200){
-          wepy.showToast({
+          await wepy.showToast({
             title:'感谢您的反馈!'
           })
-          wepy.navigateBack()
+          setTimeout(()=>{
+            wepy.navigateBack()
+          },1000)
         }
       }
     }
