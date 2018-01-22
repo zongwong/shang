@@ -39,9 +39,9 @@ page{
   vertical-align: top;
   &.icon_star{
     width: 28rpx;
-    height: 28rpx;
+    height: 27rpx;
     margin-right: 10rpx;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAACDUlEQVRIibXWP2gUQRTH8c9dTlDwD2ilRm3UaIgIEWyijYqNEC1ETG0IVtoZIWITJaVgK/5JoZ1WinbWKjYqiUQTNAQOiRaCVVDPYmdhs7e37uU2DxZm3jx+3/fm5t5MZXawXxtWwRguhflt3ESjqECtHRqGMZ6Yj+Mb7hQVqLYBq+Fahn9MG4m3AxzCTs3btwvnywZWcCXAKqm1BkYz/B0BT6EvR7QvxJQGHE2Mb+FNYh4ncbWIUN6PvR09OIwjwbckOpEXM+IHAvQ1plHPA/bhNHoDZC82pGIbeCzaunUtkpxIjH9iBh8xhWd4X5kd7D+Hh/KrjQ/LACaxOye2lf3BUC1k1ZUTNIO3eIUtK4TFNlHDNstP3zvM4z4+iLb3EE7iaAewKrpreIEziYXNWCPa5rUdANJWwfMaRkRV9IaF7hIhSZvGSBWLOIFPqwQStI9jMf7j13EMc6sAmwvadZZ3moWwMF8ibF5U2ULsSLe2r+mADmwhaH1JOrN66WdRR+nUngStZdaqee8vAbgvy7mawN4sZxZwI3aUAOwOWv8FllFd/AxpqnIlwL8FgHFvbtIqCkw+nKqi+22qALjp4GQBsy7XOOM6LuBg+Ia1uNmDrS8CfJoYx5X9wnVRk7+H3+G7G3w3QkyeFui63LM17ZvFDxwI80mcFT0RljJEl/ASD7AJe/Bd9EB+lA7+B9bJYfhuXv/AAAAAAElFTkSuQmCC);
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAbCAYAAABvCO8sAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAB/0lEQVRIx72WPWgUQRTHf+sFv4IKKXIgdu9UiKQZxSaQIqJilBHTyCnkAkllo5Wkshcb7ZMmVSBFYEwVQTsRhGkjhOnjB0JECImas9g5XC+zezuXXF4zs2/eez/+83ZnFrowp9Vlp9XVbnL7ukkCZoBLwOhhAa8D0k3ikdgEp9XZFsxpda3nQGAyM797GMAHmfm9ngKdVlVgOOM657SKenFiFT4M+KZ7CWwEfBMxBRKn1UWgH/gMNIEEOOrHljWBGrCaU2caeNsmoAnsZGoOAJU+P1kGqsCuD6hEKp/P8f/xYwXYBuoJgFe54lX0wn4AN8XYD9ltw2m1CNw/YNgbYEKM/Qn/96kFfQy8PCDYczF2NutIQlFOq9vAEnBiH7CGGLvQ7kzyop1W50n7eiES9AW4I8Z+DC0mRZlOq2O+wOmSsA1gWIz9lhfQ6cMfAE5GqDsFbBYFdAJOEXdn9gOP9gMcj4C17FbRYtFLUyXtSch2gS2vqN02gUExdidW4ZUc/zrp/0wNeB9YPwPcyCtaBBwL+BaAITH2kxi7IcaOAC8CcbkXcxEwm/QVqIuxDTH2dzZIjH1K2re1MsC8k6bmtw7gNTAlxn6ngzmt5vh3IY+Jse/KKnzmxydirC4D82pngLp/nA3F7AE6rY4Dv0hP+FdlQG3QRWAEWHda7Tmh/gL5DXu+BYWsdAAAAABJRU5ErkJggg==);
   }
   &.icon_default{
       width:24rpx;
@@ -102,7 +102,14 @@ import login from './interfaces/login'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/set/bind',
       'pages/index/index',
+      'pages/shop/merdetail',
+      'pages/shop/merlist',
+      'pages/shop/detail',
+      'pages/shop/list',
+      'pages/shop/index',
+      'pages/set/card',
       'pages/index/game',
       'pages/sign/signed',
       'pages/index/top',
@@ -114,14 +121,12 @@ export default class extends wepy.app {
       'pages/set/info',
       'pages/address/index',
       'pages/address/edit',
-      'pages/set/card',
       'pages/index/task',
       'pages/sign/index',
       'pages/set/index',
       'pages/index/order',
       'pages/index/ticket',
       'pages/set/sign',
-      'pages/set/bind',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -168,7 +173,12 @@ export default class extends wepy.app {
   onLaunch() {
     login.login()
   }
-
+  async onShow(e) {
+    const data = await wepy.getShareInfo({
+      shareTicket:e.shareTicket
+    })
+    console.log(data)
+  }
   
 }
 </script>

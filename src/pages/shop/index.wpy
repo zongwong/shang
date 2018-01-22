@@ -1,0 +1,176 @@
+<style lang="less">
+.shop{
+  font-size: 30rpx;
+  .userInfo{
+    width: 750rpx;
+    height: 160rpx;
+    position: relative;
+    .content,.bg{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .content{
+      z-index: 1;
+      padding: 38rpx 40rpx;
+      box-sizing: border-box;
+      color: #fff;
+      .weui-cell{
+        padding: 0;
+        .weui-cell__ft{
+          color: #fff;
+          font-size: 28rpx;
+        }
+      }
+      .avatar{
+        width:80rpx;
+        height: 80rpx;
+        border-radius: 50%;
+        display: block;
+        margin-right: 14rpx;
+      }
+      .name{
+        font-size: 32rpx;
+      }
+      .signature{
+        font-size: 26rpx;
+      }
+    }
+  }
+  .goods_block{
+    background: #fff;
+    .block_title{
+      .icon{
+        margin-right: 14rpx;
+      }
+      .icon_activity{
+        width: 31rpx;
+        height: 36rpx;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAkCAYAAABxE+FXAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADI0lEQVRYw72XXYhOQRjHf3Ms+8EuhZuVLeFCbFkfWSVpkwv5SHNFrEmt2vWZUNZKJDfuFBebMj4uSONCJLnwsWVvNtkIUWRFraKw1MYaF2fedZz3vOfjXd7/zczzzDPPf/5zzszTCDLCKtkI7AQ6hDavss4PwitizjdgPfDEKtlaavKxrq0ETlslO62So0pFPiVktwBnrZKiFOTzInybgMOlIF9SwH/IKtn038itkrUx5B5wxipZGYgf8y+Vb0yYMw3YE7CXWiWXjpjcqdieInSvVXKc6z8FblolI3cri/JNwNQUcROAra7fD1QBV62SeXPzyK2SEyN8VcCRDAvd4tpy104GLofvgyjlh4M/jUM7+ec7DrOtkg3AooBvMbAviXwtsCqguh7Yn4E4h9XA3ghhdZHkbrV1wHJnjwHOAqOLID8ArAz5KoDjhZS3uHaWa48B82MIhmLGKgr4N1glZ/1FbpWcBDQ7s9YquSZi28J4gf9JhkgPAbSGle/mT8WqBc67wDiMFdqcwC+xWRaw2SpZ5TnVNcC2wGAlMD5Fko8AQpsrQFsG8hpgRU55K/7lkBXvh/dSm07gQoa5TZ5VsgzYkXLCN2AwYD8MjbcFF5SABR7+sUp7gdwGOgP2reCg0GYA6EiZa4ZH4EJJgevARdd/A3RHxJwD+lLkmuDhX3tp8Bm4DPQ6+6TQ5lc4yPlOpcj30wNmpCTvFNoMCG0GgWcJBJdS5Pvk4f/2SejHv+2wSlYDzW4RkRDa9AGPE3I+LcP/e8sTAtuFNl9c4q9AT4oFdwP1ceMe8C4hSRd+ccmKJOVXPeB+QtBBoY0tgjxO1AOhTa+HfzQK4bnQpqsIYvBPRyF0AHhCm7vAvQJBN4skjsMZoc0d+FPVWoDvEYEjeYVWR/ieALtyhgcgtHmJXxZ/hIKLedHkMD1CyEqhzbDI4eRCm2vAOvzikUMdxWNOoP8aaBLavC2oTGhzA1jmgqHw0ygNcu+2LqBRaPMmHJC3rUKbHmAufm1eZJWcmZXVKrkYv1IedYo/RMWVRTndbdZslTwHNAIvM/I3AAuFNo/ign4Dwv3UwRQD+bcAAAAASUVORK5CYII=);
+      }
+      .icon_re{
+        width: 33rpx;
+        height: 36rpx;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAkCAYAAAAHKVPcAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAABrklEQVRYw83XzysEYRzH8fesLQcuIr/qyTjg4g/QnjySXCiblHLloFwUOYiDi5vaNn+As6IoB4dROC4pByV6ampDidpadlMc7NYm5sfOjH2+NTXzzGdmXn1n5pnGIIQybasBWAOmgU7gDkgDaSXkp9vx8RAAMeAQGKwY7gVSQBuw6naOWAiNmPgBqKwV07a6/wMx4rCvju9bFDmiw2V/4j8QLQGRwRCmbRl8P4SBrhG0E/1As0vmNWrEmIfMfWSI0vww5yF6HWUnZoAuD7nTSBCmbTUBmx6iWeDCLWRUATCAXSDpIX4CbP8Y+wAegIwSslgtYhXY8HvcL/UELCkhd3whTNtKlrrgG/9HfQKThmlbxw6hAyVkqgRoAm6A1pAA5crEgWGHwG3F+nwEAIA+P2/HeAQAANsPoj0ixFEYX9Gg1agDYlQHRLsOiKwOiH0dEJYOiFkdEEM6IAo6IGo+Y14Dy4F/iANUAUgoIXO17EQ9pX+WWt+ON7+Iq5ABl0rIR7+IKWALKIYAyAML5Y0Y8OKw5MtBJeS7EnIR6AHWgTPg2efFc8AeMKCEPC8PfgEMeV7KzMyzLQAAAABJRU5ErkJggg==);
+      }
+      .icon_lo{
+        width: 36rpx;
+        height: 34rpx;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAiCAYAAAA3WXuFAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAElUlEQVRYw73Yf8jdVR0H8NfTZivt1CQHlmAu2TDT6bdVEKtANNFYxWZUipNweSihhBJnaxma5JYUMiPlCBO1PypCjCTBVmEtkayOucCZy19BZDh/dFatTbf+OOeu+9zuvc+9svWGy/c55/M5n+/7e87n13lmvEKU1J2BO/EzrAkx/3NAvhhLQsz3TmN35hWSWYDtWNKmtmFliPnFkroj8EV8Ca9uZL8zqe35c7z4NViLJ7E1xPzvJrq8jwy8F1tL6q7CRizrk30aExMau0MldZfj+jb8O+7GL/BNHDnhOw5gaYh556EgtBmfnfTrxuAm/BBL1Z09DneEmO8aVJw/h6E3HgIy8Jn268cS/A+hV/2fCA3DrmGTB3eopO61+BDeijdjMd5/GAk9PZYQNhnvL7vxXTyBt+M8LBijfw/ehWNGyJ+ai9AzY4zvxFkh5oNGSuqux8+xcIj+NqzEKfj9CJsXltTtw4/xuxDzAWb70BbsHbH4ohDzUyV1q0rqbi+pWxFifgifG6K7B2tDzPtHyHtYjGvwG/ylpO4KBsK+pO52rBlYuD3EvKyk7hQ8hHkoeIt6jM/hdX3660LMXy+pOxM/MXk1eDbEvGgwyrYNUdzRnmc0MhDw7hDzPrN94UF8o6TuKKQpyFCTbT2ykrqFLQl+e4jiUe35t8EvGhjvVY/qZVyrRuuk+K1WEWZK6s7Dt3DsCOXn1cwKv8Ry3BViXlVSd1zboXn4Soj5mpK69zS9eSbDS3hHiHl7b4duHUMGjsb6EPO/sAInY3VJ3QxuaC9+GNe1YrxlCjLwspr39Ah9TS2A47ChpO4GLAwxP4Lj1Qr+0faFFzd/uhon9a37xwSEFuDukrqLaU5XUvdJ1QmPmMDAi3hD33hTiPnKkrrleEDNbd/DlSHmJ0vqFuHzWGduJ19/UKGk7iy1vVhgcuxAh/1qPjkV3w8xf7wd6VI8HmLeV1J3Na6aw94L/WH/jOnOfj8+FWLeo3aHp6pHv67Jf9AIP9jq5Ea8MMbeX7G2F/bzVeeeqx3px40h5l+V1C1TW1bY2Y5pOVa3udPw4RYUw/LcS9iMt4WY7+wRuEIN50nxhOro89Wo6vleac/BgrqoPXcPsXVpiPmW3qB3ZF+YgswBXBJi3j3kQ5a0Jv/XfeT2YWv7+8Qh9ma1OD1CG9UznARbQsw/Lak7CV8ekAWcH2J+HueqqeETIeYd7dr0ziH2PlZS96beoD/KZnA6zsElajUehtPwB7XZXzFEvgsfCDHnPtsnqPe3UTbXh5ivm0WoHyV1X8WGEYufVYvouWN2ca8aZdsbiQvM7ggGsTnEfBmjo+r4MYuPmYMM9YJ4wQjZHtyrBsbT7XlPTziK0AkOH+4LMX9klHDUrePow0ho1zjhqB3agIvwZ/yx/Vbj0sNNaOKOrqTuRDw2xZrdan57n9rwL2zzl4WYN49aNNdF8SBCzH/C/QPTD+ODamEdxKYQcwoxr1H7rZVq03/zIdmhtksX4g41rK/FxlbJX48f+W/WfQzLWuGdClP/f6ik7mw82n9Ha/NH4jaciVUh5vumtQ3/ATHDakqLfHBZAAAAAElFTkSuQmCC);
+      }
+    }
+    .block_list{
+      padding:0 15px;
+      border-top: 2rpx solid #f1f1f1;
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      &:after{
+        content: '';
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        background: #f1f1f1;
+        transform: translateY(-50%);
+      }
+      .list_item{
+        width: 220rpx;
+        height: 220rpx;
+        margin: 24rpx 15rpx 24rpx 0;
+        &:nth-child(3n){
+          margin-right: 0;
+        }
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="container shop">
+    <view class="userInfo mb24">
+      <image src="../../images/shopbg.png" class="bg"></image>
+      <view class="content">
+        <view class="weui-cell">
+          <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
+          <view class="weui-cell__bd">
+            <view class="name">{{userInfo.nickName}}</view>
+            <view class="signature">{{myInfo.signature}}</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{myInfo.point}}积分</view>
+        </view>
+      </view>
+    </view>
+    <view class="goods_block mb24">
+      <navigator class="weui-cell block_title" url="/pages/shop/list?type=activity">
+        <view class="icon icon_activity"></view>
+        <view class="weui-cell__bd">活动专区</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">更多</view>
+      </navigator>
+      <view class="block_list">
+        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}">
+          <image src="../../images/gamebg.png" mode="aspectFill"></image>
+        </navigator>
+      </view>
+    </view>
+    <view class="goods_block mb24">
+      <navigator class="weui-cell block_title" url="/pages/shop/list?type=foryou">
+        <view class="icon icon_re"></view>
+        <view class="weui-cell__bd">为你推荐</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">更多</view>
+      </navigator>
+      <view class="block_list">
+        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}">
+          <image src="../../images/gamebg.png" mode="aspectFill"></image>
+        </navigator>
+      </view>
+    </view>
+    <view class="goods_block mb24">
+      <navigator class="weui-cell block_title" url="/pages/shop/merlist">
+        <view class="icon icon_lo"></view>
+        <view class="weui-cell__bd">本地特惠</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">更多</view>
+      </navigator>
+      <view class="block_list">
+        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}">
+          <image src="../../images/gamebg.png" mode="aspectFill"></image>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
+  export default class ShopIndex extends wepy.page {
+    config = {
+      navigationBarTitleText: '积分商城'
+    }
+
+    data = {
+      userInfo:null,
+      myInfo:null,
+    }
+
+    methods = {
+      
+    }
+
+    async onLoad() {
+      const userInfo = await wxApi.getUser()
+      const myInfo = await api.getPersonalInfo()
+      this.userInfo = userInfo
+      this.myInfo = myInfo.data
+      this.$apply()
+    }
+  }
+</script>

@@ -1,0 +1,35 @@
+<style lang="less">
+.merdetail{
+  
+}
+</style>
+<template>
+  <view class="container merdetail">
+
+  </view>
+  <view class="sbtn sbtn_default ex_btn">兑换</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
+  export default class ShopMerDetail extends wepy.page {
+    config = {
+      navigationBarTitleText: '商家优惠券'
+    }
+
+    data = {
+      userInfo:null,
+      myInfo:null,
+    }
+
+    methods = {
+      
+    }
+
+    async onLoad() {
+
+    }
+  }
+</script>

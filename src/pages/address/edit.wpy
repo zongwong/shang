@@ -2,8 +2,8 @@
 .address_edit{
   .weui-cells{
     margin-top: 24rpx;
+    font-size: 28rpx;
   }
-  font-size: 30rpx;
   .textarea{
     width: 100%;
     height: 140rpx;

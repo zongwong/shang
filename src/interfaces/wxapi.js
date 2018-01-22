@@ -44,7 +44,17 @@ export default class wxApi extends base {
     return wepy.getSystemInfo()
   }
   // 图片预览
-  static previewImg() {
-    
+  static previewImg(current, urls) {
+    wepy.previewImage({
+      current:current,
+      urls:urls
+    })
+  }
+  // 文件下载
+  static async downImg(url) {
+    const { tempFilePath } = await wepy.downloadFile({
+      url:url
+    })
+    return tempFilePath
   }
 }

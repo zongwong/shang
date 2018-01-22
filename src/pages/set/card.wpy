@@ -1,22 +1,46 @@
 <style lang="less">
+page{
+  background: #dd4e32;
+}
+.avatar{
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  position: absolute;
+  top:24rpx;
+  left: 50%;
+  margin-left: -62rpx;
+  border-radius: 50%;
+  z-index: 1;
+  border:4rpx solid #fff;
+}
 .card{
   font-size: 30rpx;
+  margin: 86rpx 30rpx 20rpx;
+  background:#fff;
+  border-radius: 10rpx;
+  position: relative;
+  overflow: hidden;
   .weui-cells{
-    margin-top: 24rpx;
-    .weui-cell{
-      padding: 40rpx;
+    margin-top: 80rpx;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+    &:before,&:after{
+      border:none;
     }
-  }
-  .avatar{
-    width: 160rpx;
-    height: 160rpx;
-    display: block;
-    margin-right: 40rpx;
+    .weui-cell{
+      padding: 30rpx 15px 10rpx;
+      .weui-cell__ft{
+        width: 6em;
+        color: #000;
+        text-align: left;
+      }
+    }
   }
   .input_box{
     height: 160rpx;
-    border: 2rpx solid #ffcec4;
-    background: #fffcfb;
+    border-bottom: 2rpx solid #ffcec4;
+    // background: #fffcfb;
     box-sizing: border-box;
     .input_wrap{
       box-sizing: border-box;
@@ -38,10 +62,12 @@
     }
   }
   .card_preview{
-    margin: 40rpx auto;
+    margin: 0 auto 40rpx;
     position: relative;
-    width: 673rpx;
-    height: 382rpx;
+    width: 570rpx;
+    height: 323rpx;
+    // padding: 0 calc(20rpx + 15px);
+    // box-sizing: border-box;
     .cardbg,.data_box{
       width: 100%;
       height: 100%;
@@ -53,31 +79,32 @@
       top: 0;
       left: 0;
       .name{
-        font-size: 46rpx;
+        font-size: 42rpx;
         text-align: center;
-        margin-top: 40rpx;
+        margin-top: 50rpx;
       }
       .phone{
         font-size: 30rpx;
         text-align: center;
-        margin-top: 14rpx;
+        // margin-top: 10rpx;
       }
       .company{
-        font-size: 24rpx;
+        font-size: 20rpx;
         position: absolute;
-        right: 30rpx;
-        top: 30rpx;
+        right: 20rpx;
+        top: 14rpx;
       }
       .text_box{
         width: 100%;
-        height: 162rpx;
+        height: 138rpx;
         position: absolute;
         box-sizing: border-box;
         bottom: 0;
         left: 0;
         color: #fff;
-        padding: 40rpx 36rpx;
-        font-size: 24rpx;
+        padding: 26rpx 35rpx;
+        font-size: 20rpx;
+        box-sizing: border-box;
         .twotext{
           display: flex;
           justify-content: space-between;
@@ -87,62 +114,70 @@
     }
   }
 }
+.canvas{
+  width: 570rpx;
+  height: 323rpx;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  // left: 0;
+  z-index: 11;
+}
 </style>
 <template>
-  <view class="container card">
-    <view class="weui-cells">
-      <view class="weui-cell">
-        <view class="weui-cell__ft">
-          <image src="../../images/qrcode.png" class="avatar"></image>
-        </view>
-        <view class="weui-cell__bd input_box">
-          <view class="input_wrap bob">  
-            <input type="text" placeholder="请输入姓名" />
-          </view>
-          <view class="input_wrap">
-            <input type="text" placeholder="请输入常用手16" />
+  <canvas class="canvas" canvas-id="card"></canvas>
+  <view class="container">
+    <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
+    <view class="card">
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__ft">姓名</view>
+          <view class="weui-cell__bd">
+              <input type="text" value="{{name}}" @input="nameInput" placeholder="请输入姓名" />
           </view>
         </view>
+        <view class="weui-cell">
+          <view class="weui-cell__ft">手机号码</view>
+          <view class="weui-cell__bd">
+              <input type="text" value="{{phone}}" @input="phoneInput" placeholder="请输入手机号码" />
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__ft">公司名称</view>
+          <view class="weui-cell__bd">
+              <input type="text" value="{{company}}" @input="companyInput" placeholder="请输入公司名称" />
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__ft">主营业务</view>
+          <view class="weui-cell__bd">
+              <input type="text" value="{{business}}" @input="businessInput" placeholder="请输入主营业务" />
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__ft">详细地址</view>
+          <view class="weui-cell__bd">
+              <input type="text" value="{{address}}" @input="addressInput" placeholder="请输入详细地址" />
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__ft">邮箱</view>
+          <view class="weui-cell__bd">
+              <input type="text" value="{{email}}" @input="emailInput" placeholder="请输入邮箱" />
+          </view>
+        </view>
+        <view class="weui-cell"></view>
       </view>
-    </view>
-    <view class="weui-cells">
-      <view class="weui-cell flex_wrap">
-        <view class="weui-cell__bd input_box mb24" style="height:auto;">
-          <view class="input_wrap">  
-            <input type="text" placeholder="请输入姓名" />
+      <view class="card_preview" @tap="savaCard">
+        <image src="https://www.hdlwork.cn/xcx/images/cardbg.png" class="cardbg"></image>
+        <view class="data_box">
+          <view class="name">{{name||'姓名'}}</view>
+          <view class="phone">{{phone||'手机号'}}</view>
+          <view class="company">{{company||'公司名称'}}</view>
+          <view class="text_box">
+            <view class="twotext"><text>主营业务：{{business||'主营业务'}}</text><text>邮箱：{{email||'邮箱'}}</text></view>
+            <view>详细地址：{{address||'详细地址'}}</view>
           </view>
-        </view>
-        <view class="weui-cell__bd input_box mb24" style="height:auto;">
-          <view class="input_wrap">  
-            <input type="text" placeholder="请输入姓名" />
-          </view>
-        </view>
-        <view class="weui-cell__bd input_box mb24" style="height:auto;">
-          <view class="input_wrap">  
-            <input type="text" placeholder="请输入姓名" />
-          </view>
-        </view>
-        <view class="weui-cell__bd input_box mb24" style="height:auto;">
-          <view class="input_wrap">  
-            <input type="text" placeholder="请输入姓名" />
-          </view>
-        </view>
-        <view class="weui-cell__bd input_box" style="height:auto;">
-          <view class="input_wrap">  
-            <input type="text" placeholder="请输入姓名" />
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="card_preview">
-      <image src="https://www.hdlwork.cn/xcx/images/cardbg.png" class="cardbg"></image>
-      <view class="data_box">
-        <view class="name">姓名</view>
-        <view class="phone">电话</view>
-        <view class="company">xxx公司</view>
-        <view class="text_box">
-          <view class="twotext"><text>主营业务：123123123text</text><text>邮箱：123123</text></view>
-          <view>详细地址：1231231231</view>
         </view>
       </view>
     </view>
@@ -151,31 +186,142 @@
 
 <script>
   import wepy from 'wepy'
-
+  import wxApi from '../../interfaces/wxapi'
   export default class Card extends wepy.page {
     config = {
       navigationBarTitleText: '名片制作'
     }
-    components = {
-    }
-
 
     data = {
-      
+      name:'',
+      phone:'',
+      company:'',
+      business:'',
+      address:'',
+      email:'',
+      userInfo:null
     }
 
 
 
     methods = {
-      
+      nameInput(e) {
+        this.name = e.detail.value
+      }, 
+      phoneInput(e) {
+        this.phone = e.detail.value
+      }, 
+      companyInput(e) {
+        this.company = e.detail.value
+      }, 
+      businessInput(e) {
+        this.business = e.detail.value
+      }, 
+      addressInput(e) {
+        this.address = e.detail.value
+      }, 
+      emailInput(e) {
+        this.email = e.detail.value
+      }, 
     }
 
-    events = {
-
-    }
-
-    onLoad() {
+    async onLoad() {
+      const userInfo = await wxApi.getUser()
+      this.userInfo = userInfo
+      this.$apply()
       
+    }
+    async drawCard() {
+      const ctx = wx.createCanvasContext('card')
+      const sys = await wxApi.getSystemInfo()
+      const rate = sys.screenWidth / 750;
+      //背景绘制
+      const bgImg = await wxApi.downImg('https://www.hdlwork.cn/xcx/images/cardbg.png')
+      ctx.drawImage(bgImg,0,0,570*rate,323*rate)
+      // 文本绘制
+      ctx.setTextAlign('center')
+      ctx.setFontSize(42*rate)
+      ctx.setFillStyle('#000000')
+      ctx.fillText(this.name,570*rate/2,90*rate)
+      ctx.setFontSize(30*rate)
+      ctx.fillText(this.phone,570*rate/2,140*rate)
+      ctx.setFontSize(20*rate)
+      ctx.setTextAlign('right')
+      ctx.fillText(this.company,570*rate-24*rate,32*rate)
+      ctx.setFillStyle('#ffffff')
+      ctx.fillText('邮箱：'+this.email,570*rate-33*rate,236*rate)
+      ctx.setTextAlign('left')
+      ctx.fillText('主营业务：'+this.business,33*rate,236*rate)
+      ctx.fillText('详细地址：'+this.address,33*rate,282*rate)
+      await ctx.draw()
+    }
+    async savaCard() {
+      if(!this.name){
+        wepy.showModal({
+          title:'提示',
+          content:'请填写姓名'
+        })
+        return false
+      }
+      if(!this.phone){
+        wepy.showModal({
+          title:'提示',
+          content:'请填写手机号'
+        })
+        return false
+      }
+      if(!this.company){
+        wepy.showModal({
+          title:'提示',
+          content:'请填写公司名称'
+        })
+        return false
+      }
+      if(!this.business){
+        wepy.showModal({
+          title:'提示',
+          content:'请填写主营业务'
+        })
+        return false
+      }
+      if(!this.address){
+        wepy.showModal({
+          title:'提示',
+          content:'请填写详细地址'
+        })
+        return false
+      }
+      if(!this.email){
+        wepy.showModal({
+          title:'提示',
+          content:'请填写邮箱'
+        })
+        return false
+      }
+      wepy.showLoading({
+        title:'生成中...'
+      })
+      await this.drawCard()
+      setTimeout(() => {      
+        wx.canvasToTempFilePath({
+          // x: 100,
+          // y: 200,
+          // width: 50,
+          // height: 50,
+          destWidth: 570,
+          destHeight: 323,
+          canvasId: 'card',
+          success: function(res) {
+            console.log(res.tempFilePath)
+            wx.saveImageToPhotosAlbum({
+              filePath: res.tempFilePath,
+              complete: function(res) {
+                wepy.hideLoading()
+              }
+            })
+          } 
+        })
+      }, 1000);
     }
   }
 </script>

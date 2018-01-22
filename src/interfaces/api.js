@@ -92,9 +92,14 @@ export default class Api extends base{
     return await this.get(url,data)
   }
   // 修改绑定手机号
-  static async setPhone(data) {
-    const url = `${this.host}/center/setmobilephone`
-    return await this.post(url,data)
+  static async bind(href,type, data) {
+    const url = `${this.host}/${href}`
+    return await this[type](url,data)
+  }
+  // 修改绑定手机号
+  static async sms(href,type, data) {
+    const url = `${this.host}/${href}`
+    return await this[type](url,data)
   }
   // 设置签名
   static async setSignature(data) {

@@ -1,0 +1,58 @@
+<style lang="less">
+.merlist{
+  padding: 24rpx;
+  .mer_block{
+      border-radius: 10rpx;
+      background: #fff;
+      overflow: hidden;
+      .post{
+        width: 100%;
+        height: 240rpx;
+        display: block;
+      }
+      .title{
+        font-size: 32rpx;
+        padding: 0 24rpx;
+        margin-top: 10rpx;
+      }
+      .address{
+        font-size: 26rpx;
+        color: #a6a6a6;
+        padding: 0 24rpx;
+        margin-bottom: 10rpx;
+      }
+  }
+}
+</style>
+<template>
+  <view class="container merlist">
+    <navigator class="mer_block mb24" wx:for="{{3}}" wx:key="mer_{{index}}" url="/pages/shop/merdetail?id=">
+      <image src="../../images/goods.png" mode="aspectFill" class="post"></image>
+      <view class="title oneTextHide">打开就阿萨德卡号我</view>
+      <view class="address oneTextHide">地址：请问请问亲我额请问请问</view>
+    </navigator>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
+  export default class ShopMerList extends wepy.page {
+    config = {
+      navigationBarTitleText: '商家列表'
+    }
+
+    data = {
+
+    }
+
+    methods = {
+      
+    }
+
+    async onLoad() {
+
+    }
+  }
+</script>
