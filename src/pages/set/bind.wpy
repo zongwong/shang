@@ -20,17 +20,7 @@
     <view wx:if="{{oldPhone}}" class="tips mt24">当前账号已绑定手机{{oldPhone}}</view>
     <view class="weui-ceils bgwhite mt24">
       <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" @input="phoneInput" value="{{phone}}" placeholder="{{inputTips}}"/></view>
-        <view class="weui-cell__ft"></view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" @input="codeInput" value="{{code}}" placeholder="请输入验证码" /></view>
-        <view class="weui-cell__ft"><button class="sbtn sbtn_outline sms_btn" @tap="getCode"  disabled="{{disabled}}">{{text}}</button></view>
-      </view>
-    </view>
-    <view class="weui-ceils bgwhite mt24" wx:if="{{oldPhone}}">
-      <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" @input="phoneInput" value="{{phone}}" placeholder="{{inputTips}}"/></view>
+        <view class="weui-cell__bd"><input type="number" @input="phoneInput" value="{{phone}}" placeholder="请输入手机号"/></view>
         <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
@@ -39,8 +29,7 @@
       </view>
     </view>
     <view class="btn_wrap">
-       <!-- <view wx:if="{{!next}}" class="sbtn sbtn_default" @tap="next">下一步</view>  -->
-       <view class="sbtn sbtn_default" @tap="bind">{{btntext}}</view> 
+       <view class="sbtn sbtn_default" @tap="bind">确定</view> 
     </view>
   </view>
 </template>
@@ -59,8 +48,6 @@
       code: '',
       myInfo:null,
       oldPhone:'',
-      inputTips:'请输入手机号',
-      btntext:'确定',
       next:false
     }
 
@@ -73,37 +60,26 @@
       },
       // 验证码
       async getCode() {
-        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
           wepy.showModal({
             content: '请输入正确的手机号',
             title: '提示'
           })
           return false;
         }
-        if(this.oldPhone && this.myInfo.mobilephone!= this.phone){
-          wepy.showModal({
-            content: '当前手机号输入错误',
-            title: '提示'
-          })
-          return false;
-        }
-        let url = 'bind/getBindCode'
-        let type = 'get'
-        let query = {
-          mobilephone: this.phone
-        }
+        // 获取验证码
+        let data = {}
         if(this.oldPhone){
-          if(this.next){
-            url="bind/getOldCode"
-          }else{
-            url="center/getNewCode"
-            type = 'post'
-            query.newphone = ''
-            query.code = ''
-          }
+          data = await api.getEditSms({
+            newphone:this.phone
+          })
+        }else{
+          data = await api.getSms({
+            phone:this.phone
+          })
         }
-        const data = await api.sms(url,type,query)
-        if(data.status){
+
+        if(data.code == 200){
           wepy.showToast({
             title: '验证码已发送'
           })
@@ -120,21 +96,18 @@
             }
             this.$apply()
           },1000)
+        }else{
+          wepy.showModal({
+            title:'提示',
+            content: data.message
+          })
         }
       },
       // 绑定
       async bind() {
-        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
           wepy.showModal({
             content: '请输入正确的手机号',
-            title: '提示'
-          })
-          return false;
-        }
-        // 修改时验证原手机
-        if(this.oldPhone && this.myInfo.mobilephone!= this.phone){
-          wepy.showModal({
-            content: '当前手机号输入错误',
             title: '提示'
           })
           return false;
@@ -146,24 +119,18 @@
           })
           return false;
         }
-        let href = 'bind/doBind',type='get'
+        let data = {}
         if(this.oldPhone){
-          //修改
-          if(!this.next){
-            //第一步
-            href = ''
-            type = ''
-          }else{
-            // 第二步
-          }
+          data = await api.editBind({
+            newphone:this.phone,
+            code: this.code
+          })
         }else{
-          //新绑定
+          data = await api.bind({
+            phone:this.phone,
+            code: this.code
+          })
         }
-
-        const data = await api.bind({
-          phone: this.phone,
-          code: this.code
-        }) 
 
         if(data.code==200){
           await wepy.showToast({
@@ -178,10 +145,6 @@
         }
         
       },
-      // 下一步
-      async next() {
-
-      }
     }
 
     async onLoad() {
@@ -189,8 +152,9 @@
       this.myInfo = myInfo.data
       if(myInfo.data.mobilephone){
         this.oldPhone = myInfo.data.mobilephone.slice(0,3) + '****' + myInfo.data.mobilephone.slice(7,11)
-        this.inputTips = '请输入原手机号码'
-        this.btntext = '下一步'
+        await wepy.setNavigationBarTitle({
+          title: '修改绑定手机'
+        })
       }
       this.$apply()
     }

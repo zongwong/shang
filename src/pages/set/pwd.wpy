@@ -1,0 +1,109 @@
+<style lang="less">
+.bind{
+    font-size: 30rpx;
+    .btn_wrap{
+        margin: 40rpx 24rpx 0;
+    }
+    .sms_btn{
+        border-radius: 8rpx;
+        line-height: 46rpx;
+        font-size: 24rpx;
+        padding: 0 16rpx;
+    }
+    .tips{
+      text-align: center;
+    }
+}
+</style>
+<template>
+  <view class="container bind">
+    <view wx:if="{{status}}" class="tips mt24">当前账号已设置提现密码</view>
+    <view class="weui-ceils bgwhite mt24">
+      <view class="weui-cell">
+        <view class="weui-cell__bd"><input type="digit" password="true" @input="pwdInput" maxlength="6" value="{{pwd}}" placeholder="请输入六位提现密码"/></view>
+        <view class="weui-cell__ft"></view>
+      </view>
+      <view class="weui-cell" wx:if="{{status}}">
+        <view class="weui-cell__bd"><input type="digit" password="true" @input="newPwdInput" maxlength="6" value="{{newPwd}}" placeholder="请输入新的提现密码" /></view>
+        <view class="weui-cell__ft"></view>
+      </view>
+    </view>
+    <view class="btn_wrap">
+       <view class="sbtn sbtn_default" @tap="submit">确定</view> 
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  export default class Pwd extends wepy.page {
+    config = {
+      navigationBarTitleText: '设置提现密码'
+    }
+    data = {
+      pwd:'',
+      newPwd:'',
+      status:null,
+    }
+
+    methods = {
+      pwdInput(e) {
+        this.pwd = e.detail.value
+      },
+      newPwdInput(e) {
+        this.newPwd = e.detail.value
+      },
+      // 提交
+      async submit() {
+        if(!this.pwd && this.pwd.length<6 ){
+          wepy.showModal({
+            content: '请设置六位提现密码',
+            title: '提示'
+          })
+          return false;
+        }
+        if(this.status && !this.newPwd){
+          wepy.showModal({
+            content: '请输入新的提现密码',
+            title: '提示'
+          })
+          return false;
+        }
+        let query = {}
+        if(this.status){
+          query.newpassword = this.newPwd
+          query.password = this.pwd
+        }else{
+          query.newpassword = this.pwd
+        }
+        let data = await api.setMoneyLock(query)
+        if(data.code==200){
+          wepy.showToast({
+            title: '设置成功',
+          })
+          setTimeout(()=>{
+            wepy.navigateBack()
+          },300)
+        }else{
+          wepy.showModal({
+            title: '提示',
+            content: data.message
+          })
+        }
+        
+      },
+    }
+
+    async onLoad() {
+      const status = await api.checkMoneyLock()
+      this.status = status.data.set
+      if(status.data.set){
+        await wepy.setNavigationBarTitle({
+          title: '修改提现密码'
+        })
+      }
+      this.$apply()
+    }
+  }
+</script>

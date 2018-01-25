@@ -33,11 +33,11 @@
       <view class="usersign"><text style="color:#000;">个性签名：</text>{{myInfo.signature||''}}</view>
     </view>
     <view class="weui-cells navsBox">
-      <navigator class="weui-cell  weui-cell_access">
+      <view class="weui-cell  weui-cell_access">
         <image class="nav-icon" src="../../icon/mer.png"></image>
         <view class="weui-cell__bd">所属商家</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </navigator>
+      </view>
       <navigator class="weui-cell  weui-cell_access" url="/pages/set/card">
         <image class="nav-icon" src="../../icon/card.png"></image>
         <view class="weui-cell__bd">名片信息</view>
@@ -50,7 +50,7 @@
       </navigator>
     </view>
     <view class="weui-cells navsBox">
-      <navigator class="weui-cell  weui-cell_access" url="/pages/set/bind">
+      <navigator class="weui-cell  weui-cell_access" url="/pages/set/pwd">
         <image class="nav-icon" src="../../icon/pwd.png"></image>
         <view class="weui-cell__bd">设置提现密码</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>

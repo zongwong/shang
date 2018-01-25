@@ -102,8 +102,9 @@ import login from './interfaces/login'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/set/bind',
+      'pages/set/pwd',
       'pages/index/index',
+      'pages/set/bind',
       'pages/shop/merdetail',
       'pages/shop/merlist',
       'pages/shop/detail',
@@ -172,13 +173,6 @@ export default class extends wepy.app {
 
   onLaunch() {
     login.login()
-  }
-  async onShow(e) {
-    const data = await wepy.getShareInfo({
-      shareTicket:e.shareTicket
-    })
-    console.log(data)
-  }
-  
+  }  
 }
 </script>

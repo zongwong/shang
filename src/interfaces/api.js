@@ -1,6 +1,6 @@
 import wepy from 'wepy'
 import base from '../interfaces/base'
-export default class Api extends base{
+export default class Api extends base {
   // 地址列表
   static async addressList(data) {
     const url = `${this.host}/address/getlist`
@@ -24,7 +24,7 @@ export default class Api extends base{
   // 取消默认收货地址
   static async addressUndefault(data) {
     const url = `${this.host}/address/undefault`
-    return await this.put(url,data)
+    return await this.put(url, data)
   }
   // 删除地址
   static async addressDelete(data) {
@@ -39,7 +39,7 @@ export default class Api extends base{
   // 月签到数据
   static async getSignData(data) {
     const url = `${this.host}/sign/getList`
-    return await this.get(url,data)
+    return await this.get(url, data)
   }
   // 连续签到数据
   static async signContinue() {
@@ -54,7 +54,7 @@ export default class Api extends base{
   // 我的评价
   static async rewardList(data) {
     const url = `${this.host}/reward/getlist`
-    return await this.get(url,data)
+    return await this.get(url, data)
   }
   // 我的评价统计
   static async rewardData() {
@@ -64,7 +64,7 @@ export default class Api extends base{
   // 我的收益
   static async profitList(data) {
     const url = `${this.host}/profit/getlist`
-    return await this.get(url,data)
+    return await this.get(url, data)
   }
   // 我的收益数据
   static async profitData() {
@@ -89,27 +89,37 @@ export default class Api extends base{
   // 消息详情
   static async msgInfo(data) {
     const url = `${this.host}/msg/detail`
-    return await this.get(url,data)
+    return await this.get(url, data)
+  }
+  // (未绑定)获取验证码
+  static async getSms(data) {
+    const url = `${this.host}/bind/getBindCode`
+    return await this.get(url, data)
+  }
+  // 绑定手机号
+  static async bind(data) {
+    const url = `${this.host}/bind/doBind`
+    return await this.post(url, data)
+  }
+  // (已绑定)获取验证码
+  static async getEditSms(data) {
+    const url = `${this.host}/center/getNewCode`
+    return await this.post(url, data)
   }
   // 修改绑定手机号
-  static async bind(href,type, data) {
-    const url = `${this.host}/${href}`
-    return await this[type](url,data)
-  }
-  // 修改绑定手机号
-  static async sms(href,type, data) {
-    const url = `${this.host}/${href}`
-    return await this[type](url,data)
+  static async editBind(data) {
+    const url = `${this.host}/center/doChange`
+    return await this.post(url, data)
   }
   // 设置签名
   static async setSignature(data) {
     const url = `${this.host}/center/setSignature`
-    return await this.post(url,data)
+    return await this.post(url, data)
   }
   // 设置个人信息
   static async setPersonalInfo(data) {
     const url = `${this.host}/center/setPersonalInfo`
-    return await this.post(url,data)
+    return await this.post(url, data)
   }
   // 获取个人信息
   static async getPersonalInfo() {
@@ -117,9 +127,9 @@ export default class Api extends base{
     return await this.post(url)
   }
   // 反馈
-  static async toFaceback(data){
+  static async toFaceback(data) {
     const url = `${this.host}/feedback/save`
-    return await this.post(url,data)
+    return await this.post(url, data)
   }
   // 抽奖
   static async toCj() {
@@ -130,5 +140,25 @@ export default class Api extends base{
   static async cjList() {
     const url = `${this.host}/game/getList`
     return await this.post(url)
+  }
+  // 我的代理(一级代理)
+  static async myAgent() {
+    const url = `${this.host}/agent/getList`
+    return await this.post(url)
+  }
+  // 我的商家(代理)
+  static async myMer() {
+    const url = `${this.host}/merchant/getList`
+    return await this.post(url)
+  }
+  // 查询提现密码
+  static async checkMoneyLock() {
+    const url = `${this.host}/cash/checkPwd`
+    return await this.get(url)
+  }
+  // 设置提现密码
+  static async setMoneyLock(data) {
+    const url = `${this.host}/cash/setpwd`
+    return await this.post(url, data)
   }
 }
