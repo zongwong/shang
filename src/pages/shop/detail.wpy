@@ -45,7 +45,7 @@
         indicator-color="#a6a6a6"
         indicator-active-color="#000"
         autoplay="true">
-        <block wx:for="{{3}}">
+        <block wx:for="{{3}}" wx:key="post">
           <swiper-item>
             <image src="../../images/goods.png" class="slide-image"/>
           </swiper-item>

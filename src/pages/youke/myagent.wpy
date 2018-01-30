@@ -1,0 +1,98 @@
+<style lang="less">
+.agent{
+  font-size: 28rpx;
+  .weui-cell{
+    padding: 24rpx;
+  }
+  .icon_adr{
+    width: 16rpx;
+    height: 21rpx;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAYAAABPPm7SAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAABgElEQVQ4y5XTPWhUQRTF8d8+YuNHYxdEm6kT5FUWgi5iJWwjithIMCoIClqoEIRgJ2JppYJWpkg1hYXBj0ZjIYNovY1gESEBQUFQg8XOytsh+3QPvOL+77kH5s2djkL9Xn0AZ3EUezL+jBU8DDG9bfo7jcGduI9T2rWEcyGmb38D+r16N15i1v/pA7ohpo0qgwdjhjfzV2o2z+j0e/UhvCoM73Edz3N9BLexv/AdnsJ8AT/iYIjpe4M96/fq11jFTIPPV+gWAQvFMMhsocDdCtMFXG35eWVvusKvAm5vCSh7vyu8K+CJloCylyo8KeBi3sYRZbZY4KVOXqJP2NFo/MRjo9d4Btsanh/YN9zEW7hpMt0JMV0bbuJdrE0wvG6wWCoIMX3FpQkCroaY1mm8xnyUZRz/x/DTENOxYVEVzfMGb3+c1jDXBCMBIaYNnDS4hVKbOB1i+jI2IIe8wZUtAm6EmF6UsGOM+r36Hi7m8lGIaW4r31TLeS9jL3bhwjjTH5CnZjNKgFONAAAAAElFTkSuQmCC);
+    vertical-align: middle;
+    margin: 0 6rpx 0 15rpx;
+  }
+  .icon_phone{
+    width: 56rpx;
+    height: 56rpx;
+    background-image: url(data:image/png;base64,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);
+    // background-size: cover;
+  }
+  .info_box{
+    width: 645rpx;
+    display: flex;
+    align-items: center;
+    .info_right{
+      flex:1;
+      max-width: 522rpx;
+    }
+    .avt{
+      display: block;
+      border-radius: 50%;
+      width: 90rpx;
+      height: 90rpx;
+      margin-right: 20rpx;
+    }
+    .area{
+      color: #606060;
+      font-size: 26rpx;
+    }
+    .adr_detail{
+      color: #959595;
+      font-size: 24rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="container agent">
+    <view class="weui-cells">
+      <view class="weui-cell" wx:for="{{list}}" wx:key="agent">
+        <view class="weui-cell__bd">
+          <view class="info_box">
+            <image src="{{item.headimgurl||'../../images/avatar.png'}}" class="avt"></image>
+            <view class="info_right">
+              <view>{{item.agent_name}} <text class="icon icon_adr"></text><text class="area">{{item.city}}</text></view>
+              <view class="adr_detail">地址：{{item.address}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cell__ft icon icon_phone" @tap="phoneCall({{item.mobilephone}})"></view>
+      </view>
+    </view>
+    
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
+  export default class MyAgent extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的代理'
+    }
+
+
+
+    data = {
+      list:null
+
+    }
+    methods= {
+      phoneCall(phone){
+        wxApi.phoneCall(phone)
+      }
+    }
+    async onLoad() {
+        this.top()
+    }
+    async top(){
+        const data = await api.myAgent()
+        if(data.code==200){
+            this.list = data.data
+            this.$apply()
+        }
+    }
+
+  }
+</script>

@@ -23,24 +23,42 @@
         <image src="{{userInfo.avatarUrl}}"></image>
       </view>
       <view class="userinfo_data">
-        <view class="username oneTextHide">{{userInfo.nickName}}</view>
-        <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
+        <view wx:if="{{role=='youke'||role=='staff'}}" class="username oneTextHide">{{userInfo.nickName}}</view>
+        <view wx:if="{{role=='merchant'}}" class="username oneTextHide">{{myInfo.info.merchant_name}}</view>
+        <view wx:if="{{role=='agent'}}" class="username oneTextHide">{{myInfo.info.agent_name}}</view>
+        <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text></text><text class="icon icon_star"></text><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
       </view>
-      <view class="userinfo_qrcode">
-        <image src="../../images/qrcode.png"></image>
+      <view class="userinfo_qrcode" wx:if="{{role=='staff'}}" @tap="previewImg('http://www.hdlwork.cn{{myInfo.info.qrcode}}')">
+        <image src="http://www.hdlwork.cn{{myInfo.info.qrcode}}"></image>
       </view>
-      <view class="usersign"><text style="color:#000;">工号：</text>{{myInfo.staffinfo.staff_no||'无'}} <text style="color:#000;">门店：</text>{{myInfo.staffinfo.merchant_name||'无'}}</view>
-      <view class="usersign"><text style="color:#000;">个性签名：</text>{{myInfo.signature||''}}</view>
+      <view class="usersign" wx:if="{{role=='staff'}}"><text style="color:#000;">工号：</text>{{myInfo.info.staff_no}} <text style="color:#000;">门店：</text>{{myInfo.info.store_name||'总店'}}</view>
+      <!-- <view class="usersign"><text style="color:#000;">个性签名：</text>{{myInfo.signature||''}}</view> -->
+      <navigator class="usersign" url="/pages/set/sign?sign={{myInfo.signature||''}}" hover-class="none">
+        <view class="weui-cell" style="padding:0;">
+          <view class="weui-cell__bd"><text style="color:#000;">个性签名：</text>{{myInfo.signature||''}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </navigator>
     </view>
     <view class="weui-cells navsBox">
-      <view class="weui-cell  weui-cell_access">
+      <view class="weui-cell  weui-cell_access" wx:if="{{role=='agent'}}">
+        <image class="nav-icon" src="../../icon/mer.png"></image>
+        <view class="weui-cell__bd">账号类型</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">代理商</view>
+      </view>
+      <view class="weui-cell  weui-cell_access" wx:if="{{role=='merchant'}}">
+        <image class="nav-icon" src="../../icon/mer.png"></image>
+        <view class="weui-cell__bd">账号类型</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">商户</view>
+      </view>
+      <view class="weui-cell  weui-cell_access" wx:if="{{role=='staff'}}">
         <image class="nav-icon" src="../../icon/mer.png"></image>
         <view class="weui-cell__bd">所属商家</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">{{myInfo.info.merchant_name}}</view>
       </view>
       <navigator class="weui-cell  weui-cell_access" url="/pages/set/card">
         <image class="nav-icon" src="../../icon/card.png"></image>
-        <view class="weui-cell__bd">名片信息</view>
+        <view class="weui-cell__bd">名片制作</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
       <navigator class="weui-cell  weui-cell_access" url="/pages/set/info">
@@ -85,13 +103,16 @@
 
     data = {
       userInfo:null,
-      myInfo:null
+      myInfo:null,
+      role:''
     }
 
 
 
     methods = {
-      
+      previewImg(url){
+        wxApi.previewImg(url,[url])
+      }
     }
 
     events = {
@@ -101,7 +122,8 @@
     async onLoad() {
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
-      const data = await api.getPersonalInfo()
+      this.role = await wepy.getStorageSync('type')
+      const data = await api.getPersonalInfo(this.role)
       if(data.code==200){
         this.myInfo = data.data
       }

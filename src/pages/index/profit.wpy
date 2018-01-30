@@ -32,16 +32,16 @@
     <view class="data">
       <view>
         <view class="tips_text" style="padding-top:20rpx;">收入总额(元)</view>
-        <view class="value total" style="margin-bottom:20rpx;">{{mydata.total}}</view>
+        <view class="value total" style="margin-bottom:20rpx;">{{mydata.total||0}}</view>
       </view>
       <view class="flex_row">
         <view class="flex_item">
           <view class="tips_text">账户余额(元)</view>
-          <view class="value">{{mydata.rest}}</view>
+          <view class="value">{{mydata.rest||0}}</view>
         </view>
         <view class="flex_item">
           <view class="tips_text">已提现(元)</view>
-          <view class="value">{{mydata.transfered}}</view>
+          <view class="value">{{mydata.transfered||0}}</view>
         </view>
       </view>
     </view>
@@ -53,26 +53,27 @@
             </picker>
         </view>
         <view>
-            <view class="value light">{{list.total}}</view>
+            <view class="value light">{{list.total||0}}</view>
             <view class="text">金额(元)</view>
         </view>
         <view>
-            <view class="value">{{list.count}}</view>
+            <view class="value">{{list.count||0}}</view>
             <view class="text">次数</view>
         </view>
     </view>
     <view class="weui-ceils bgwhite">
       <view class="weui-cell evaluate_ceil" wx:for="{{list.list}}" wx:key="item_{{index}}">
         <view class="weui-cell__ft avatar_wrap">
-            <image src="../../images/qrcode.png" class="avatar"></image>
+            <image src="{{item.headimgurl||'../../images/avatar.png'}}" class="avatar"></image>
         </view>
         <view class="weui-cell__bd">
             <view class="info_box">
                 <view class="info_left">
-                    <view class="name oneTextHide">打赏-来自 无名</view>
+                    <view wx:if="{{role!='agent'}}" class="name oneTextHide">打赏-来自 {{item.nickName||'热心用户'}}</view>
+                    <view wx:if="{{role=='agent'}}" class="name oneTextHide">分佣-来自 {{item.merchant_name}}</view>
                     <view class="sign oneTextHide time">{{item.day}}</view>
                 </view>
-                <view class="info_right">+{{item.net_remuneration}}</view>
+                <view class="info_right">+{{item.amount||item.profit}}</view>
             </view>
         </view>
       </view>
@@ -97,6 +98,7 @@
       mydata:null,
       list:null,
       date:'',
+      role:''
     }
 
 
@@ -112,6 +114,12 @@
     async onLoad() {
         this.date = _.getToday()
         const data = await api.profitData()
+        this.role = await wepy.getStorageSync('type')
+        if(this.role=='merchant'){
+          await wepy.setNavigationBarTitle({
+            title: '门店收益'
+          })
+        }
         if(data.code==200){
             this.mydata = data.data
         }

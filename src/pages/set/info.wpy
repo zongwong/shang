@@ -29,7 +29,7 @@
       </view>
     </view>
     <view class="btn_wrap">
-       <view class="sbtn sbtn_default">确定</view> 
+       <view class="sbtn sbtn_default" @tap="toSubmit">确定</view> 
     </view>
   </view>
 </template>
@@ -81,21 +81,28 @@
           return false
         }
         const data = await api.setPersonalInfo({
-          name:this.name,
+          realname:this.name,
           age:this.age,
-          job:this.job,
+          occupation:this.job,
         })
         if(data.code==200){
           await wepy.showToast({
             title:'设置成功'
           })
-          wepy.navigateBack()
+          setTimeout(() => {
+            wepy.navigateBack()
+          }, 800);
         }
       }
     }
 
     async onLoad() {
       // 获取内容
+      const data = await api.getPersonal()
+      this.name = data.data.realname
+      this.age = data.data.age
+      this.job = data.data.occupation
+      this.$apply()
     }
   }
 </script>

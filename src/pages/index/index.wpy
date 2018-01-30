@@ -100,11 +100,13 @@
         <image src="{{userInfo.avatarUrl}}"></image>
       </view>
       <view class="userinfo_data">
-        <view class="username oneTextHide">{{userInfo.nickName}}</view>
-        <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
+        <view wx:if="{{role=='youke'||role=='staff'}}" class="username oneTextHide">{{userInfo.nickName}}</view>
+        <view wx:if="{{role=='merchant'}}" class="username oneTextHide">{{myInfo.info.merchant_name}}</view>
+        <view wx:if="{{role=='agent'}}" class="username oneTextHide">{{myInfo.info.agent_name}}</view>
+        <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text><text class="icon icon_star"></text><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
       </view>
-      <view class="userinfo_qrcode">
-        <image src="../../images/qrcode.png"></image>
+      <view class="userinfo_qrcode" wx:if="{{role=='staff'}}" @tap="previewImg('http://www.hdlwork.cn{{myInfo.info.qrcode}}')">
+        <image src="http://www.hdlwork.cn{{myInfo.info.qrcode}}"></image>
       </view>
       <navigator class="usersign" url="/pages/set/sign?sign={{myInfo.signature||''}}" hover-class="none">
         <view class="weui-cell" style="padding:0;">
@@ -122,8 +124,8 @@
       </view>
       <view class="weui-flex__item">
         <view class="nav_row">
-            <view class="icon icon_sb">{{myInfo.coin}}</view>
-            <view class="text">赏币</view>
+            <view class="icon icon_sb">{{myInfo.exp}}</view>
+            <view class="text">经验值</view>
         </view>
       </view>
       <view class="weui-flex__item">
@@ -135,18 +137,44 @@
     </view>
     <view class="grid_wrap bgwhite">
       <view class="weui-grids nav-grids">
-        <navigator class="weui-grid" url="/pages/index/profit">
+        <!-- 游客 -->
+        <navigator wx:if="{{role=='youke'}}" class="weui-grid" url="/pages/youke/dashang">
             <view class="icon icon_money"></view>
-            <view class="weui-grid__label">我的收益</view>
+            <view class="weui-grid__label">我的打赏</view>
         </navigator>
-        <navigator class="weui-grid" url="/pages/index/evaluate">
+        <!-- 游客 -->
+
+        <navigator wx:if="{{role!='youke'}}" class="weui-grid" url="/pages/index/profit">
+            <view class="icon icon_money"></view>
+            <view wx:if="{{role!='merchant'}}" class="weui-grid__label">我的收益</view>
+            <view wx:if="{{role=='merchant'}}" class="weui-grid__label">门店收益</view>
+        </navigator>
+        <navigator wx:if="{{role!='agent'}}" class="weui-grid" url="/pages/index/evaluate">
             <view class="icon icon_pj"></view>
-            <view class="weui-grid__label">我的评价</view>
+            <view wx:if="{{role!='merchant'}}" class="weui-grid__label">我的评价</view>
+            <view wx:if="{{role=='merchant'}}" class="weui-grid__label">员工评价</view>
         </navigator>
-        <navigator class="weui-grid" url="/pages/index/top">
+        <!-- 员工和商家排名一样,代理无排名 -->
+        <navigator wx:if="{{role=='staff'||role=='merchant'}}" class="weui-grid" url="/pages/index/top">
+            <view class="icon icon_top"></view>
+            <view wx:if="{{role=='staff'}}" class="weui-grid__label">我的排名</view>
+            <view wx:if="{{role=='merchant'}}" class="weui-grid__label">员工排名</view>
+        </navigator>
+        <!-- 游客打赏排名 -->
+        <navigator wx:if="{{role=='youke'}}" class="weui-grid" url="/pages/youke/top">
             <view class="icon icon_top"></view>
             <view class="weui-grid__label">我的排名</view>
         </navigator>
+        <!-- agent -->
+        <navigator wx:if="{{role=='agent' && myInfo.info.role_id==2}}" class="weui-grid" url="/pages/youke/myagent">
+            <view class="icon icon_pj"></view>
+            <view class="weui-grid__label">我的代理</view>
+        </navigator>
+        <navigator wx:if="{{role=='agent'}}" class="weui-grid" url="/pages/youke/mymer">
+            <view class="icon icon_top"></view>
+            <view class="weui-grid__label">我的商家</view>
+        </navigator>
+        <!-- agent end -->
         <navigator class="weui-grid" url="/pages/index/msg">
             <view class="icon icon_msg"></view>
             <view class="weui-grid__label">我的消息</view>
@@ -170,7 +198,7 @@
       </view>
     </view>
     <view class="weui-flex bgwhite btns_box">
-      <navigator class="btn_wrap">
+      <navigator class="btn_wrap" url="/pages/shop/index">
         <view class="tw_row">
           <view class="icon icon_shop"></view>
           <view class="text">积分商城</view>
@@ -200,16 +228,25 @@
 
     data = {
       userInfo:null,
-      myInfo:null
+      myInfo:null,
+      role:'',
+    }
+
+    methods = {
+      previewImg(url){
+        wxApi.previewImg(url,[url])
+      }
     }
 
     async onLoad() {
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
+      this.role = await wepy.getStorageSync('type')
       this.$apply()
     }
     async onShow() {
-      const data = await api.getPersonalInfo()
+      const role = await wepy.getStorageSync('type')
+      const data = await api.getPersonalInfo(role)
       if(data.code==200){
         this.myInfo = data.data
         this.$apply()

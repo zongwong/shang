@@ -121,10 +121,15 @@ export default class Api extends base {
     const url = `${this.host}/center/setPersonalInfo`
     return await this.post(url, data)
   }
+  // 获取的个人信息
+  static async getPersonal(data) {
+    const url = `${this.host}/center/getPersonalInfo`
+    return await this.get(url, data)
+  }
   // 获取个人信息
   static async getPersonalInfo() {
     const url = `${this.host}/center/getData`
-    return await this.post(url)
+    return await this.get(url)
   }
   // 反馈
   static async toFaceback(data) {
@@ -144,12 +149,12 @@ export default class Api extends base {
   // 我的代理(一级代理)
   static async myAgent() {
     const url = `${this.host}/agent/getList`
-    return await this.post(url)
+    return await this.get(url)
   }
   // 我的商家(代理)
   static async myMer() {
     const url = `${this.host}/merchant/getList`
-    return await this.post(url)
+    return await this.get(url)
   }
   // 查询提现密码
   static async checkMoneyLock() {
@@ -160,5 +165,35 @@ export default class Api extends base {
   static async setMoneyLock(data) {
     const url = `${this.host}/cash/setpwd`
     return await this.post(url, data)
+  }
+  // 我的打赏(游客)
+  static async myDashang(data) {
+    const url = `${this.host}/reward/getMyReward`
+    return await this.get(url, data)
+  }
+  // 我的排名 (其他)
+  static async getOtherTop(data) {
+    const url = `${this.host}/rank/reward`
+    return await this.get(url, data)
+  }
+  // 任务列表
+  static async getTaskList(data) {
+    const url = `${this.host}/task/getdata`
+    return await this.get(url, data)
+  }
+  // 分享
+  static async share(data) {
+    const url = `${this.host}/task/share`
+    return await this.get(url, data)
+  }
+  // 员工排名
+  static async rankStaff(data) {
+    const url = `${this.host}/staff/rank`
+    return await this.get(url, data)
+  }
+  // 员工评价
+  static async rewardStaff(data) {
+    const url = `${this.host}/staff/reward`
+    return await this.get(url, data)
   }
 }

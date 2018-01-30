@@ -1,0 +1,115 @@
+<style lang="less">
+@import "../../style/evlist.less";
+.info_right{
+    color: #6e6e6e!important;
+    text{
+        color: #dd4e32;
+    }
+}
+.evaluate{
+    margin-bottom: 120rpx;
+    .evaluate_ceil{
+        align-items: center;
+    }
+    .info_box{
+        .info_right{
+            .shouru{
+                font-size: 24rpx;
+                line-height: 36rpx;
+            }
+        }
+    }
+    .top_icon{
+        width: 44rpx;
+        height: 54rpx;
+        margin-right: 20rpx;
+        display: block;
+        line-height: 54rpx;
+        font-size: 38rpx;
+        color: #4d4d4d;
+        text-align: center;
+    }
+    .float_tips{
+        width: 100%;
+        position: fixed;
+        padding: 18rpx 40rpx;
+        background: rgba(226,103,79,.86);
+        color: #fff;
+        font-size: 24rpx;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        box-sizing: border-box;
+    }
+    .tabNav{
+        &:after{
+            content:'';
+            width: 1px;
+            height: 40rpx;
+            background: #f1f1f1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+        }
+    }
+}
+</style>
+<template>
+  <view class="container evaluate">
+
+    <view class="weui-ceils bgwhite mt24">
+      <view class="weui-cell evaluate_ceil" wx:for="{{list.list}}" wx:key="top_{{index}}">
+        <image wx:if="{{index == 0}}" src="../../icon/1st.png" class="top_icon"></image>
+        <image wx:if="{{index == 1}}" src="../../icon/2nd.png" class="top_icon"></image>
+        <image wx:if="{{index == 2}}" src="../../icon/3rd.png" class="top_icon"></image>
+        <view wx:if="{{index>2}}" class="top_icon">{{index + 1}}</view>
+        <view class="weui-cell__ft avatar_wrap">
+            <image src="{{item.headimgurl||'../../images/avatar.png'}}" class="avatar"></image>
+        </view>
+        <view class="weui-cell__bd">
+            <view class="info_box">
+                <view class="info_left">
+                    <view class="name oneTextHide">{{item.nickname||'热心用户'}}</view>
+                    <!-- <view class="sign oneTextHide">{{item.merchant_name}}</view> -->
+                </view>
+                <view class="info_right">
+                    <view class="shouru">总打赏：<text class="light">{{item.amount}}元</text></view>
+                    <view class="shouru">总次数：<text class="light">{{item.count}}次</text></view>
+                </view>
+            </view>
+        </view>
+      </view>
+    </view>
+    <view class="float_tips">您的排行为第{{list.rank}}名，总打赏{{list.r_amount}}元，总打赏{{list.r_count}}次。</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  export default class MyTop extends wepy.page {
+    config = {
+      navigationBarTitleText: '排行榜'
+    }
+
+
+
+    data = {
+      list:null
+
+    }
+
+    async onLoad() {
+        this.top()
+    }
+    async top(){
+        const data = await api.getOtherTop()
+        if(data.code==200){
+            this.list = data.data
+            this.$apply()
+        }
+    }
+
+  }
+</script>

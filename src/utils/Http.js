@@ -1,9 +1,15 @@
 import wepy from 'wepy';
 import Tips from './Tips';
 import login from '../interfaces/login'
+const TEST = true
 // HTTP工具类
 export default class http {
   static async request (method, url, data={}, loading = true , token = true) {
+    if(TEST){
+      const type = await wepy.getStorageSync('type')
+      data.type = type
+      data.act = 'test'
+    }
     const param = {
       url: url,
       method: method,

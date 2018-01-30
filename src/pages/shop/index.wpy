@@ -115,7 +115,7 @@
         <view class="weui-cell__ft weui-cell__ft_in-access">更多</view>
       </navigator>
       <view class="block_list">
-        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}">
+        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}" url="/pages/shop/detail">
           <image src="../../images/gamebg.png" mode="aspectFill"></image>
         </navigator>
       </view>
@@ -127,7 +127,7 @@
         <view class="weui-cell__ft weui-cell__ft_in-access">更多</view>
       </navigator>
       <view class="block_list">
-        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}">
+        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}" url="/pages/shop/detail">
           <image src="../../images/gamebg.png" mode="aspectFill"></image>
         </navigator>
       </view>
@@ -139,7 +139,7 @@
         <view class="weui-cell__ft weui-cell__ft_in-access">更多</view>
       </navigator>
       <view class="block_list">
-        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}">
+        <navigator class="list_item" wx:for="{{6}}" wx:key="goods_{{index}}" url="/pages/shop/merdetail">
           <image src="../../images/gamebg.png" mode="aspectFill"></image>
         </navigator>
       </view>

@@ -1,0 +1,39 @@
+<style lang="less">
+.myprofit{
+
+}
+</style>
+<template>
+  <view class="container myprofit">
+    <view class="weui-cells">
+      <view class="weui-cell" wx:for="{{list.rewardlist}}" wx:key="myreward">
+        <view class="weui-ceill__bd">您于{{item.create_time}}打赏  <text class="light">{{item.amount}}</text>元</view>
+        <!-- <view class="weui-ceill__bd"></view> -->
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+// 顾客 我的打赏
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  export default class Myprofit extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的打赏'
+    }
+    data = {
+      list:'',
+    }
+
+    methods = {
+      
+    }
+
+    async onLoad() {
+      const list = await api.myDashang()
+      this.list = list.data
+      this.$apply()
+    }
+  }
+</script>

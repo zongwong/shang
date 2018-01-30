@@ -31,6 +31,9 @@
     line-height: 54rpx;
     padding: 0 24rpx;
   }
+  .share_btn{
+    background: #fff;
+  }
   .nav-icon{
     margin-right: 10rpx;
     vertical-align: middle;
@@ -46,36 +49,36 @@
 </style>
 <template>
   <view class="container task">
-    <view class="tips">今天还可以获得<text class="light">14积分</text>,已获得<text class="light">0积分</text></view>
+    <view class="tips">今天还可以获得<text class="light">{{list.getable}}积分</text>,已获得<text class="light">{{list.point}}积分</text></view>
     <view class="weui-cells">
       <viwe class="weui-cell">
         <image class="nav-icon" src="../../icon/signed.png"></image>
         <view class="weui-cell__bd">
           <view>每日签到</view>
-          <view class="jiangli">奖励：<text class="light">2积分</text></view>
+          <view class="jiangli">奖励：<text class="light">1积分</text></view>
         </view>
         <view class="weui-cell__ft">
-          <view class="sbtn sbtn_outline ex_btn">去签到</view>
+          <view class="sbtn sbtn_outline ex_btn" @tap="toSign({{list.tasklist.dailysign}})">{{list.tasklist.dailysign==0?'已签到':'去签到'}}</view>
         </view>
       </viwe>
       <viwe class="weui-cell">
         <image class="nav-icon" src="../../icon/edit.png"></image>
         <view class="weui-cell__bd">
           <view>完善个人信息</view>
-          <view class="jiangli">奖励：<text class="light">2积分</text></view>
+          <view class="jiangli">奖励：<text class="light">1积分</text></view>
         </view>
         <view class="weui-cell__ft">
-          <view class="sbtn sbtn_outline ex_btn">去完善</view>
+          <view class="sbtn sbtn_outline ex_btn" @tap="toInfo({{list.tasklist.improvable}})">{{list.tasklist.improvable==0?'已完善':'去完善'}}</view>
         </view>
       </viwe>
       <viwe class="weui-cell">
         <image class="nav-icon" src="../../icon/share.png"></image>
         <view class="weui-cell__bd">
           <view>分享赏一赏</view>
-          <view class="jiangli">奖励：<text class="light">2积分</text></view>
+          <view class="jiangli">奖励：<text class="light">1积分</text></view>
         </view>
         <view class="weui-cell__ft">
-          <view class="sbtn sbtn_outline ex_btn">去分享</view>
+          <button open-type="share" class="sbtn sbtn_outline ex_btn share_btn" @tap="toShare({{list.tasklist.share}})">{{list.tasklist.share==0?'已分享':'去分享'}}</button>
         </view>
       </viwe>
     </view>
@@ -97,7 +100,7 @@
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
   export default class Task extends wepy.page {
     config = {
       navigationBarTitleText: '任务列表'
@@ -107,21 +110,56 @@
 
 
     data = {
-      
+      list:''
     }
 
 
 
     methods = {
-      
+      toSign(status){
+        if(!status){
+          return false
+        }else{
+          wepy.navigateTo({
+            url:'/pages/sign/index'
+          })
+        }
+      },
+      toInfo(status){
+        if(!status){
+          return false
+        }else{
+          wepy.navigateTo({
+            url:'/pages/set/info'
+          })
+        }
+      },
+      toShare(status){
+        if(!status){
+          return false
+        }else{
+          wx.showShareMenu()
+        }
+      },
     }
 
     events = {
 
     }
 
-    onLoad() {
-      
+    async onShow() {
+        const data = await api.getTaskList()
+        if(data.code==200){
+          this.list = data.data
+          this.$apply();
+        }
+    }
+    onShareAppMessage() {
+      return {
+        success:function(){
+          api.share()
+        }
+      }
     }
   }
 </script>

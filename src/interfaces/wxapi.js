@@ -57,4 +57,10 @@ export default class wxApi extends base {
     })
     return tempFilePath
   }
+  // 拨打电话
+  static async phoneCall (phone) {
+    await wepy.makePhoneCall({
+      phoneNumber:phone
+    })
+  }
 }

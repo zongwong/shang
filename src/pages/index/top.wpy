@@ -74,14 +74,16 @@
                     <view class="sign oneTextHide">{{item.merchant_name}}</view>
                 </view>
                 <view class="info_right">
-                    <view class="shouru">总积分：<text class="light">{{item.point}}分</text></view>
-                    <view class="shouru">总收入：<text class="light">{{item.profit}}元</text></view>
+                    <view class="shouru" wx:if="{{role!='merchant'}}">总积分：<text class="light">{{item.point}}分</text></view>
+                    <view class="shouru" wx:if="{{role!='merchant'}}">总收入：<text class="light">{{item.profit}}元</text></view>
+                    <!-- <view class="shouru"总次数：<text class="light">{{item.count}}次数</text></view> -->
+                    <view class="shouru" wx:if="{{role=='merchant'}}">总收入：<text class="light">{{item.amount||item.profit}}元</text></view>
                 </view>
             </view>
         </view>
       </view>
     </view>
-    <view class="float_tips">您的排行为第{{list.rank}}名，总收入{{list.total}}元，总积分{{list.wechat_point}}分， 己超越25%的用户。</view>
+    <view class="float_tips" wx:if="{{role!='merchant'}}">您的排行为第{{list.rank}}名，总收入{{list.total}}元，总积分{{list.wechat_point}}分。</view>
   </view>
 </template>
 
@@ -106,7 +108,8 @@
       },{
           text:'平台排名',
           selected:false
-      }]
+      }],
+      role:''
     }
 
 
@@ -118,7 +121,12 @@
     events = {
         navTapEvent(index){
             if(index==0){
-                this.rankMer()
+                if(this.role=='merchant'){
+                    this.rankStaff()
+                }else{
+                    this.rankMer()
+                }
+                
             }else{
                 this.rankPlatform()
             }
@@ -126,7 +134,25 @@
     }
 
     async onLoad() {
-        this.rankMer()
+        
+        this.role = await wepy.getStorageSync('type')
+        
+        if(this.role=='merchant'){
+          await wepy.setNavigationBarTitle({
+            title: '员工排名'
+          })
+          this.rankStaff()
+        }else{
+          this.rankMer()
+        }
+    }
+    async rankStaff(){
+        const data = await api.rankStaff()
+        if(data.code==200){
+            this.list = {}
+            this.list.list = data.data
+            this.$apply()
+        }
     }
     async rankMer(){
         const data = await api.rankMer()

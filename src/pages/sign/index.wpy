@@ -123,13 +123,15 @@ page{
       <view class="info_box">
         <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
         <view class="info_text">
-          <view class="name">{{userInfo.nickName}}</view>
+          <view wx:if="{{role=='youke'||role=='staff'}}" class="name">{{userInfo.nickName}}</view>
+          <view wx:if="{{role=='merchant'}}" class="name">{{myInfo.info.merchant_name}}</view>
+          <view wx:if="{{role=='agent'}}" class="name">{{myInfo.info.agent_name}}</view>
           <view class="signstatus">
             <text wx:if="{{isSigned==0}}">你今天还没有签到哦</text>
             <text wx:if="{{isSigned==1}}">你今天已经签到啦</text>
             <text class="sbtn sbtn_default sign_btn" @tap="toSign">{{isSigned==0?'签到':'已签到'}}</text>
           </view>
-          <view><text class="light">15478人</text>参与了签到任务</view>
+          <view><text class="light">{{signData.count}}86人</text>参与了签到任务</view>
         </view>
         <view class="info_btns">
           <view>你拥有<text class="light">{{myInfo.point}}积分</text></view>
@@ -166,7 +168,8 @@ page{
       modalStatus:0,
       isSigned:0,
       signData:null,
-      myInfo:null
+      myInfo:null,
+      role:''
     }
 
     methods = {
@@ -200,8 +203,11 @@ page{
     async onLoad() {
       const userInfo = await wxApi.getUser()
       const signData = await api.signContinue()
+      const task = await api.getTaskList()
+      this.role = await wepy.getStorageSync('type')
       this.userInfo = userInfo
       this.signData = signData.data
+      this.isSigned = !task.data.tasklist.dailysign
       this.$apply()
     }
     async onShow() {

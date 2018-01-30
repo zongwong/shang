@@ -36,6 +36,11 @@ const login = {
         key: 'token',
         data: userinfo.data.data.token
       })
+      await wepy.setStorage({
+        key: 'type',
+        // data: userinfo.data.data.type
+        data:'merchant'
+      })
       console.log(userinfo)
     } catch (e) {
       wepy.showModal({
