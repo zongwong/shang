@@ -359,13 +359,13 @@
 </style>
 <template>
   <view class="container game">
-      <image class="gamebg" src="../../images/treebg.png"></image>
+      <image class="gamebg" src="https://www.hdlwork.cn/xcx/images/gamebg.png"></image>
       <view class="content">
-        <image class="title" src="../../images/gametitle.png"></image>
+        <image class="title" src="https://www.hdlwork.cn/xcx/images/gametitle.png"></image>
         <view class="shaketree-time"><text>每次消耗10积分,奖品为10-2000积分</text></view>
         <view class="count">当前您还有<text>{{myInfo.point}}</text>积分</view>
         <view class="shakelottery">
-            <image src="../../images/start.png" class="start-btn shake" @tap="gameStart"></image>
+            <image src="https://www.hdlwork.cn/xcx/images/start.png" class="start-btn shake" @tap="gameStart"></image>
             <view class="pointer-btn hand"></view>
         </view>
         <!-- <view class="btn-box">
@@ -377,7 +377,7 @@
             <view class="record_list-wrap">
                 <view class="record_list">
                     <view class="record_item" wx:for="{{2}}" wx:key="record_{{index}}">
-                      <image src="../../images/qrcode.png" class="avatar"></image>
+                      <image src="../../images/avatar.png" class="avatar"></image>
                       <text class="name">微信昵称</text>
                       <text class="prize">一等奖:50积分</text>
                     </view>
@@ -408,7 +408,7 @@
       </view>
   </view>
   <!-- alert弹框 -->
-  <view class="mask" wx:if="{{0}}">
+  <view class="mask" wx:if="{{alert}}">
       <view class="modal-wrap modal-alert bgs">
           <view class="modal-close close-alert"></view>
           <view class="modal-content alert-content">
@@ -433,15 +433,15 @@
     </view> -->
     <!-- 摇树页面 -->
     <view class="treePage" style="width:{{sys.windowWidth}}px;height:{{sys.windowHeight}}px;transform:translateX({{right}});{{transtion}}">
-        <image src="../../images/sbg.png" class="sbg" mode="aspectFill"></image>   
+        <image src="https://www.hdlwork.cn/xcx/images/sbg.png" class="sbg" mode="aspectFill"></image>   
         <view class="content_box">        
-          <image src="../../images/stitle.png" class="stitle"></image>   
-          <image src="../../images/phone.png" class="phone shake"></image>
-          <image src="../../images/tree.png" class="tree shakeTree"></image>   
+          <image src="https://www.hdlwork.cn/xcx/images/stitle.png" class="stitle"></image>   
+          <image src="https://www.hdlwork.cn/xcx/images/phone.png" class="phone shake"></image>
+          <image src="https://www.hdlwork.cn/xcx/images/tree.png" class="tree shakeTree"></image>   
           <view class="active-text">使劲摇</view>
-          <image src="../../images/result.png" class="result {{isShake==1?'coinShow':''}}"></image>
-          <image src="../../images/result.png" class="result result2 {{isShake==1?'coinShow2':''}}"></image>    
-          <image src="../../images/result.png" class="result result3 {{isShake==1?'coinShow3':''}}"></image>
+          <image src="https://www.hdlwork.cn/xcx/images/result.png" class="result {{isShake==1?'coinShow':''}}"></image>
+          <image src="https://www.hdlwork.cn/xcx/images/result.png" class="result result2 {{isShake==1?'coinShow2':''}}"></image>    
+          <image src="https://www.hdlwork.cn/xcx/images/result.png" class="result result3 {{isShake==1?'coinShow3':''}}"></image>
         </view>
     </view>
 </template>
@@ -463,16 +463,22 @@
       result:'',
       myInfo:null,
       isShake:0,
+      alert:false
     }
 
     methods = {
-      async gameStart(){
-        this.transtion = 'transition: 1s ease;'
+      gameStart(){
+        this.transtion = 'transition: .5s ease;'
         this.right = 0
-        new shake(this,{
-          shakeThreshold: 70, //阈值
+        let that = this
+        console.log(12321)
+        new shake(that,{
+          shakeThreshold: 50, //阈值
           callback: (idx, award) => {
-            console.log(arguments)
+            console.log('回调')
+            that.isShake = 1
+            that.alert = true
+            that.$apply()
           }
         })
       }

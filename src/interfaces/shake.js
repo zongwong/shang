@@ -22,6 +22,7 @@ class Shake {
    * @param  {Function} opts.callback    结束回调
    */      
   constructor (pageContext, opts) {
+    console.log('构造')
     this.page = pageContext
     this.shakeThreshold = opts.shakeThreshold || 80
     this.lastX = 0
@@ -30,12 +31,13 @@ class Shake {
     this.lastUpdate = 0
     this.isStart = true
     this.endCallBack = opts.callback
-    this.page.audioCtx = wx.createAudioContext('shakeAudio')
+    // this.page.audioCtx = wx.createAudioContext('shakeAudio')
     this.start()
     
   }
 
   start () {
+    console.log('start')
     let { isStart, shakeThreshold, lastX, lastY, lastZ, lastUpdate } = this
     wx.onAccelerometerChange((res) => {
       let curTime = new Date().getTime()
@@ -45,7 +47,7 @@ class Shake {
         let curZ = res.z
         let speed = Math.abs(curX + curY + curZ - lastX - lastY - lastZ) / (curTime - lastUpdate) * 10000
         if(speed > shakeThreshold && this.isStart){
-          this.page.audioCtx.play()   
+          // this.page.audioCtx.play()   
           this.update()
         }
         lastUpdate = curTime
