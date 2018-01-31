@@ -1,7 +1,7 @@
 import wepy from 'wepy';
 import Tips from './Tips';
 import login from '../interfaces/login'
-const TEST = true
+const TEST = false
 // HTTP工具类
 export default class http {
   static async request (method, url, data={}, loading = true , token = true) {

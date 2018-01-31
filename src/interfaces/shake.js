@@ -31,7 +31,7 @@ class Shake {
     this.lastUpdate = 0
     this.isStart = true
     this.endCallBack = opts.callback
-    // this.page.audioCtx = wx.createAudioContext('shakeAudio')
+    this.page.audioCtx = wx.createAudioContext('shakeAudio')
     this.start()
     
   }
@@ -47,7 +47,7 @@ class Shake {
         let curZ = res.z
         let speed = Math.abs(curX + curY + curZ - lastX - lastY - lastZ) / (curTime - lastUpdate) * 10000
         if(speed > shakeThreshold && this.isStart){
-          // this.page.audioCtx.play()   
+          this.page.audioCtx.play()   
           this.update()
         }
         lastUpdate = curTime

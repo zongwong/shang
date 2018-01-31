@@ -102,7 +102,7 @@
             </picker>
         </view>
         <view>
-            <view class="value">{{list.count||list.length}}</view>
+            <view class="value">{{list.count||list.length||0}}</view>
             <view class="text">评价次数</view>
         </view>
         <view wx:if="{{role!='merchant'}}">

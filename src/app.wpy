@@ -102,12 +102,12 @@ import login from './interfaces/login'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/index/index',
       'pages/youke/mymer',
       'pages/youke/myagent',
       'pages/youke/top',
       'pages/youke/dashang',
       'pages/set/pwd',
-      'pages/index/index',
       'pages/set/bind',
       'pages/shop/merdetail',
       'pages/shop/merlist',

@@ -82,19 +82,19 @@
         </view>
       </viwe>
     </view>
-    <view class="weui-cells">
+    <!-- <view class="weui-cells">
       <viwe class="weui-cell">
         <view class="weui-cell__bd">积分商城</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </viwe>
-    </view>
-    <view class="weui-cells">
+    </view> -->
+    <!-- <view class="weui-cells">
       <view class="post_wrap"><image src="https://www.hdlwork.cn/xcx/images/ex.png" mode="aspectFill" class="post"></image></view>
       <viwe class="weui-cell goods_item">
         <view class="weui-cell__bd">300积分</view>
         <view class="weui-cell__ft"><view class="sbtn sbtn_outline ex_btn">马上兑换</view></view>
       </viwe>
-    </view>
+    </view> -->
   </view>
 </template>
 

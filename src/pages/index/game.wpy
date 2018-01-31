@@ -50,6 +50,7 @@
         border: 4rpx solid #6d3900;
         box-sizing: border-box;
         border-radius: 20rpx;
+        overflow: hidden;
         .record_title{
           text-align: center;
           border-bottom:4rpx solid #6d3900;
@@ -60,6 +61,8 @@
         }
         .record_list-wrap{
           padding: 0 28rpx;
+          max-height: 376rpx;
+          overflow-y: auto;
           .record_item{
             display: flex;
             align-items: center;
@@ -247,6 +250,31 @@
     }
   }
 }
+// .light-bg {
+//     width: 753rpx;
+//     height: 753rpx;
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     margin-left: -376.5rpx;
+//     margin-top: -376.5rpx;
+//     background: url() center / 100% no-repeat
+// }
+
+// .light1 {
+//     -webkit-animation: light 12s linear infinite;
+//     animation: light 12s linear infinite
+// }
+// @-webkit-keyframes light {
+//     0% {
+//         -webkit-transform: rotateZ(0deg);
+//         transform: rotateZ(0deg)
+//     }
+//     100% {
+//         -webkit-transform: rotateZ(360deg);
+//         transform: rotateZ(360deg)
+//     }
+// }
 .flex_row{
   display: flex;
   justify-content: space-between;
@@ -255,7 +283,8 @@
   position: fixed;
   top: 0;
   z-index: 8;
-  transform: translateX('-100%');
+  transform: translateX('100%');
+  transition:none;
   .sbg,.content_box{
     width: 100%;
     height: 100%;
@@ -376,10 +405,10 @@
             <view class="record_title">中奖记录</view>
             <view class="record_list-wrap">
                 <view class="record_list">
-                    <view class="record_item" wx:for="{{2}}" wx:key="record_{{index}}">
+                    <view class="record_item" wx:for="{{list}}" wx:key="record_{{index}}">
                       <image src="../../images/avatar.png" class="avatar"></image>
-                      <text class="name">微信昵称</text>
-                      <text class="prize">一等奖:50积分</text>
+                      <text class="name">热心用户</text>
+                      <text class="prize">抽中{{item.get}}积分</text>
                     </view>
                 </view>
             </view>
@@ -410,14 +439,14 @@
   <!-- alert弹框 -->
   <view class="mask" wx:if="{{alert}}">
       <view class="modal-wrap modal-alert bgs">
-          <view class="modal-close close-alert"></view>
+          <view class="modal-close close-alert" @tap="close"></view>
           <view class="modal-content alert-content">
-              <image class="alert-type alert-success" src="../../images/qrcode.png"></image>
+              <image class="alert-type alert-success" src="{{userInfo.avatarUrl}}"></image>
               <view class="congratulation">感谢你的参与</view>
-              <view class="reward_name">祝你好运</view>
+              <view class="reward_name">{{reward}}</view>
           </view>
           <view class="modal-btn btn-alert">
-              <view style="border-right:2rpx solid #6d3900;box-sizing:border-box;">再来一次</view><view>查看奖品</view>
+              <view style="border-right:2rpx solid #6d3900;box-sizing:border-box;" @tap="again">再来一次</view><view @tap="close">确定</view>
           </view>
       </view>
       <view class="light-bg light1"></view>
@@ -444,6 +473,7 @@
           <image src="https://www.hdlwork.cn/xcx/images/result.png" class="result result3 {{isShake==1?'coinShow3':''}}"></image>
         </view>
     </view>
+    <audio controls="false" src="https://www.hdlwork.cn/xcx/shake_sound.mp3" id="shakeAudio" style="display:none;"></audio>
 </template>
 
 <script>
@@ -463,7 +493,9 @@
       result:'',
       myInfo:null,
       isShake:0,
-      alert:false
+      alert:false,
+      reward:'很遗憾,没有中奖',
+      list:''
     }
 
     methods = {
@@ -471,29 +503,65 @@
         this.transtion = 'transition: .5s ease;'
         this.right = 0
         let that = this
-        console.log(12321)
+        // that.cj()
         new shake(that,{
-          shakeThreshold: 50, //阈值
-          callback: (idx, award) => {
-            console.log('回调')
+          shakeThreshold: 40, //阈值
+          callback: () => {
             that.isShake = 1
-            that.alert = true
             that.$apply()
+            console.log('回调')
+            that.cj()
           }
         })
-      }
+      },
+      close(){
+        this.alert = false
+      },
     }
-    async cj() {
+    again(that){
+      that.transtion = 'transition:none;'
+      that.right = '100%';
+      that.$apply()
+    }
+    async cj(fn) {
+      let that = this
+      console.log('cj')
       const data = await api.toCj()
+      console.log(data)
       if(data.code==200){
-        this.result = data
+        that.myInfo.point = data.data.rest
+        wx.showModal({
+          title:'提示',
+          content:`恭喜抽中${data.data.get}积分`,
+          success:function(res){
+            if (res.confirm) {
+              that.again(that)
+            } else if (res.cancel) {
+              that.again(that)
+            }
+          }
+        })
+      }else{
+        wx.showModal({
+          title:'提示',
+          content:data.message,
+          success:function(res){
+            if (res.confirm) {
+              that.again(that)
+            } else if (res.cancel) {
+              that.again(that)
+            }
+          }
+        })
       }
     }
     async onLoad() {
       const data = await wxApi.getSystemInfo()
       const list = await api.cjList()
+      const userInfo = await wxApi.getUser()
       this.sys = data
-      this.list = list
+      this.list = list.data
+      this.userInfo = userInfo
       this.$apply()
     }
     async onShow() {

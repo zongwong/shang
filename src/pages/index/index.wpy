@@ -187,10 +187,10 @@
             <view class="icon icon_ticket"></view>
             <view class="weui-grid__label">我的卡券</view>
         </navigator>
-        <navigator class="weui-grid" url="/pages/index/order">
+        <view class="weui-grid" url="/pages/index/order" @tap="tips">
             <view class="icon icon_order"></view>
             <view class="weui-grid__label">我的订单</view>
-        </navigator>
+        </view>
         <navigator class="weui-grid" url="/pages/address/index">
             <view class="icon icon_address"></view>
             <view class="weui-grid__label">收货地址</view>
@@ -198,12 +198,12 @@
       </view>
     </view>
     <view class="weui-flex bgwhite btns_box">
-      <navigator class="btn_wrap" url="/pages/shop/index">
+      <view class="btn_wrap" url="/pages/shop/index" @tap="tips">
         <view class="tw_row">
           <view class="icon icon_shop"></view>
           <view class="text">积分商城</view>
         </view>
-      </navigator>
+      </view>
       <navigator class="btn_wrap" url="/pages/index/game">
         <view class="tw_row">
           <view class="icon icon_game"></view>
@@ -235,13 +235,19 @@
     methods = {
       previewImg(url){
         wxApi.previewImg(url,[url])
+      },
+      tips(){
+        wx.showModal({
+          title:'提示',
+          content:'敬请期待!'
+        })
       }
     }
 
     async onLoad() {
+      this.role = await wepy.getStorageSync('type')
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
-      this.role = await wepy.getStorageSync('type')
       this.$apply()
     }
     async onShow() {
