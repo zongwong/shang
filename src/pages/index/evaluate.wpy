@@ -106,9 +106,9 @@
     </view>
     <view class="navs" style="border-bottom:1px solid #f1f1f1;">
         <text class="">查询：</text>
-        <text @tap="query(1)" class="sbtn query_btn {{query==1?'selected':''}}">昨日</text>
-        <text @tap="query(2)" class="sbtn query_btn {{query==2?'selected':''}}">最近一周</text>
-        <text @tap="query(3)" class="sbtn query_btn {{query==3?'selected':''}}">最近一月</text>
+        <text @tap="query('yesterday','昨日')" class="sbtn query_btn {{query=='yesterday'?'selected':''}}">昨日</text>
+        <text @tap="query('last_week','最近一周')" class="sbtn query_btn {{query=='last_week'?'selected':''}}">最近一周</text>
+        <text @tap="query('last_month','最近一月')" class="sbtn query_btn {{query=='last_month'?'selected':''}}">最近一月</text>
     </view>
     <view class="query">
         <view>
@@ -181,6 +181,7 @@
     methods = {
         async DateChange(e) {
             this.date = e.detail.value
+            this.query = e.detail.value
             this.$apply()
             if(this.role=='merchant'){
                 await this.getStaffList()
@@ -198,9 +199,15 @@
                 await this.getList()
             }   
         },
-        async query(type){
+        async query(type,text){
+            this.date = text
             this.query = type
             this.$apply()
+            if(this.role=='merchant'){
+                await this.getStaffList()
+            }else{
+                await this.getList()
+            }
         }
     }
 
@@ -210,6 +217,7 @@
 
     async onLoad() {
         this.date = _.getToday()
+        this.query = _.getToday()
         const data = await api.rewardData()
         if(data.code==200){
             this.mydata = data.data
@@ -228,7 +236,7 @@
     }
     async getList(){
         const list = await api.rewardList({
-            day:this.date,
+            day:this.query,
             level:this.level
         })
         if(list.code==200){
@@ -243,7 +251,7 @@
     }
     async getStaffList(){
         const list = await api.rewardStaff({
-            day:this.date,
+            day:this.query,
             level:this.level
         })
         if(list.code==200){

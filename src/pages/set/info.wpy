@@ -124,6 +124,34 @@
           })
           return false
         }
+        if(!this.idCard||this.idCard.length<18){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写身份证号码'
+          })
+          return false
+        }
+        if(!this.accountName){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写户名'
+          })
+          return false
+        }
+        if(!this.bankNum){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写银行卡号'
+          })
+          return false
+        }
+        if(!this.bankName){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写开户行名称'
+          })
+          return false
+        }
         const data = await api.setPersonalInfo({
           realname:this.name,
           age:this.age,
@@ -140,6 +168,11 @@
           setTimeout(() => {
             wepy.navigateBack()
           }, 800);
+        }else{
+          wepy.showModal({
+            title:'提示',
+            content:data.message
+          })
         }
       }
     }
@@ -150,6 +183,10 @@
       this.name = data.data.realname
       this.age = data.data.age
       this.job = data.data.occupation
+      this.idCard = data.data.idcard
+      this.accountName = data.data.cash_name
+      this.bankNum = data.data.cash_card
+      this.bankName = data.data.cash_bank
       this.$apply()
     }
   }
