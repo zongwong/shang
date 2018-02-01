@@ -10,7 +10,7 @@
   <view class="container bind">
     <view class="weui-ceils bgwhite mt24">
       <view class="weui-cell">
-        <view class="weui-cell__bd"><input type="number" value="{{sign}}" @input="signInput" placeholder="设置签名"/></view>
+        <view class="weui-cell__bd"><input value="{{sign}}" @input="signInput" placeholder="设置签名"/></view>
         <view class="weui-cell__ft"></view>
       </view>
     </view>

@@ -43,6 +43,16 @@
                 background: #dd4e32;
                 color: #fff;
             }
+            &.query_btn{
+                background: #fff;
+                color: #32bee1;
+                border: 1px solid #32bee1;
+                padding: 5rpx 20rpx;
+                &.selected{
+                    background: #32bee1;
+                    color: #fff;
+                }
+            }
         }
     }
     .evaluate_ceil{
@@ -93,6 +103,12 @@
         <text @tap="getCat('hao')" class="sbtn {{level=='hao'?'selected':''}}">好评({{hao}})</text>
         <text @tap="getCat('zhong')" class="sbtn {{level=='zhong'?'selected':''}}">中评({{zhong}})</text>
         <text @tap="getCat('cha')" class="sbtn {{level=='cha'?'selected':''}}">差评({{cha}})</text>
+    </view>
+    <view class="navs" style="border-bottom:1px solid #f1f1f1;">
+        <text class="">查询：</text>
+        <text @tap="query(1)" class="sbtn query_btn {{query==1?'selected':''}}">昨日</text>
+        <text @tap="query(2)" class="sbtn query_btn {{query==2?'selected':''}}">最近一周</text>
+        <text @tap="query(3)" class="sbtn query_btn {{query==3?'selected':''}}">最近一月</text>
     </view>
     <view class="query">
         <view>
@@ -156,7 +172,8 @@
       cha:0,
       zhong:0,
       hao:0,
-      role:''
+      role:'',
+      query:''
     }
 
 
@@ -179,8 +196,11 @@
                 await this.getStaffList()
             }else{
                 await this.getList()
-            }
-            
+            }   
+        },
+        async query(type){
+            this.query = type
+            this.$apply()
         }
     }
 

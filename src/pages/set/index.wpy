@@ -26,7 +26,7 @@
         <view wx:if="{{role=='youke'||role=='staff'}}" class="username oneTextHide">{{userInfo.nickName}}</view>
         <view wx:if="{{role=='merchant'}}" class="username oneTextHide">{{myInfo.info.merchant_name}}</view>
         <view wx:if="{{role=='agent'}}" class="username oneTextHide">{{myInfo.info.agent_name}}</view>
-        <view class="userstar"><text class="icon icon_star"></text><text class="icon icon_star"></text></text><text class="icon icon_star"></text><text class="icon icon_star"></text><text class="icon icon_star"></text></view>
+        <view class="userstar"><text class="icon icon_star" wx:for="{{myInfo.star}}" wx:key="star"></text></view>
       </view>
       <view class="userinfo_qrcode" wx:if="{{role=='staff'}}" @tap="previewImg('http://www.hdlwork.cn{{myInfo.info.qrcode}}')">
         <image src="http://www.hdlwork.cn{{myInfo.info.qrcode}}"></image>
@@ -63,7 +63,7 @@
       </navigator>
       <navigator class="weui-cell  weui-cell_access" url="/pages/set/info">
         <image class="nav-icon" src="../../icon/id.png"></image>
-        <view class="weui-cell__bd">实名认证</view>
+        <view class="weui-cell__bd">个人信息</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
     </view>
@@ -123,11 +123,14 @@
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
       this.role = await wepy.getStorageSync('type')
-      const data = await api.getPersonalInfo(this.role)
+      this.$apply()
+    }
+    async onShow() {
+      const data = await api.getPersonalInfo()
       if(data.code==200){
         this.myInfo = data.data
+        this.$apply()
       }
-      this.$apply()
     }
 
   }

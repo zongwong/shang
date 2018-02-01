@@ -83,7 +83,7 @@
         </view>
       </view>
     </view>
-    <view class="float_tips" wx:if="{{role!='merchant'}}">您的排行为第{{list.rank}}名，总收入{{list.total}}元，总积分{{list.wechat_point}}分。</view>
+    <view class="float_tips" wx:if="{{role!='merchant'}}">您在{{index==0?'本店':'平台'}}排行为第{{list.rank}}名，总收入{{list.total}}元，总积分{{list.wechat_point}}分，已超越{{list.rate}}%用户，继续努力哦！</view>
   </view>
 </template>
 
@@ -109,7 +109,8 @@
           text:'平台排名',
           selected:false
       }],
-      role:''
+      role:'',
+      index:0
     }
 
 
@@ -120,6 +121,7 @@
 
     events = {
         navTapEvent(index){
+            this.index = index
             if(index==0){
                 if(this.role=='merchant'){
                     this.rankStaff()
