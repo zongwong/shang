@@ -187,6 +187,7 @@ page{
 <script>
   import wepy from 'wepy'
   import wxApi from '../../interfaces/wxapi'
+  import api from '../../interfaces/api'
   export default class Card extends wepy.page {
     config = {
       navigationBarTitleText: '名片制作'
@@ -228,6 +229,13 @@ page{
     async onLoad() {
       const userInfo = await wxApi.getUser()
       this.userInfo = userInfo
+      const cardInfo = await api.getCardInfo()
+      this.name = cardInfo.data.name
+      this.phone = cardInfo.data.mobilephone
+      this.company = cardInfo.data.position
+      this.business = cardInfo.data.email
+      this.address = cardInfo.data.company
+      this.email = cardInfo.data.detail
       this.$apply()
       
     }
@@ -301,6 +309,15 @@ page{
       wepy.showLoading({
         title:'生成中...'
       })
+      const res = await api.saveCardInfo({
+        name:this.name,
+        mobilephone:this.phone,     
+        position:this.business,
+        email:this.email,
+        company:this.company,
+        detail:this.address,
+      })
+      console.log(res)
       await this.drawCard()
       setTimeout(() => {      
         wx.canvasToTempFilePath({

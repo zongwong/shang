@@ -70,8 +70,6 @@
             }
         }
     }
-
-
     .ev_row{
         display: flex;
         align-content: center;

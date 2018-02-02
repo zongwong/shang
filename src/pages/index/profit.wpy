@@ -26,6 +26,33 @@
     }
   }
 }
+.navs{
+    background: #fff;
+    padding: 20rpx 30rpx;
+    .sbtn{
+        font-size: 26rpx;
+        line-height: 1;
+        border-radius: 8rpx;
+        background: #ffd1c8;
+        color: #575757;
+        padding:10rpx 20rpx; 
+        margin-right: 30rpx;
+        &.selected{
+            background: #dd4e32;
+            color: #fff;
+        }
+        &.query_btn{
+            background: #fff;
+            color: #32bee1;
+            border: 1px solid #32bee1;
+            padding: 5rpx 20rpx;
+            &.selected{
+                background: #32bee1;
+                color: #fff;
+            }
+        }
+    }
+}
 </style>
 <template>
   <view class="container evaluate">
@@ -44,6 +71,12 @@
           <view class="value">{{mydata.transfered||0}}</view>
         </view>
       </view>
+    </view>
+    <view class="navs" style="border-bottom:1px solid #f1f1f1;">
+        <text class="">查询：</text>
+        <text @tap="query('yesterday','昨日')" class="sbtn query_btn {{query=='yesterday'?'selected':''}}">昨日</text>
+        <text @tap="query('last_week','最近一周')" class="sbtn query_btn {{query=='last_week'?'selected':''}}">最近一周</text>
+        <text @tap="query('last_month','最近一月')" class="sbtn query_btn {{query=='last_month'?'selected':''}}">最近一月</text>
     </view>
     <view class="query mt24">
         <view>
@@ -98,7 +131,8 @@
       mydata:null,
       list:null,
       date:'',
-      role:''
+      role:'',
+      query:'',
     }
 
 
@@ -106,13 +140,25 @@
     methods = {
       async DateChange(e) {
         this.date = e.detail.value
+        this.query = e.detail.value
         this.$apply()
         await this.getList()
+      },
+      async query(type,text){
+          this.date = text
+          this.query = type
+          this.$apply()
+          if(this.role=='merchant'){
+              await this.getStaffList()
+          }else{
+              await this.getList()
+          }
       }
     }
 
     async onLoad() {
         this.date = _.getToday()
+        this.query = _.getToday()
         const data = await api.profitData()
         this.role = await wepy.getStorageSync('type')
         if(this.role=='merchant'){
@@ -128,7 +174,7 @@
     }
     async getList(){
         const list = await api.profitList({
-            day:this.date
+            day:this.query
         })
         if(list.code==200){
             this.list = list.data
