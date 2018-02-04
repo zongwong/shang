@@ -10,6 +10,15 @@
         font-size: 24rpx;
         padding: 0 16rpx;
     }
+    .weui-cell__ft{
+      font-size: 25rpx;
+      color: #000;
+      text-align: left;
+      width: 5em;
+    }
+    input{
+      color: #999;
+    }
 }
 </style>
 <template>
@@ -17,45 +26,45 @@
     <view class="weui-cells__title">个人资料</view>
     <view class="weui-ceils bgwhite mt24">
       <view class="weui-cell">
+        <view class="weui-cell__ft">真实姓名：</view>
         <view class="weui-cell__bd"><input  @input="nameInput" value="{{name}}" placeholder="请输入真实姓名"/></view>
-        <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
+        <view class="weui-cell__ft">年龄：</view>
         <view class="weui-cell__bd"><input type="number" @input="ageInput" value="{{age}}" placeholder="请输入您的年龄"/></view>
-        <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
+        <view class="weui-cell__ft">职业：</view>
         <view class="weui-cell__bd"><input  @input="jobInput" value="{{job}}" placeholder="请输入您的职业"/></view>
-        <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
+        <view class="weui-cell__ft">身份证：</view>
         <view class="weui-cell__bd"><input type="number" @input="idCardInput" value="{{idCard}}" placeholder="请输入您的身份证号码"/></view>
-        <view class="weui-cell__ft"></view>
       </view>
     </view>
     <view class="weui-cells__title">收款信息</view>
     <view class="weui-ceils bgwhite mt24">
       <view class="weui-cell">
+        <view class="weui-cell__ft">户名：</view>
         <view class="weui-cell__bd"><input  @input="accountNameInput" value="{{accountName}}" placeholder="请输入户名"/></view>
-        <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
+        <view class="weui-cell__ft">银行卡号：</view>
         <view class="weui-cell__bd"><input type="number" @input="bankNumInput" value="{{bankNum}}" placeholder="请输入银行卡号"/></view>
-        <view class="weui-cell__ft"></view>
       </view>
       <view class="weui-cell">
+        <view class="weui-cell__ft">开户行：</view>
         <view class="weui-cell__bd"><input  @input="bankNameInput" value="{{bankName}}" placeholder="请输入开户行名称"/></view>
-        <view class="weui-cell__ft"></view>
       </view>
     </view>
-    <view class="weui-cells__title">形象照</view>
+    <!-- <view class="weui-cells__title">形象照</view>
     <view class="weui-uploader">
         <view class="weui-uploader__bd">
             <view class="weui-uploader__input-box">
                 <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="" />
             </view>
         </view>
-    </view>
+    </view> -->
     <view class="btn_wrap">
        <view class="sbtn sbtn_default" @tap="toSubmit">确定</view> 
     </view>

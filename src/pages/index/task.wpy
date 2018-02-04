@@ -120,7 +120,7 @@
         if(!status){
           return false
         }else{
-          wepy.navigateTo({
+          wepy.switchTab({
             url:'/pages/sign/index'
           })
         }

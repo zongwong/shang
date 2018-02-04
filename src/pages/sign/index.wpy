@@ -113,6 +113,18 @@ page{
         overflow-y:auto;
       }
     }
+    .card2{
+      width: 523rpx;
+      height: 545rpx;
+      .wrod_text2{
+        width: 430rpx;
+        height:287rpx;
+        top: 220rpx;
+        color: #000;
+        font-size: 26rpx;
+      }
+    }
+
   }
 }
 </style>
@@ -141,11 +153,18 @@ page{
       <view class="sbtn sbtn_default sign_btns" @tap="modalChange(1)">今日祝福语</view>
       <navigator url="/pages/sign/signed" class="sbtn sbtn_outline sign_btns">签到记录</navigator>
     </view>
-    <view class="modal" wx:if="{{modalStatus==1}}">
+    <!-- <view class="modal" wx:if="{{modalStatus==1}}">
       <view class="card">
         <image class="wordbg" src="https://www.hdlwork.cn/xcx/images/wordbg.png"></image>
         <view class="icon close" @tap="modalChange(0)"></view>
         <view class="wrod_text">{{myInfo.blessword}}</view>
+      </view>
+    </view> -->
+    <view class="modal" wx:if="{{modalStatus==1}}">
+      <view class="card card2">
+        <image class="wordbg" src="https://www.hdlwork.cn/xcx/images/wordbg2.png"></image>
+        <view class="icon close" @tap="modalChange(0)"></view>
+        <view class="wrod_text wrod_text2">{{myInfo.blessword}}</view>
       </view>
     </view>
   </view>

@@ -183,10 +183,10 @@
             <view class="icon icon_task"></view>
             <view class="weui-grid__label">我的任务</view>
         </navigator>
-        <navigator class="weui-grid" url="/pages/index/ticket">
+        <view class="weui-grid" url="/pages/index/ticket" @tap="tips">
             <view class="icon icon_ticket"></view>
             <view class="weui-grid__label">我的卡券</view>
-        </navigator>
+        </view>
         <view class="weui-grid" url="/pages/index/order" @tap="tips">
             <view class="icon icon_order"></view>
             <view class="weui-grid__label">我的订单</view>

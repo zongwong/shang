@@ -102,7 +102,7 @@
         <text @tap="getCat('zhong')" class="sbtn {{level=='zhong'?'selected':''}}">中评({{zhong}})</text>
         <text @tap="getCat('cha')" class="sbtn {{level=='cha'?'selected':''}}">差评({{cha}})</text>
     </view>
-    <view class="navs" style="border-bottom:1px solid #f1f1f1;">
+    <view class="navs" style="border-bottom:1px solid #f1f1f1;" wx:if="{{role!='youke'}}">
         <text class="">查询：</text>
         <text @tap="query('yesterday','昨日')" class="sbtn query_btn {{query=='yesterday'?'selected':''}}">昨日</text>
         <text @tap="query('last_week','最近一周')" class="sbtn query_btn {{query=='last_week'?'selected':''}}">最近一周</text>
@@ -183,19 +183,22 @@
             this.$apply()
             if(this.role=='merchant'){
                 await this.getStaffList()
-            }else{
+            }else if(this.role=='staff'){
                 await this.getList()
+            }else{
+                await this.getMyRewardList()
             }
-            
         },
         async getCat(value) {
             this.level = value
             this.$apply()
             if(this.role=='merchant'){
                 await this.getStaffList()
-            }else{
+            }else if(this.role=='staff'){
                 await this.getList()
-            }   
+            }else{
+                await this.getMyRewardList()
+            } 
         },
         async query(type,text){
             this.date = text
@@ -203,8 +206,10 @@
             this.$apply()
             if(this.role=='merchant'){
                 await this.getStaffList()
-            }else{
+            }else if(this.role=='staff'){
                 await this.getList()
+            }else{
+                await this.getMyRewardList()
             }
         }
     }
@@ -226,8 +231,10 @@
             title: '员工评价'
           })
           await this.getStaffList()
-        }else{
+        }else if(this.role=='staff'){
             await this.getList()
+        }else{
+            await this.getMyRewardList()
         }
         this.$apply()
         
@@ -254,6 +261,21 @@
         })
         if(list.code==200){
             this.list = list.data.rewardlist
+        }
+        if(this.level=='all'){
+            this.cha = list.data.cha
+            this.zhong = list.data.zhong
+            this.hao = list.data.hao
+        }
+        this.$apply()
+    }
+    async getMyRewardList() {
+        const list = await api.getMyRewardList({
+            day:this.query,
+            level:this.level
+        })
+        if(list.code==200){
+            this.list = list.data.list
         }
         if(this.level=='all'){
             this.cha = list.data.cha

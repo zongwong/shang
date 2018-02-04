@@ -68,7 +68,7 @@
       </navigator>
     </view>
     <view class="weui-cells navsBox">
-      <navigator class="weui-cell  weui-cell_access" url="/pages/set/pwd">
+      <navigator class="weui-cell  weui-cell_access" url="/pages/set/pwd"  wx:if="{{role!='youke'}}">
         <image class="nav-icon" src="../../icon/pwd.png"></image>
         <view class="weui-cell__bd">设置提现密码</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>

@@ -196,14 +196,19 @@ export default class Api extends base {
     const url = `${this.host}/staff/reward`
     return await this.get(url, data)
   }
-  //获取名片信息
+  // 获取名片信息
   static async getCardInfo(data) {
     const url = `${this.host}/bcard/getinfo`
     return await this.get(url, data)
   }
-  //新建或更新名片
+  // 新建或更新名片
   static async saveCardInfo(data) {
     const url = `${this.host}/bcard/save`
     return await this.post(url, data)
+  }
+  // 我的评价 非员工
+  static async getMyRewardList(data) {
+    const url = `${this.host}/reward/getActiveList`
+    return await this.get(url, data)
   }
 }
