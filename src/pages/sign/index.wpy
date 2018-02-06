@@ -203,6 +203,7 @@ page{
         if(data.code==200){
           this.isSigned = 1
           this.modalStatus = 1
+          this.signData.continuous_days = parseInt(this.signData.continuous_days) + 1
           this.$apply()
         }else if(data.code==400){
           this.isSigned = 1

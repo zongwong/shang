@@ -58,15 +58,16 @@
 </style>
 <template>
   <view class="container ticket">
-      <view class="ticket_item bgwhite" wx:for="{{3}}" wx:key="ticket_{{index}}">
-          <view class="status dated"></view>
+      <view class="ticket_item bgwhite" wx:for="{{list}}" wx:key="ticket_{{index}}">
+          <view wx:if="{{item.status=='已使用'}}" class="status used"></view>
+          <view wx:if="{{item.status=='已过期'}}" class="status dated"></view>
           <view class="flexrow first_row">
-              <view class="flexrow_bd"><text class="money">100元优惠券</text></view>
-              <view class="flexrow_bd qrcode_wrap"><image class="qrcode" src="../../images/qrcode.png"></image></view>
+              <view class="flexrow_bd"><text class="money">{{item.merchant_name}}</text></view>
+              <view class="flexrow_bd qrcode_wrap">兑换码：{{item.code}}</view>
           </view>
           <view class="flexrow second_row">
-              <view class="flexrow_bd"><text>消费满399使用，消费满399使用</text></view>
-              <view class="flexrow_bd"><text>有效期：2018-12-30</text></view>
+              <view class="flexrow_bd"><text>消费满{{item.full}}减{{item.cut}}</text></view>
+              <view class="flexrow_bd"><text>有效期：{{item.deadline}}</text></view>
           </view>
       </view>
   </view>
@@ -74,7 +75,8 @@
 
 <script>
   import wepy from 'wepy'
-
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
   export default class Ticket extends wepy.page {
     config = {
       navigationBarTitleText: '优惠券'
@@ -84,7 +86,7 @@
 
 
     data = {
-      
+      list:null
     }
 
 
@@ -97,8 +99,12 @@
 
     }
 
-    onLoad() {
-      
+    async onShow() {
+      const data = await api.getTicket()
+      if(data.code==200){
+          this.list = data.data
+          this.$apply();
+      }
     }
   }
 </script>

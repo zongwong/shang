@@ -211,4 +211,9 @@ export default class Api extends base {
     const url = `${this.host}/reward/getActiveList`
     return await this.get(url, data)
   }
+  // 我的卡券
+  static async getTicket(data) {
+    const url = `${this.host}/coupon/getlist`
+    return await this.get(url, data)
+  }
 }
