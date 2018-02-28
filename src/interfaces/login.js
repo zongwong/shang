@@ -3,18 +3,18 @@ import wepy from 'wepy'
 const login = {
   // 获取用户信息
   async getUserInfo() {
-    const {
-      userInfo
-    } = await wepy.getUserInfo()
+    const res = await wepy.getUserInfo({
+      withCredentials: true
+    })
     const {
       code
     } = await wepy.login()
     await wepy.setStorage({
       key: 'userInfo',
-      data: userInfo
+      data: res.userInfo
     })
     return {
-      userInfo: JSON.stringify(userInfo),
+      userInfo: JSON.stringify(res),
       code: code
     }
   },
