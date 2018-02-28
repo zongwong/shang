@@ -232,10 +232,10 @@ page{
       const cardInfo = await api.getCardInfo()
       this.name = cardInfo.data.name
       this.phone = cardInfo.data.mobilephone
-      this.company = cardInfo.data.position
-      this.business = cardInfo.data.email
-      this.address = cardInfo.data.company
-      this.email = cardInfo.data.detail
+      this.company = cardInfo.data.company
+      this.business = cardInfo.data.position
+      this.address = cardInfo.data.detail
+      this.email = cardInfo.data.email
       this.$apply()
       
     }

@@ -65,7 +65,7 @@
         <image wx:if="{{index == 2}}" src="../../icon/3rd.png" class="top_icon"></image>
         <view wx:if="{{index>2}}" class="top_icon">{{index + 1}}</view>
         <view class="weui-cell__ft avatar_wrap">
-            <image src="{{item.headimgurl}}" class="avatar"></image>
+            <image src="{{item.headimgurl?item.headimgurl:'http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJfcyE0UNxULD2iaGAeRLPQcH3zHK5ticcvWvpWZbZYOA2CWLAOibQDHC3xnU7Toa9hPQZN9lU6d9yww/0'}}" class="avatar"></image>
         </view>
         <view class="weui-cell__bd">
             <view class="info_box">
@@ -110,7 +110,8 @@
           selected:false
       }],
       role:'',
-      index:0
+      index:0,
+      isShow:false,
     }
 
 
@@ -130,7 +131,12 @@
                 }
                 
             }else{
-                this.rankPlatform()
+                if(this.isShow){
+                    this.rankPlatform()
+                }else{
+                    this.navs[0].selected = true;
+                    this.navs[1].selected = false;
+                }
             }
         }
     }
@@ -138,7 +144,8 @@
     async onLoad() {
         
         this.role = await wepy.getStorageSync('type')
-        
+        const re = await api.showPlatform()
+        this.isShow = Boolean(re.data.show_platform_rank)
         if(this.role=='merchant'){
           await wepy.setNavigationBarTitle({
             title: '员工排名'

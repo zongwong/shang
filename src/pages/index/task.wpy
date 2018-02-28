@@ -156,6 +156,7 @@
     }
     onShareAppMessage() {
       return {
+        path:'/pages/index/index',
         success:function(){
           api.share()
         }

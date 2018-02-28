@@ -103,12 +103,12 @@ export default class Api extends base {
   }
   // (已绑定)获取验证码
   static async getEditSms(data) {
-    const url = `${this.host}/center/getNewCode`
+    const url = `${this.host}/bind/getnewcode`
     return await this.post(url, data)
   }
   // 修改绑定手机号
   static async editBind(data) {
-    const url = `${this.host}/center/doChange`
+    const url = `${this.host}/bind/doChange`
     return await this.post(url, data)
   }
   // 设置签名
@@ -215,5 +215,10 @@ export default class Api extends base {
   static async getTicket(data) {
     const url = `${this.host}/coupon/getlist`
     return await this.get(url, data)
+  }
+  // 平台开关
+  static async showPlatform() {
+    const url = `${this.host}/config/getShowPlatformRank`
+    return await this.get(url)
   }
 }

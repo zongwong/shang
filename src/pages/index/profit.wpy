@@ -102,11 +102,11 @@
         <view class="weui-cell__bd">
             <view class="info_box">
                 <view class="info_left">
-                    <view wx:if="{{role!='agent'}}" class="name oneTextHide">打赏-来自 {{item.nickName||'热心用户'}}</view>
+                    <view wx:if="{{role!='agent'}}" class="name oneTextHide">打赏-来自 {{item.nickname||'热心用户'}}</view>
                     <view wx:if="{{role=='agent'}}" class="name oneTextHide">分佣-来自 {{item.merchant_name}}</view>
                     <view class="sign oneTextHide time">{{item.day}}</view>
                 </view>
-                <view class="info_right">+{{item.amount||item.profit}}</view>
+                <view class="info_right">+{{item.total||item.profit}}</view>
             </view>
         </view>
       </view>
@@ -148,11 +148,7 @@
           this.date = text
           this.query = type
           this.$apply()
-          if(this.role=='merchant'){
-              await this.getStaffList()
-          }else{
-              await this.getList()
-          }
+          await this.getList()
       }
     }
 
@@ -174,6 +170,15 @@
     }
     async getList(){
         const list = await api.profitList({
+            day:this.query
+        })
+        if(list.code==200){
+            this.list = list.data
+        }
+        this.$apply()
+    }
+    async getStaffList(){
+        const list = await api.getStaffList({
             day:this.query
         })
         if(list.code==200){

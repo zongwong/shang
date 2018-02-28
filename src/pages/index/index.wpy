@@ -91,6 +91,13 @@
     height: 27rpx;
     background-image:url(data:image/png;base64,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);
   }
+  .userstar{
+    .lv{
+      font-size: 20rpx;
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
 }
 </style>
 <template>
@@ -103,7 +110,7 @@
         <view wx:if="{{role=='youke'||role=='staff'}}" class="username oneTextHide">{{userInfo.nickName}}</view>
         <view wx:if="{{role=='merchant'}}" class="username oneTextHide">{{myInfo.info.merchant_name}}</view>
         <view wx:if="{{role=='agent'}}" class="username oneTextHide">{{myInfo.info.agent_name}}</view>
-        <view class="userstar"><text class="icon icon_star" wx:for="{{myInfo.star}}" wx:key="star"></text></view>
+        <view class="userstar"><text class="icon icon_star" wx:for="{{myInfo.star}}" wx:key="star"></text><text class="lv">  LV{{myInfo.star}}</text></view>
       </view>
       <view class="userinfo_qrcode" wx:if="{{role=='staff'}}" @tap="previewImg('http://www.hdlwork.cn{{myInfo.info.qrcode}}')">
         <image src="http://www.hdlwork.cn{{myInfo.info.qrcode}}"></image>

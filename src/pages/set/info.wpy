@@ -30,8 +30,14 @@
         <view class="weui-cell__bd"><input  @input="nameInput" value="{{name}}" placeholder="请输入真实姓名"/></view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__ft">年龄：</view>
-        <view class="weui-cell__bd"><input type="number" @input="ageInput" value="{{age}}" placeholder="请输入您的年龄"/></view>
+        <view class="weui-cell__ft">出生日期：</view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{birthday}}"  bindchange="ageInput">
+            <view class="picker">
+              <input disabled value="{{birthday}}" placeholder="请输入您的年龄"/>
+            </view>
+          </picker>
+        </view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__ft">职业：</view>
@@ -81,7 +87,7 @@
 
     data = {
       name:'',
-      age:'',
+      birthday:'',
       job:'',
       idCard:'',
       accountName:'',
@@ -94,7 +100,7 @@
         this.name = e.detail.value
       },
       ageInput(e) {
-        this.age = e.detail.value
+        this.birthday = e.detail.value
       },
       jobInput(e) {
         this.job = e.detail.value
@@ -119,7 +125,7 @@
           })
           return false
         }
-        if(!this.age){
+        if(!this.birthday){
           wepy.showModal({
             title:'提示',
             content:'请填写年龄'
@@ -163,7 +169,7 @@
         }
         const data = await api.setPersonalInfo({
           realname:this.name,
-          age:this.age,
+          birthday:this.birthday,
           occupation:this.job,
           idcard:this.idCard,
           cash_name:this.accountName,
@@ -190,7 +196,7 @@
       // 获取内容
       const data = await api.getPersonal()
       this.name = data.data.realname
-      this.age = data.data.age
+      this.birthday = data.data.birthday
       this.job = data.data.occupation
       this.idCard = data.data.idcard
       this.accountName = data.data.cash_name

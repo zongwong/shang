@@ -39,7 +39,7 @@ const login = {
       await wepy.setStorage({
         key: 'type',
         data: userinfo.data.data.type
-        // data:'staff'
+        // data:'merchant'
       })
       console.log(userinfo)
     } catch (e) {

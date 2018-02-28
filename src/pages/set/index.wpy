@@ -14,6 +14,13 @@
     width:56rpx; 
     height: 56rpx;
   }
+  .userstar{
+    .lv{
+      font-size: 20rpx;
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
 }
 </style>
 <template>
@@ -26,7 +33,7 @@
         <view wx:if="{{role=='youke'||role=='staff'}}" class="username oneTextHide">{{userInfo.nickName}}</view>
         <view wx:if="{{role=='merchant'}}" class="username oneTextHide">{{myInfo.info.merchant_name}}</view>
         <view wx:if="{{role=='agent'}}" class="username oneTextHide">{{myInfo.info.agent_name}}</view>
-        <view class="userstar"><text class="icon icon_star" wx:for="{{myInfo.star}}" wx:key="star"></text></view>
+        <view class="userstar"><text class="icon icon_star" wx:for="{{myInfo.star}}" wx:key="star"></text><text class="lv">  LV{{myInfo.star}}</text></view>
       </view>
       <view class="userinfo_qrcode" wx:if="{{role=='staff'}}" @tap="previewImg('http://www.hdlwork.cn{{myInfo.info.qrcode}}')">
         <image src="http://www.hdlwork.cn{{myInfo.info.qrcode}}"></image>

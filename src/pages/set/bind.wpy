@@ -75,7 +75,7 @@
           })
         }else{
           data = await api.getSms({
-            phone:this.phone
+            mobilephone:this.phone
           })
         }
 
@@ -123,11 +123,11 @@
         if(this.oldPhone){
           data = await api.editBind({
             newphone:this.phone,
-            code: this.code
+            newcode: this.code
           })
         }else{
           data = await api.bind({
-            phone:this.phone,
+            mobilephone:this.phone,
             code: this.code
           })
         }
@@ -136,7 +136,10 @@
           await wepy.showToast({
             title: '绑定成功',
           })
-          wepy.navigateBack()
+          setTimeout(() => {
+            wepy.navigateBack()
+          }, 800);
+          
         }else{
           wepy.showModal({
             title: '提示',
