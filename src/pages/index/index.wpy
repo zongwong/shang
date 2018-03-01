@@ -252,16 +252,21 @@
     }
 
     async onLoad() {
-      this.role = await wepy.getStorageSync('type')
+      this.role =  wepy.getStorageSync('type')
       const userInfo = await wxApi.getUser()
+      
       this.userInfo = userInfo
       this.$apply()
     }
-    async onShow() {
-      const role = await wepy.getStorageSync('type')
+    async onShow() {      
       const data = await api.getPersonalInfo()
       if(data.code==200){
         this.myInfo = data.data
+        this.role =  wepy.getStorageSync('type')
+        if(this.userInfo==null){
+          const userInfo = await wxApi.getUser()
+          this.userInfo = userInfo
+        }
         this.$apply()
       }
     }

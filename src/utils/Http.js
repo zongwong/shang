@@ -20,7 +20,8 @@ export default class http {
       // Tips.loading();
     }
     if (token){
-      const token = wepy.getStorageSync('token')
+      let token = await wepy.getStorageSync('token');
+
       param.header = {
         'content-type': 'application/x-www-form-urlencoded',
       }
@@ -30,8 +31,8 @@ export default class http {
 
     if (res.statusCode == 200) {
       if(res.data.code==400 && res.data.message=='token过期，请重新请求'){
-        // await login.login()
-        // return await this.request(method, url, data)
+        await login.login()
+        return await this.request(method, url, data)
       }
       return res.data;
     } else {

@@ -31,12 +31,13 @@ export default class wxApi extends base {
       }else{
          console.log(2)
          const { userInfo } = await wepy.getUserInfo()
+         console.log(userInfo)
          return userInfo
       }
     } catch (e) {
       console.log(3)
       const { userInfo } = await wepy.getUserInfo()
-      return data
+      return userInfo
     }
   }
   // 获取设备信息

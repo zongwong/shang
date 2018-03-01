@@ -176,7 +176,12 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    login.login()
+
+    const token = wepy.getStorageSync('token')
+    if(!token){
+      login.login()
+    }
+
   }  
 }
 </script>

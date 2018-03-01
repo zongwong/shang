@@ -41,12 +41,13 @@ const login = {
         data: userinfo.data.data.type
         // data:'merchant'
       })
-      console.log(userinfo)
+      console.log(userinfo.data.data.token)
     } catch (e) {
       wepy.showModal({
         title: '提示',
         content: `获取用户信息失败，请关闭重新进入。${e.message}`
       })
+
     }
   }
 }
