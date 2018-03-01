@@ -131,7 +131,7 @@
                 }
                 
             }else{
-                if(this.isShow){
+                if(this.isShow!=0){
                     this.rankPlatform()
                 }else{
                     this.navs[0].selected = true;
@@ -145,7 +145,7 @@
         
         this.role = await wepy.getStorageSync('type')
         const re = await api.showPlatform()
-        this.isShow = Boolean(re.data.show_platform_rank)
+        this.isShow = re.data.show_platform_rank
         if(this.role=='merchant'){
           await wepy.setNavigationBarTitle({
             title: '员工排名'
